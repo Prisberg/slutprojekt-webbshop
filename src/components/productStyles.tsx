@@ -1,9 +1,10 @@
 import { makeStyles } from '@mui/styles';
-import { color } from '@mui/system';
+
 
 export default makeStyles(() => ({
     root: {
-        maxWidth: '100%',
+        minWidth: '20rem',
+        minHeight: '33rem',
         height: '35vw',
     },
     media: {
@@ -36,5 +37,4 @@ export default makeStyles(() => ({
     cardModel: {
         fontSize: '20px',
     },
-
 }));
