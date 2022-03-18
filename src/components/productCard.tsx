@@ -5,7 +5,6 @@ import CardContent from '@mui/material/CardContent';
 import { CardMedia } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-
 import useStyles from './productStyles';
 
 
