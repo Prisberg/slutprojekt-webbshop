@@ -13,7 +13,6 @@ const Product = ({ product }: { product: any }) => {
         <Card sx={{
             minWidth: '20rem',
             minHeight: '33rem',
-            height: '35vw',
         }}>
             <CardMedia sx={{
                 height: '20em',

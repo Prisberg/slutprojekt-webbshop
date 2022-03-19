@@ -2,6 +2,7 @@ import { AppBar, Typography, Box, Paper, Toolbar, IconButton, createTheme } from
 import logo from '../assets/images/logo.png'
 import background from '../assets/images/nav-background.jpg'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import SideCart from "./SideCart";
 
 function Navbar() {
    return (
@@ -42,7 +43,9 @@ function Navbar() {
                   }}>
                   TIC TOC
                </Typography>
-               <IconButton
+               <SideCart/>
+               {/* <IconButton
+                  // onClick={}
                   size="large"
                   edge="end"
                   color="inherit"
@@ -54,7 +57,6 @@ function Navbar() {
                         fontSize: '3rem',
                      }}
                   />
-               </IconButton>
                <Typography
                   variant="h6"
                   sx={{
@@ -64,6 +66,7 @@ function Navbar() {
                   }}>
                   View your selections
                </Typography>
+               </IconButton> */}
             </Toolbar>
          </AppBar>
       </div >
