@@ -1,8 +1,9 @@
-import { AppBar, Typography, Box, Paper, Toolbar, IconButton, createTheme } from "@mui/material";
+import { AppBar, Typography, Box, Paper, Toolbar, IconButton, createTheme, Button } from "@mui/material";
 import logo from '../assets/images/logo.png'
 import background from '../assets/images/nav-background.jpg'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import SideCart from "./SideCart";
+import { Link, Outlet } from "react-router-dom";
 
 function Navbar() {
    return (
@@ -26,29 +27,40 @@ function Navbar() {
          <Toolbar sx={{
             minHeight: 75,
          }}>
-            <Box
-               component="img"
-               alt="logo"
-               src={logo}
-               sx={{
-                  zIndex: 1,
-                  height: 60,
-                  margin: '1rem',
-                  display: { xs: 'none', md: 'inline-block' }
-               }}
-            />
-            <Typography variant="h3" component='div'
-               sx={{
-                  height: '100%',
-                  zIndex: 1,
+            <Link to=''
+               style={{
+                  textDecoration: 'none',
                   flexGrow: 1,
-                  minWidth: 250
                }}>
-               TIC TOC
-            </Typography>
+               <Button
+                  sx={{
+                     margin: '1rem',
+                     zIndex: 1,
+                     height: 60,
+                  }}>
+                  <Box
+                     component="img"
+                     alt="logo"
+                     src={logo}
+                     sx={{
+                        height: 60,
+                        display: { xs: 'none', md: 'inline-block' }
+                     }}
+                  />
+                  <Typography variant="h3" component='div'
+                     sx={{
+                        height: '100%',
+                        minWidth: 250,
+                        color: 'white'
+                     }}>
+                     TIC TOC
+                  </Typography>
+               </Button>
+            </Link>
             <SideCart />
          </Toolbar>
-      </AppBar>
+         <Outlet />
+      </AppBar >
    );
 }
 

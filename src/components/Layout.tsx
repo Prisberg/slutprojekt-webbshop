@@ -3,7 +3,6 @@ import Checkout from "./Checkout";
 import Navbar from "./Navbar";
 import ProductInfo from "./ProductInfo";
 import Products from "./productsPage";
-import SideCart from "./SideCart";
 import { Box } from "@mui/material";
 import background from '../assets/images/nav-background.jpg'
 
@@ -21,11 +20,11 @@ function Layout() {
           position: 'fixed',
           zIndex: -1,
           objectFit: 'cover',
-          display: {xs: 'block', sm: 'none'}
+          display: { xs: 'block', sm: 'none' }
         }}
       />
-      <Navbar />
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="product-info" element={<ProductInfo />} />
@@ -33,7 +32,7 @@ function Layout() {
           <Route
             path="*"
             element={
-              <Box sx={{ marginTop: "10rem", color: {xs:'white', sm: 'black'} }}>
+              <Box sx={{ marginTop: "10rem", color: { xs: 'white', sm: 'black' } }}>
                 There's nothing here!
               </Box>
             }
