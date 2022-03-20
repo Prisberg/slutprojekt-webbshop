@@ -1,8 +1,7 @@
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import { Box, CardMedia } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import { Box, CardMedia, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 
 
@@ -14,15 +13,31 @@ const Product = ({ product }: { product: any }) => {
             minWidth: '20rem',
             minHeight: '33rem',
         }}>
-            <CardMedia sx={{
-                height: '20em',
-                width: '50%',
+             <Button sx={{
+                 height:'20em',
+                 width:'100%',
+                 display: 'block',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+             }} >
+                <CardMedia sx={{
+                height: '100%',
+                width: '100%',
                 display: 'block',
                 marginLeft: 'auto',
-                marginRight: 'auto'
+                marginRight: 'auto',
+                objectFit: 'cover',
             }}
                 image={product.image}
                 title={product.name} />
+                        <Typography sx={{
+                            color: 'black',
+                            borderColor: 'black',
+                        }}>
+                            More info
+                        </Typography>
+                    </Button>
+            
             <CardContent>
                 <Box sx={{
                     display: 'flex',

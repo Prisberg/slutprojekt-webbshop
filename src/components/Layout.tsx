@@ -13,7 +13,7 @@ function Layout() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Products />} />
-          <Route path="product-info" element={<ProductInfo />} />
+          <Route path="product-info/:id" element={<ProductInfo />} />
           <Route path="checkout" element={<Checkout />} />
           <Route
             path="*"
