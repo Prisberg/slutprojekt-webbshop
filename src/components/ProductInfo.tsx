@@ -1,5 +1,6 @@
 
 import { 
+  Button,
  Table,
   TableBody,
   TableCell,
@@ -36,10 +37,25 @@ function ProductInfo() {
                       <TableCell align="right">{row.value}</TableCell>
                   </TableRow>
               ))}
+
           </TableBody>
+          <Button sx={{
+         backgroundColor: 'black',
+         color: 'white',
+         width: '8rem',
+         height: '3rem',
+         marginTop: '1rem',
+         '&:hover': {
+             backgroundColor: '#5f5f5f',
+             color: '#fff',
+         }
+        
+      }}>Add to cart</Button>
       </Table>
+      
   </TableContainer>
+  
     );
   }
-  
+
   export default ProductInfo;
