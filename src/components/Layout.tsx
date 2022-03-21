@@ -6,6 +6,7 @@ import Products from "./productsPage";
 import { Box } from "@mui/material";
 import background from '../assets/images/nav-background.jpg'
 
+
 function Layout() {
   return (
     <div>
