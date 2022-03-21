@@ -1,11 +1,13 @@
 
-import { 
+import {
   Button,
- Table,
+  Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableRow, } from "@mui/material";
+  TableRow,
+} from "@mui/material";
+import { Box } from "@mui/system";
 
 function createData(name: string, value: any) {
   return { name, value };
@@ -20,42 +22,50 @@ const rows = [
   createData('Thickness', '8 mm'),
   createData('Bracelet', 'steel'),
 ];
+
 function ProductInfo() {
-    return (
-      <TableContainer sx={{ 
-        justifyContent: 'center',
-        marginTop: '15rem',
-        display: 'flex',
-      }} >
-      <Table sx={{maxWidth: '30rem', textAlign: 'center',}}>
+  return (
+    <TableContainer sx={{
+      justifyContent: 'center',
+      display: 'flex',
+      paddingTop: { xs: '6rem', sm: '10rem' },
+    }} >
+      <Table sx={{
+        maxWidth: '30rem', 
+        textAlign: 'center', 
+        backgroundColor: 'white', 
+      }}>
+        <Box sx={{ 
+        padding: '1rem',
+        display: 'flex', 
+        justifyContent:'center' }}>
           <TableBody>
-              {rows.map((row) => (
-                  <TableRow key={row.name}>
-                      <TableCell component="th" scope="row">
-                          {row.name}
-                      </TableCell>
-                      <TableCell align="right">{row.value}</TableCell>
-                  </TableRow>
-              ))}
-
-          </TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.name}>
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell align="right">{row.value}</TableCell>
+              </TableRow>
+            ))}
           <Button sx={{
-         backgroundColor: 'black',
-         color: 'white',
-         width: '8rem',
-         height: '3rem',
-         marginTop: '1rem',
-         '&:hover': {
-             backgroundColor: '#5f5f5f',
-             color: '#fff',
-         }
-        
-      }}>Add to cart</Button>
+            backgroundColor: 'black',
+            color: 'white',
+            width: '8rem',
+            height: '3rem',
+            marginTop: '1rem',
+            display: 'block',
+            '&:hover': {
+              backgroundColor: '#5f5f5f',
+              color: '#fff',
+            }
+          }}>Add to cart</Button>
+          </TableBody>
+        </Box>
       </Table>
-      
-  </TableContainer>
-  
-    );
-  }
+    </TableContainer >
 
-  export default ProductInfo;
+  );
+}
+
+export default ProductInfo;

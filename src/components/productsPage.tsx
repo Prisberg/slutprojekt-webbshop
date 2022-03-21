@@ -19,7 +19,7 @@ export default function Products() {
         display: 'flex',
          flexGrow: 1,
          flexBasis: 0,
-         paddingTop: {xs: '1.5rem', sm: '3rem'},
+         paddingTop: {xs: '2.7rem', sm: '4rem'},
          item: '0'
     }}>
         <Grid 
@@ -35,7 +35,7 @@ export default function Products() {
             sx={{
                 display: 'flex',
             }}
-            item justifyContent="center" key={product.id} xs={12} sm={6} md={4} xl={3} lg={4}>
+            item justifyContent="center" key={product.id} xs={12} sm={6} md={4} xl={4} lg={4}>
                     <Product product={product} />
         </Grid>
             ))}

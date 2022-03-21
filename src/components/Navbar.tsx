@@ -26,11 +26,12 @@ function Navbar() {
          />
          <Toolbar sx={{
             minHeight: 75,
+            display: 'flex',
+            justifyContent: 'space-between'
          }}>
             <Link to=''
                style={{
                   textDecoration: 'none',
-                  flexGrow: 1,
                }}>
                <Button
                   sx={{
@@ -50,13 +51,14 @@ function Navbar() {
                   <Typography variant="h3" component='div'
                      sx={{
                         height: '100%',
-                        color: 'white'
+                        color: 'white',
+                        minWidth: 191
                      }}>
                      TIC TOC
                   </Typography>
                </Button>
             </Link>
-            <SideCart />
+            <SideCart/>
          </Toolbar>
          <Outlet />
       </AppBar >
