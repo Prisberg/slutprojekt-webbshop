@@ -1,9 +1,13 @@
-import { Grid, Button, Card, Typography,TextField,} from "@mui/material";
+import { Grid, Button, Card, Typography, TextField, FormControl, InputLabel, Select, MenuItem} from "@mui/material";
 import { border, color, display, margin } from "@mui/system";
 import { userInfo } from "os";
+import { Link } from 'react-router-dom';
+
 
 
 function Checkout() {
+
+  
     return ( 
       <Card 
         sx={{
@@ -16,7 +20,7 @@ function Checkout() {
       <Typography sx={{
         textAlign: 'center'
       }}>
-        <h1>Shipping Address</h1>
+        <h1>Shipping</h1>
       </Typography>
 
       <Grid container spacing={4}
@@ -88,6 +92,7 @@ function Checkout() {
        />  
      </Grid>
        <Grid item xs={12} sm={6}>
+       {/* <Link to={'delivery'}>
        <Button
        sx={{
          marginLeft: '15rem',
@@ -99,6 +104,21 @@ function Checkout() {
       }
        }}
        >Proceed</Button>
+       </Link> */}
+
+          <FormControl sx={{ m: 1, minWidth: 150, marginTop: '10rem' }}>
+          <InputLabel id="demo-simple-select-autowidth-label">Delivery</InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            autoWidth
+            label="Age"
+          >
+            <MenuItem value={10}>Standard</MenuItem>
+            <MenuItem value={21}>Express</MenuItem>
+            <MenuItem value={22}>Pick up at store</MenuItem>
+          </Select>
+          </FormControl>
      </Grid>
      </Grid>
      </Card>

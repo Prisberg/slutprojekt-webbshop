@@ -22,7 +22,7 @@ export default function Products() {
         display: 'flex',
          flexGrow: 1,
          flexBasis: 0,
-         paddingTop: {xs: '1.5rem', sm: '3rem'},
+         paddingTop: {xs: '2.7rem', sm: '4rem'},
          item: '0'
     }}>
         <Grid 
@@ -46,5 +46,3 @@ export default function Products() {
     </Box>
     )
 }
-
-
