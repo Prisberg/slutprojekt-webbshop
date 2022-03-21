@@ -6,6 +6,7 @@ import ProductInfo from "./ProductInfo";
 import Products from "./productsPage";
 import SideCart from "./SideCart";
 
+
 function Layout() {
   return (
     <div>

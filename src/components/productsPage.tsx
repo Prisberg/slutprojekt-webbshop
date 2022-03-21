@@ -20,11 +20,10 @@ export default function Products() {
          flexGrow: 1,
          flexBasis: 0,
          marginBlockStart: '3rem',
-         item: '0'
+         item: '0',
     }}>
         <Grid 
             sx={{
-            margin: 'auto',
                 }}
             container justifyContent="center" 
             direction="row" spacing={2} 
