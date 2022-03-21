@@ -60,7 +60,6 @@ export default function SideCart() {
                     color="inherit"
                     aria-label="open drawer"
                     onClick={handleDrawerOpen}
-                    edge="end"
                     sx={{ ...(open && { display: 'none' }) }}
                 >
                     <ShoppingBagIcon
