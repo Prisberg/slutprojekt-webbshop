@@ -24,7 +24,6 @@ export default function Products() {
     }}>
         <Grid 
             sx={{
-            margin: 'auto',
                 }}
             container justifyContent="center" 
             direction="row" spacing={2} 
