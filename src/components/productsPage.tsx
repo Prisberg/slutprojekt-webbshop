@@ -19,8 +19,8 @@ export default function Products() {
         display: 'flex',
          flexGrow: 1,
          flexBasis: 0,
-         marginBlockStart: '3rem',
-         item: '0',
+         paddingTop: {xs: '1.5rem', sm: '3rem'},
+         item: '0'
     }}>
         <Grid 
             sx={{
