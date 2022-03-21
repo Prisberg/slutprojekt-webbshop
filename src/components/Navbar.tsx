@@ -50,7 +50,6 @@ function Navbar() {
                   <Typography variant="h3" component='div'
                      sx={{
                         height: '100%',
-                        minWidth: 250,
                         color: 'white'
                      }}>
                      TIC TOC

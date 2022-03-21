@@ -11,8 +11,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-let drawerWidth
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean;
@@ -28,6 +28,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function SideCart() {
+    let drawerWidth
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -38,6 +39,12 @@ export default function SideCart() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    if (!open) {
+        drawerWidth = '0%'
+    } else {
+        drawerWidth = '100%'
+    }
 
     return (
         <Box
@@ -81,7 +88,7 @@ export default function SideCart() {
                     position: 'absolute',
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
-                        width: { xs: '100%', sm: '40%', md: '30%' }
+                        width: { xs: drawerWidth, sm: '40%', md: '30%' }
                     },
                 }}
                 variant="persistent"
@@ -106,20 +113,25 @@ export default function SideCart() {
                 <List>
 
                 </List>
-                <Button
-                    sx={{
-                        backgroundColor: '#3665DD',
-                        width: 200,
+                <Link to={'checkout'}
+                    style={{
+                        textDecoration: 'none',
                         alignSelf: 'center',
                     }}>
-                    <Typography
+                    <Button
                         sx={{
-                            color: 'white',
-                            fontSize: '2rem'
+                            backgroundColor: '#3665DD',
+                            width: 200,
                         }}>
-                        Checkout
-                    </Typography>
-                </Button>
+                        <Typography
+                            sx={{
+                                color: 'white',
+                                fontSize: '2rem'
+                            }}>
+                            Checkout
+                        </Typography>
+                    </Button>
+                </Link>
             </Drawer>
         </Box>
     );
