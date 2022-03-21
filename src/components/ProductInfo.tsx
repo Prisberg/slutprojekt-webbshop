@@ -1,11 +1,61 @@
-import { Box } from "@mui/material";
 
+import { 
+  Button,
+ Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow, } from "@mui/material";
+
+function createData(name: string, value: any) {
+  return { name, value };
+}
+
+const rows = [
+  createData('Name', 'Rolex'),
+  createData('Circumference', '46 mm'),
+  createData('Use', 'Have them around your wrist'),
+  createData('Back case', 'solid'),
+  createData('Glass', 'Diamond glass on top'),
+  createData('Thickness', '8 mm'),
+  createData('Bracelet', 'steel'),
+];
 function ProductInfo() {
     return (
-      <Box sx={{marginTop: '10rem'}}>
-          This is the product info page
-      </Box>
+      <TableContainer sx={{ 
+        justifyContent: 'center',
+        marginTop: '15rem',
+        display: 'flex',
+      }} >
+      <Table sx={{maxWidth: '30rem', textAlign: 'center',}}>
+          <TableBody>
+              {rows.map((row) => (
+                  <TableRow key={row.name}>
+                      <TableCell component="th" scope="row">
+                          {row.name}
+                      </TableCell>
+                      <TableCell align="right">{row.value}</TableCell>
+                  </TableRow>
+              ))}
+
+          </TableBody>
+          <Button sx={{
+         backgroundColor: 'black',
+         color: 'white',
+         width: '8rem',
+         height: '3rem',
+         marginTop: '1rem',
+         '&:hover': {
+             backgroundColor: '#5f5f5f',
+             color: '#fff',
+         }
+        
+      }}>Add to cart</Button>
+      </Table>
+      
+  </TableContainer>
+  
     );
   }
-  
+
   export default ProductInfo;
