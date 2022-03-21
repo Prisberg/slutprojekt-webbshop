@@ -10,10 +10,6 @@ function Checkout() {
 
   
     return ( 
-      <Card 
-        sx={{
-
-  return (
     <Card
       sx={{
         maxWidth: '60rem',
@@ -27,13 +23,14 @@ function Checkout() {
         backgroundColor: 'white',
         paddingBottom: '1rem',
       }}>
-
+        <Typography>
         <h1>Shipping</h1>
       </Typography>
 
         <Typography sx={{
           textAlign: 'center'
         }}>
+        </Typography>
         <Grid container spacing={4}
           sx={{
             display: 'flex'
@@ -190,15 +187,9 @@ function Checkout() {
           </Select>
           </FormControl>
      </Grid>
-     </Grid>
+     </Box>
      </Card>
     );
   };
-  
-
-      </Box>
-    </Card>
-  );
-};
 
 export default Checkout;
