@@ -1,4 +1,4 @@
-import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper } from "@mui/material";
+import { Grid, Button, Card, Typography,TextField,} from "@mui/material";
 import { border, color, display, margin } from "@mui/system";
 import { userInfo } from "os";
 
@@ -16,7 +16,7 @@ function Checkout() {
       <Typography sx={{
         textAlign: 'center'
       }}>
-        <h1>Billing Address</h1>
+        <h1>Shipping Address</h1>
       </Typography>
 
       <Grid container spacing={4}

@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Checkout from "./Checkout";
+import Delivery from "./Delivery";
 import Navbar from "./Navbar";
 import ProductInfo from "./ProductInfo";
 import Products from "./productsPage";
-import { Box } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 import background from '../assets/images/nav-background.jpg'
 
 
@@ -14,15 +15,7 @@ function Layout() {
         component="img"
         alt="background"
         src={background}
-        sx={{
-          marginBottom: 100,
-          padding: 0,
-          height: '100%',
-          position: 'fixed',
-          zIndex: -1,
-          objectFit: 'cover',
-          display: { xs: 'block', sm: 'none' }
-        }}
+        sx={boxStyle}
       />
       <BrowserRouter>
         <Navbar />
@@ -30,6 +23,7 @@ function Layout() {
           <Route path="/" element={<Products />} />
           <Route path="product-info" element={<ProductInfo />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="delivery" element={<Delivery />} />
           <Route
             path="*"
             element={
@@ -42,6 +36,16 @@ function Layout() {
       </BrowserRouter>
     </div>
   );
+}
+
+const boxStyle: SxProps = {
+  marginBottom: 100,
+  padding: 0,
+  height: '100%',
+  position: 'fixed',
+  zIndex: -1,
+  objectFit: 'cover',
+  display: { xs: 'block', sm: 'none' }
 }
 
 export default Layout;
