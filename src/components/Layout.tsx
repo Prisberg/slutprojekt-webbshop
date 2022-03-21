@@ -23,7 +23,7 @@ function Layout() {
           <Route path="/" element={<Products />} />
           <Route path="product-info" element={<ProductInfo />} />
           <Route path="checkout" element={<Checkout />} />
-          <Route path="delivery" element={<Delivery />} />
+          <Route path="checkout/delivery" element={<Delivery />} />
           <Route
             path="*"
             element={
