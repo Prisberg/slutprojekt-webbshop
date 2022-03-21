@@ -1,14 +1,17 @@
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Product from "./productCard";
+import Submariner from "../assets/images/SubmarinerGreen.jpg";
+import SubmarinerBlue from "../assets/images/Rolex-submariner.jpeg";
+import AirKing from "../assets/images/air-king.jpg";
 
 const products = [
-    { id: 1, name: 'Rolex', model: 'Submariner' ,describtion: 'Green', price: '100 000 kr', image: 'https://pwrrsrv.com/wp-content/uploads/2018/09/Rolex-Submariner-Green-Dial-Hulk.jpg' }, 
-    { id: 2, name: 'Rolex', model: 'Submariner' ,describtion: 'Blue', price: '100 000 kr', image: 'https://www.watchtradingco.com/wp-content/uploads/2020/09/wtc_rolex_submariner_blue_126613LB_sold.jpg' },
-    { id: 3, name: 'Rolex', model: 'Air-King' ,describtion: 'Silver', price: '100 000 kr', image: 'https://cdn2.chrono24.com/images/uhren/21467663-0zjha9f7whtsjixe6n0azh7v-ExtraLarge.jpg' },
-    { id: 4, name: 'Rolex', model: 'Submariner' ,describtion: 'Green', price: '100 000 kr', image: 'https://pwrrsrv.com/wp-content/uploads/2018/09/Rolex-Submariner-Green-Dial-Hulk.jpg' }, 
-    { id: 5, name: 'Rolex', model: 'Submariner' ,describtion: 'Blue', price: '100 000 kr', image: 'https://www.watchtradingco.com/wp-content/uploads/2020/09/wtc_rolex_submariner_blue_126613LB_sold.jpg' },
-    { id: 6, name: 'Rolex', model: 'Air-King' ,describtion: 'Silver', price: '100 000 kr', image: 'https://cdn2.chrono24.com/images/uhren/21467663-0zjha9f7whtsjixe6n0azh7v-ExtraLarge.jpg' },
+    { id: 0, name: 'Rolex', model: 'Submariner' ,describtion: 'Green', price: '100 000 kr', image: Submariner }, 
+    { id: 1, name: 'Rolex', model: 'Submariner' ,describtion: 'Blue', price: '100 000 kr', image: SubmarinerBlue },
+    { id: 2, name: 'Rolex', model: 'Air-King' ,describtion: 'Silver', price: '100 000 kr', image: AirKing },
+    { id: 3, name: 'Rolex', model: 'Submariner' ,describtion: 'Green', price: '100 000 kr', image: Submariner }, 
+    { id: 4, name: 'Rolex', model: 'Submariner' ,describtion: 'Blue', price: '100 000 kr', image: SubmarinerBlue },
+    { id: 5, name: 'Rolex', model: 'Air-King' ,describtion: 'Silver', price: '100 000 kr', image: AirKing },
 ]
 
 

@@ -21,7 +21,7 @@ function Checkout() {
         <Typography sx={{
           textAlign: 'center'
         }}>
-          <h1>Billing Address</h1>
+          <h1>Billing Adress</h1>
         </Typography>
 
         <Grid container spacing={4}
