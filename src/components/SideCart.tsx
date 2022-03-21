@@ -2,22 +2,15 @@ import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import CssBaseline from '@mui/material/CssBaseline';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import CloseIcon from '@mui/icons-material/Close';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { Button } from '@mui/material';
 
 let drawerWidth
 
@@ -46,52 +39,49 @@ export default function SideCart() {
         setOpen(false);
     };
 
-    if (!open) {
-        drawerWidth = 0;
-    } else {
-        drawerWidth = 240;
-    }
-
     return (
         <Box
-        sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            zIndex: 2
-        }}>
+            sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                zIndex: 2
+            }}>
             {/* navbar knappen */}
-            <IconButton
-                size="large"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="end"
-                sx={{ ...(open && { display: 'none' }) }}
-            >
-                <ShoppingBagIcon
-                     sx={{
-                        zIndex: 1,
-                        fontSize: '3rem',
-                     }}
-                  />
-               <Typography
-                  variant="h6"
-                  sx={{
-                     height: '100%',
-                     zIndex: 1,
-                     display: {xs: 'none', sm: 'inline-block'}
-                  }}>
-                  View your selections
-               </Typography>
-            </IconButton>
+            <Toolbar>
+                <IconButton
+                    size="large"
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="end"
+                    sx={{ ...(open && { display: 'none' }) }}
+                >
+                    <ShoppingBagIcon
+                        sx={{
+                            zIndex: 1,
+                            fontSize: '3rem',
+                        }}
+                    />
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            height: '100%',
+                            zIndex: 1,
+                            display: { xs: 'none', sm: 'inline-block' }
+                        }}>
+                        View your selections
+                    </Typography>
+                </IconButton>
+            </Toolbar>
             {/* navbar knappen */}
 
             <Drawer
                 sx={{
-                    width: drawerWidth,
+                    zIndex: 2,
+                    position: 'absolute',
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
-                        width: drawerWidth,
+                        width: { xs: '100%', sm: '40%', md: '30%' }
                     },
                 }}
                 variant="persistent"
@@ -100,17 +90,36 @@ export default function SideCart() {
             >
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        <CloseIcon
+                            sx={{
+                                fontSize: '3rem',
+                                color: 'black'
+                            }}
+                        />
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
                 <List>
-                     {/* pris ellr prudkter */}
+                    {/* pris ellr prudkter */}
                 </List>
                 <Divider />
                 <List>
-                   {/* pris ellr prudkter */}
+
                 </List>
+                <Button
+                    sx={{
+                        backgroundColor: '#3665DD',
+                        width: 200,
+                        alignSelf: 'center',
+                    }}>
+                    <Typography
+                        sx={{
+                            color: 'white',
+                            fontSize: '2rem'
+                        }}>
+                        Checkout
+                    </Typography>
+                </Button>
             </Drawer>
         </Box>
     );
