@@ -3,7 +3,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Card, Grid, Radio, SxProps, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material';
+import { Card, Grid, Radio, SxProps, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Button } from '@mui/material';
 import { spacing } from '@mui/system';
 
 interface Props {
@@ -49,7 +49,7 @@ const Delivery: React.FC<Props> = () => {
                                   </Typography>
                               </TableCell>
                               <TableCell sx={paddingLeft}>
-                                  <FormControl
+                                  <FormControl 
                                       variant="outlined"
                                       sx={formControl}
                                   >
@@ -60,7 +60,7 @@ const Delivery: React.FC<Props> = () => {
                                           labelId="select-outlined-label"
                                           id="select-outlined"
                                           value={DeliveryDate}
-                          
+  
                                           label="Leveransdatum"
                                       >
                                           <MenuItem sx={menuItemFontSize} value={10}>
@@ -185,6 +185,11 @@ const Delivery: React.FC<Props> = () => {
                   </Table>
               </TableContainer>
           </Grid>
+          <Grid sx={buttonAlign}>
+          <Button sx={button}>
+            Payment
+          </Button>
+          </Grid>
       </Card>
   );
 };
@@ -220,4 +225,18 @@ const cardStyle: SxProps = {
 }
 const h1: SxProps = {
   textAlign: 'center'
+}
+const button: SxProps = {
+  backgroundColor: 'black',
+  color: '#fff',
+  '&:hover': {
+    backgroundColor: '#5f5f5f',
+    color: '#fff',
+  },
+}
+const buttonAlign: SxProps = {
+  display: 'flex',
+  justifyContent: 'center',
+  paddingTop: '1rem',
+  paddingBottom: '1rem'
 }
