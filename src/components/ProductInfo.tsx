@@ -31,14 +31,10 @@ function ProductInfo() {
       paddingTop: { xs: '6rem', sm: '10rem' },
     }} >
       <Table sx={{
-        maxWidth: '30rem', 
-        textAlign: 'center', 
-        backgroundColor: 'white', 
+        maxWidth: '30rem',
+        textAlign: 'center',
+        backgroundColor: 'white',
       }}>
-        <Box sx={{ 
-        padding: '1rem',
-        display: 'flex', 
-        justifyContent:'center' }}>
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.name}>
@@ -48,21 +44,24 @@ function ProductInfo() {
                 <TableCell align="right">{row.value}</TableCell>
               </TableRow>
             ))}
-          <Button sx={{
-            backgroundColor: 'black',
-            color: 'white',
-            width: '8rem',
-            height: '3rem',
-            marginTop: '1rem',
-            display: 'block',
-            '&:hover': {
-              backgroundColor: '#5f5f5f',
-              color: '#fff',
-            }
-          }}>Add to cart</Button>
           </TableBody>
-        </Box>
       </Table>
+            <Button
+              sx={{
+                backgroundColor: 'black',
+                color: 'white',
+                width: '8rem',
+                height: '3rem',
+                marginTop: '1rem',
+                display: 'block',
+                '&:hover': {
+                  backgroundColor: '#5f5f5f',
+                  color: '#fff',
+                }
+              }}
+            >
+              Add to cart
+              </Button>
     </TableContainer >
 
   );

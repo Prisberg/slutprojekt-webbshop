@@ -23,8 +23,9 @@ function Checkout() {
         backgroundColor: 'white',
         paddingBottom: '1rem',
       }}>
-        <Typography>
-        <h1>Shipping</h1>
+        <Typography
+        variant="h3">
+        Shipping
       </Typography>
 
         <Typography sx={{
@@ -179,7 +180,7 @@ function Checkout() {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             autoWidth
-            label="Age"
+            label="Delivery"
           >
             <MenuItem value={10}>Standard</MenuItem>
             <MenuItem value={21}>Express</MenuItem>
