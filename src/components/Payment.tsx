@@ -1,6 +1,6 @@
 
 import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper, Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel } from "@mui/material";
-import { border, Box, color, display, margin } from "@mui/system";
+import { border, Box, color, display, margin, SxProps } from "@mui/system";
 import { userInfo } from "os";
 import { Link } from 'react-router-dom';
 
@@ -10,12 +10,18 @@ function Payment() {
 
   return (
     <form action="" method="get">
-        <Typography variant="h5" gutterBottom>
-          Betalningsalternativ
-        </Typography>
-            <Typography>
-              Kortbetalning
-            </Typography>
+      <Box sx={primaryBox}>
+        <Box sx={secondaryBox}>
+          <Typography variant="h5" gutterBottom>
+            Betalningsalternativ
+          </Typography>
+          <Accordion>
+            <AccordionSummary>
+              <Typography>
+                Kortbetalning
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
                   <TextField
@@ -67,16 +73,18 @@ function Payment() {
                   />
                 </Grid>
               </Grid>
-        <Accordion>
-          <AccordionSummary
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>
-              Swish
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>
+                Swish
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               <Grid container spacing={6}>
                 <Grid
                   item
@@ -92,18 +100,18 @@ function Payment() {
                   />
                 </Grid>
               </Grid>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>
-              Faktura
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>
+                Faktura
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               <Grid container spacing={3}>
                 <Grid
                   item
@@ -119,10 +127,40 @@ function Payment() {
                   />
                 </Grid>
               </Grid>
-          </AccordionDetails>
-        </Accordion>
+            </AccordionDetails>
+          </Accordion>
+          <Link to={'/checkout/confirmation'} style={{ textDecoration: 'none' }}>
+            <Button sx={button}>
+              Proceed
+            </Button>
+          </Link>
+        </Box>
+      </Box>
     </form>
   );
 }
 
 export default Payment;
+
+const secondaryBox: SxProps = {
+  backgroundColor: 'white',
+  padding: '1rem',
+  maxWidth: '60rem',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center'
+}
+const primaryBox: SxProps = {
+  paddingTop: '6rem',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center'
+}
+const button: SxProps = {
+  backgroundColor: 'black',
+  color: '#fff',
+  '&:hover': {
+    backgroundColor: '#5f5f5f',
+    color: '#fff',
+  },
+}

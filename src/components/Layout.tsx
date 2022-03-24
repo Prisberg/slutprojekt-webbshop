@@ -7,6 +7,8 @@ import Products from "./productsPage";
 import { Box, SxProps } from "@mui/material";
 import background from '../assets/images/nav-background.jpg'
 import Payment from "./Payment";
+import Overview from "./OrderOverview";
+import Confirmation from "./OrderConfirmation";
 
 
 function Layout() {
@@ -23,9 +25,11 @@ function Layout() {
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="product-info" element={<ProductInfo />} />
-          <Route path="checkout" element={<Checkout />} />
+          <Route path="checkout" element={<Overview />} />
+          <Route path="checkout/adress" element={<Checkout />} />
           <Route path="checkout/delivery" element={<Delivery />} />
           <Route path="checkout/payment" element={<Payment />} />
+          <Route path="checkout/confirmation" element={<Confirmation />} />
           <Route
             path="*"
             element={
