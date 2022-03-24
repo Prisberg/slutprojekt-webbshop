@@ -7,7 +7,7 @@ import {
   TableContainer,
   TableRow,
 } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, SxProps } from "@mui/system";
 
 function createData(name: string, value: any) {
   return { name, value };
@@ -25,46 +25,48 @@ const rows = [
 
 function ProductInfo() {
   return (
-    <TableContainer sx={{
-      justifyContent: 'center',
-      display: 'flex',
-      paddingTop: { xs: '6rem', sm: '10rem' },
-    }} >
-      <Table sx={{
-        maxWidth: '30rem',
-        textAlign: 'center',
-        backgroundColor: 'white',
-      }}>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.value}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+    <TableContainer sx={containerStyling}>
+      <Table sx={tableStyling}>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.name}>
+              <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell align="right">{row.value}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
-            <Button
-              sx={{
-                backgroundColor: 'black',
-                color: 'white',
-                width: '8rem',
-                height: '3rem',
-                marginTop: '1rem',
-                display: 'block',
-                '&:hover': {
-                  backgroundColor: '#5f5f5f',
-                  color: '#fff',
-                }
-              }}
-            >
-              Add to cart
-              </Button>
+      <Button sx={buttonStyling}>
+        Add to cart
+      </Button>
     </TableContainer >
-
   );
 }
 
 export default ProductInfo;
+
+
+const containerStyling: SxProps = {
+  justifyContent: 'center',
+  display: 'flex',
+  paddingTop: { xs: '6rem', sm: '10rem' },
+}
+const buttonStyling: SxProps = {
+  backgroundColor: 'black',
+  color: 'white',
+  width: '8rem',
+  height: '3rem',
+  marginTop: '1rem',
+  display: 'block',
+  '&:hover': {
+    backgroundColor: '#5f5f5f',
+    color: '#fff',
+  }
+}
+const tableStyling: SxProps = {
+  maxWidth: '30rem',
+  textAlign: 'center',
+  backgroundColor: 'white',
+}

@@ -8,36 +8,19 @@ import { Link } from 'react-router-dom';
 
 function Checkout() {
 
-  
-    return ( 
-    <Card
-      sx={{
-        maxWidth: '60rem',
-        marginTop: '10rem',
-        paddingBottom: '2rem',
-        backgroundColor: 'rgba(0,0,0,0)',
-        marginLeft: 'auto',
-        marginRight: 'auto',
 
-      }}>
-      <Box sx={{
-        backgroundColor: 'white',
-        paddingBottom: '1rem',
-      }}>
-        <Typography
-        variant="h3">
-        Shipping
-      </Typography>
+  return (
+    <Card sx={cardStyle}>
+      <Box sx={boxStyle}>
+        <Typography variant="h3">
+          Billing adress
+        </Typography>
 
         <Typography sx={{
           textAlign: 'center'
         }}>
         </Typography>
-        <Grid container spacing={4}
-          sx={{
-            display: 'flex'
-          }}
-        >
+        <Grid container spacing={4} sx={{ display: 'flex' }}>
           <Grid item xs={12} sm={6}>
             <TextField
               required
@@ -102,28 +85,40 @@ function Checkout() {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-          <Link to={'delivery'}>
-            <Button
-              sx={{
-                marginLeft: '15rem',
-                backgroundColor: 'black',
-                color: '#fff',
-                '&:hover': {
-                  backgroundColor: '#5f5f5f',
-                  color: '#fff',
-                }
-              }}
-            >Proceed</Button>
+            <Link to={'delivery'} style={{textDecoration: 'none'}}>
+              <Button sx={buttonStyle}
+              >Proceed</Button>
             </Link>
           </Grid>
-     </Grid>
-     </Box>
-     </Card>
-    );
-  };
+        </Grid>
+      </Box>
+    </Card>
+  );
+};
 
 export default Checkout;
 
 const h1: SxProps = {
   textAlign: 'center'
+}
+const boxStyle: SxProps = {
+  backgroundColor: 'white',
+  paddingBottom: '1rem',
+}
+const buttonStyle: SxProps = {
+  marginLeft: '15rem',
+  backgroundColor: 'black',
+  color: '#fff',
+  '&:hover': {
+    backgroundColor: '#5f5f5f',
+    color: '#fff',
+  }
+}
+const cardStyle: SxProps = {
+  maxWidth: '60rem',
+  paddingTop: '10rem',
+  paddingBottom: '2rem',
+  backgroundColor: 'rgba(0,0,0,0)',
+  marginLeft: 'auto',
+  marginRight: 'auto',
 }

@@ -10,10 +10,6 @@ function Payment() {
 
   return (
     <form action="" method="get">
-      <div 
-      style={{
-        marginTop: '10rem'
-      }}>
         <Typography variant="h5" gutterBottom>
           Betalningsalternativ
         </Typography>
@@ -125,7 +121,6 @@ function Payment() {
               </Grid>
           </AccordionDetails>
         </Accordion>
-      </div>
     </form>
   );
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, SxProps, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
@@ -12,7 +12,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean;
@@ -27,8 +26,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-start',
 }));
 
+
 export default function SideCart() {
-    let drawerWidth
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -40,6 +39,8 @@ export default function SideCart() {
         setOpen(false);
     };
 
+    let drawerWidth
+
     if (!open) {
         drawerWidth = '0%'
     } else {
@@ -48,11 +49,7 @@ export default function SideCart() {
 
     return (
         <Box
-            sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                zIndex: 2
-            }}>
+            sx={boxStyling}>
             {/* navbar knappen */}
             <Toolbar>
                 <IconButton
@@ -62,19 +59,10 @@ export default function SideCart() {
                     onClick={handleDrawerOpen}
                     sx={{ ...(open && { display: 'none' }) }}
                 >
-                    <ShoppingBagIcon
-                        sx={{
-                            zIndex: 1,
-                            fontSize: '3rem',
-                        }}
-                    />
+                    <ShoppingBagIcon sx={{ zIndex: 1, fontSize: '3rem', }} />
                     <Typography
                         variant="h6"
-                        sx={{
-                            height: '100%',
-                            zIndex: 1,
-                            display: { xs: 'none', sm: 'inline-block' }
-                        }}>
+                        sx={headerSix}>
                         View your selections
                     </Typography>
                 </IconButton>
@@ -96,12 +84,7 @@ export default function SideCart() {
             >
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
-                        <CloseIcon
-                            sx={{
-                                fontSize: '3rem',
-                                color: 'black'
-                            }}
-                        />
+                        <CloseIcon sx={iconStyle}/>
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
@@ -109,29 +92,41 @@ export default function SideCart() {
                     {/* pris ellr prudkter */}
                 </List>
                 <Divider />
-                <List>
-
-                </List>
-                <Link to={'checkout'}
-                    style={{
-                        textDecoration: 'none',
-                        alignSelf: 'center',
-                    }}>
+                <Link to={'checkout'} style={linkStyle}>
                     <Button
                         sx={{
                             backgroundColor: '#3665DD',
                             width: 200,
                         }}>
-                        <Typography
-                            sx={{
-                                color: 'white',
-                                fontSize: '2rem'
-                            }}>
+                        <Typography sx={checkoutStyle}>
                             Checkout
                         </Typography>
                     </Button>
                 </Link>
             </Drawer>
-        </Box>
+        </Box >
     );
+}
+
+const boxStyling: SxProps = {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    zIndex: 2
+}
+const headerSix: SxProps = {
+    height: '100%',
+    zIndex: 1,
+    display: { xs: 'none', sm: 'inline-block' }
+}
+const iconStyle: SxProps = {
+    fontSize: '3rem',
+    color: 'black'
+}
+const linkStyle: React.CSSProperties ={
+    textDecoration: 'none',
+    alignSelf: 'center',
+}
+const checkoutStyle: SxProps ={
+    color: 'white',
+    fontSize: '2rem'
 }
