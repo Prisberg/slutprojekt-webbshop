@@ -85,7 +85,7 @@ function Checkout() {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Link to={'delivery'} style={{textDecoration: 'none'}}>
+            <Link to={'/checkout/delivery'} style={{textDecoration: 'none'}}>
               <Button sx={buttonStyle}
               >Proceed</Button>
             </Link>
