@@ -1,3 +1,4 @@
+import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -5,10 +6,26 @@ import { Box, CardMedia, SxProps, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
+import { useContext } from 'react';
+import { CartContext } from './Context';
+import { ProductInfo } from './mockedProducts';
+
+type Props = {
+    productType: ProductInfo;
+    handleReadMore: () => void;
+}
+
+const Product: React.FC<Props> = ({ productType }) => {
+    
+    
+    const { addToCart } = useContext(CartContext);
+
+    const [open, setOpen] = React.useState(false);
 
 
-
-const Product = ({ product }: { product: any }) => {
+    const handleClick = () => {
+        setOpen(true);
+     };
 
     return (
         <Card sx={cardStyling}>
@@ -19,27 +36,29 @@ const Product = ({ product }: { product: any }) => {
                         Click for more information
                     </Typography>
                     <CardMedia sx={mediCardStyle}
-                        image={product.image}
-                        title={product.name} />
+                        image={productType.image}
+                        title={productType.name} />
                 </Button>
             </Link>
             <CardContent>
                 <Box sx={boxStyle}>
                     <Typography variant="h5" gutterBottom>
-                        {product.name}
+                        {productType.name}
                     </Typography>
                     <Typography sx={{ fontSize: '20px', }}>
-                        {product.model}
+                        {productType.model}
                     </Typography>
                     <Typography>
-                        {product.describtion}
+                        {productType.describtion}
                     </Typography>
                 </Box>
                 <Typography variant="body2" color="textSecondary">
-                    {product.price}
+                    {productType.price}
                 </Typography>
                 <CardActions disableSpacing sx={cardActionStyling}>
-                    <Button sx={buyButtonStyle}>
+                    <Button sx={buyButtonStyle}
+                    onClick={() => {handleClick(); addToCart(productType)}}
+                    >
                         Buy now
                     </Button>
                 </CardActions>

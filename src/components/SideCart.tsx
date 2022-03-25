@@ -10,24 +10,35 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import { Button } from '@mui/material';
+import { Button, ButtonGroup, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { CartContext  } from './Context';
+import { useContext } from 'react';
+
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean;
 }
+ interface Props {
+  
+ }
+
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
+    
     ...theme.mixins.toolbar,
     justifyContent: 'flex-start',
 }));
 
 
-export default function SideCart() {
+const SideCart: React.FC<Props> = () => {
+    
+    const { cart, addToCart, removeCart, removeItems, total} = useContext(CartContext);
+    const [quantity] = React.useState('');
+    
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -48,9 +59,10 @@ export default function SideCart() {
     }
 
     return (
+        <React.Fragment>
         <Box
             sx={boxStyling}>
-            {/* navbar knappen */}
+           
             <Toolbar>
                 <IconButton
                     size="large"
@@ -67,7 +79,7 @@ export default function SideCart() {
                     </Typography>
                 </IconButton>
             </Toolbar>
-            {/* navbar knappen */}
+            
 
             <Drawer
                 sx={{
@@ -88,11 +100,60 @@ export default function SideCart() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <List>
-                    {/* pris ellr prudkter */}
-                </List>
-                <Divider />
-                <Link to={'checkout'} style={linkStyle}>
+
+               
+                <TableBody>
+                     {cart.map((product) => (
+                        <TableRow key={product.name}>
+                           <TableCell>
+                             
+                           </TableCell>
+                           <TableCell>{product.name}</TableCell>
+                           <TableCell>{product.price} kr</TableCell>
+                           <TableCell>
+                              <ButtonGroup sx={{
+                                  
+                              }}
+                                 
+                                 
+                              >
+                                 <Button sx={{
+                                     display: 'flex',
+                                     justifyContent: 'flex-end',
+                                     height: '10rem'
+                                 }}
+                                    
+                                    onClick={() => {
+                                       removeItems(product);
+                                    }}
+                                 >
+                                    -
+                                 </Button>
+                                 <TextField
+                                    variant="outlined"
+                                    
+                                    id={quantity}
+                                    value={product.quantity}
+                                 />
+                                 <Button
+                                    
+                                    onClick={() => {
+                                       addToCart(product);
+                                    }}
+                                 >
+                                    +
+                                 </Button>
+                              </ButtonGroup>
+                           </TableCell>
+                           <Typography>{product.subTotal} kr </Typography>
+                        
+                           </TableRow>
+                     ))}
+                     <TableCell>{total}kr</TableCell> 
+                    </TableBody>
+                    
+                
+               <Link to={'checkout'} style={linkStyle}>
                     <Button
                         sx={{
                             backgroundColor: '#3665DD',
@@ -102,11 +163,14 @@ export default function SideCart() {
                             Checkout
                         </Typography>
                     </Button>
-                </Link>
+                </Link> 
             </Drawer>
         </Box >
+        </React.Fragment>
     );
 }
+
+export default SideCart;
 
 const boxStyling: SxProps = {
     display: 'flex',
@@ -128,5 +192,5 @@ const linkStyle: React.CSSProperties ={
 }
 const checkoutStyle: SxProps ={
     color: 'white',
-    fontSize: '2rem'
+    fontSize: '2rem' 
 }
