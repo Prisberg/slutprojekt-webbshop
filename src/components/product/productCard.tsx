@@ -20,8 +20,12 @@ const Product = ({ product }: { product: any }) => {
         /* localStorage.setItem() */
     }
     function moreInformation() {
-        console.log(product.id)
-        /* localStorage.setItem() */
+        let productId = product.id
+        const selectedProduct = products.filter((products) => {
+            return products.id === productId
+        })
+        console.log(selectedProduct)
+                /* localStorage.setItem() */
     }
 
     return (
