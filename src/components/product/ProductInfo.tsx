@@ -7,6 +7,7 @@ import {
   TableContainer,
   TableRow,
 } from "@mui/material";
+import { products } from "./mockedProducts";
 import { Box, SxProps } from "@mui/system";
 
 function createData(name: string, value: any) {

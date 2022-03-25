@@ -5,16 +5,30 @@ import { Box, CardMedia, SxProps, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
-
+import { SettingsRemoteTwoTone } from '@mui/icons-material';
+import { products } from './mockedProducts';
 
 
 const Product = ({ product }: { product: any }) => {
+
+    function addToCart() {
+        let productId = product.id
+        const selectedProduct = products.filter((products) => {
+            return products.id === productId
+        })
+        console.log(selectedProduct)
+        /* localStorage.setItem() */
+    }
+    function moreInformation() {
+        console.log(product.id)
+        /* localStorage.setItem() */
+    }
 
     return (
         <Card sx={cardStyling}>
             <Link to='product-info'
                 style={linkStyle}>
-                <Button sx={buttonStyle} >
+                <Button sx={buttonStyle} onClick={moreInformation}>
                     <Typography sx={typographyStyle}>
                         Click for more information
                     </Typography>
@@ -39,7 +53,7 @@ const Product = ({ product }: { product: any }) => {
                     {product.price}
                 </Typography>
                 <CardActions disableSpacing sx={cardActionStyling}>
-                    <Button sx={buyButtonStyle}>
+                    <Button sx={buyButtonStyle} onClick={addToCart}>
                         Buy now
                     </Button>
                 </CardActions>

@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Checkout from "./Checkout";
-import Delivery from "./Delivery";
+import Checkout from "../checkout/Checkout";
+import Delivery from "../checkout/Delivery";
 import Navbar from "./Navbar";
-import ProductInfo from "./ProductInfo";
-import Products from "./productsPage";
+import ProductInfo from "../product/ProductInfo";
+import Products from "../product/productsPage";
 import { Box, SxProps } from "@mui/material";
-import background from '../assets/images/nav-background.jpg'
-import Payment from "./Payment";
-import Overview from "./OrderOverview";
-import Confirmation from "./OrderConfirmation";
+import background from '../../assets/images/nav-background.jpg'
+import Payment from "../checkout/Payment";
+import Overview from "../checkout/OrderOverview";
+import Confirmation from "../checkout/OrderConfirmation";
 
 
 function Layout() {

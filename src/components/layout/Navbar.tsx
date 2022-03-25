@@ -1,6 +1,6 @@
 import { AppBar, Typography, Box, Paper, Toolbar, IconButton, createTheme, Button, SxProps } from "@mui/material";
-import logo from '../assets/images/logo.png'
-import background from '../assets/images/nav-background.jpg'
+import logo from '../../assets/images/logo.png'
+import background from '../../assets/images/nav-background.jpg'
 import SideCart from "./SideCart";
 import { Link, Outlet } from "react-router-dom";
 
