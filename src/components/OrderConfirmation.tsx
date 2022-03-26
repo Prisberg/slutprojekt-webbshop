@@ -44,18 +44,18 @@ function Confirmation() {
         </Grid>
       </Box>
 
-      {cart.map((product) => (
+      
         <Link to={"/"} style={{ textDecoration: "none" }}>
           <Button
             sx={buttonStyle}
-            onClick={() => {
+            onClick={() => {cart.map((product)=>{
               removeallpructs(product);
-            }}
+            } )}}
           >
             Keep browsing
           </Button>
         </Link>
-      ))}
+   
       <TableCell>{total}kr</TableCell>
     </Card>
   );
