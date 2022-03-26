@@ -1,8 +1,11 @@
 import { TableContainer, Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useContext } from 'react';
+import { CartContext } from "./Context";
 
 
 function Confirmation() {
+  const {total, cart} = useContext(CartContext);
     return (
 
         <Card sx={cardStyle}>
