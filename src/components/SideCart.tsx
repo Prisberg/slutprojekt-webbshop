@@ -106,7 +106,9 @@ const SideCart: React.FC<Props> = () => {
                      {cart.map((product) => (
                         <TableRow key={product.name}>
                            <TableCell>
-                             
+                             <img src={product.image}
+                                 
+                                 height="100" />
                            </TableCell>
                            <TableCell>{product.name}</TableCell>
                            <TableCell>{product.price} kr</TableCell>
@@ -118,9 +120,9 @@ const SideCart: React.FC<Props> = () => {
                                  
                               >
                                  <Button sx={{
-                                     display: 'flex',
-                                     justifyContent: 'flex-end',
-                                     height: '10rem'
+                                    
+                                     height: '3rem'
+                                
                                  }}
                                     
                                     onClick={() => {
@@ -136,7 +138,9 @@ const SideCart: React.FC<Props> = () => {
                                     value={product.quantity}
                                  />
                                  <Button
-                                    
+                                    sx={{
+                                        height: '3rem'
+                                    }}
                                     onClick={() => {
                                        addToCart(product);
                                     }}
