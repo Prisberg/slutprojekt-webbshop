@@ -34,9 +34,9 @@ function Checkout() {
             <TextField
               required
               fullWidth
-              id="first-name"
+              id="last-name"
               name="lastname"
-              label="First Name"
+              label="Last name"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
