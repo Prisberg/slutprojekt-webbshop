@@ -8,46 +8,31 @@ import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
 import { useContext } from 'react';
 import { CartContext } from './Context';
-import { ProductInfo, products } from './mockedProducts';
+import { ProductInfo, products, Props } from './mockedProducts';
 
-type Props = {
-    productType: ProductInfo;
-}
 
 const Product: React.FC<Props> = ({ productType }) => {
 
-    const { addToCart, specificProduct } = useContext(CartContext);
-    const [open, setOpen] = React.useState(false);
-    const handleClick = () => {
-        setOpen(true);
-     };
-
-/*      function moreInformation() {
-        let productId = productType.id
-        let selectedProduct = products.filter((products) => {
-            return products.id === productId 
-        })
-        console.log(selectedProduct)
-                localStorage.setItem()
-    } */
+    const { addToCart } = useContext(CartContext);
 
     return (
         <Card sx={cardStyling}>
-            <Link to={`product-info-${productType.id}`}
-                style={linkStyle}>
-                <Button sx={buttonStyle} onClick={specificProduct} >
-                    <Typography sx={typographyStyle}>
-                        Click for more information
-                    </Typography>
-                    <CardMedia sx={mediaCardStyle}
-                        image={productType.image}
-                        title={productType.name} />
-                </Button>
-            </Link>
-            <CardContent>
+                <Link to={`product-info/${productType.id}`}
+                    style={linkStyle}>
+                    <Button sx={buttonStyle} >
+                        <Typography sx={typographyStyle}>
+                            Click for more information
+                        </Typography>
+                        <CardMedia sx={mediaCardStyle}
+                            image={productType.image}
+                            />
+                    </Button>
+                </Link>
+             
+             <CardContent>
                 <Box sx={boxStyle}>
                     <Typography variant="h5" gutterBottom>
-                        {productType.name}
+                       Rolex
                     </Typography>
                     <Typography sx={{ fontSize: '20px', }}>
                         {productType.model}
@@ -61,7 +46,7 @@ const Product: React.FC<Props> = ({ productType }) => {
                 </Typography>
                 <CardActions disableSpacing sx={cardActionStyling}>
                     <Button sx={buyButtonStyle}
-                    onClick={() => {handleClick(); addToCart(productType)}}
+                    onClick={() => {addToCart(productType)}}
                     >
                         Buy now
                     </Button>
@@ -77,16 +62,6 @@ export default Product;
 const linkStyle: CSSProperties = {
     textDecoration: 'none',
     flexGrow: 1,
-}
-const typographyStyle: CSSProperties = {
-    color: 'black',
-    borderColor: 'black',
-    fontSize: '0.8rem',
-}
-const buttonStyle: SxProps = {
-    height: '23em',
-    width: '100%',
-    display: 'block',
 }
 const cardStyling: SxProps = {
     minWidth: '20rem',
@@ -114,4 +89,14 @@ const mediaCardStyle: SxProps = {
     width: '100%',
     display: 'block',
     objectFit: 'cover',
+}
+const typographyStyle: CSSProperties = {
+    color: 'black',
+    borderColor: 'black',
+    fontSize: '0.8rem',
+}
+const buttonStyle: SxProps = {
+    height: '23em',
+    width: '100%',
+    display: 'block',
 }

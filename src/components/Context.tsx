@@ -9,6 +9,7 @@ interface CartItem extends ProductInfo {
 interface State {
    cart: CartItem[];
    total: number;
+   specificProductId: number;
 }
 
 
@@ -18,22 +19,26 @@ interface ContextValue extends State {
    removeItems: (product: ProductInfo) => void;
    subToTal: (cart: CartItem[]) => void;
    specificProduct: () => void;
+   removeallpructs:(product: ProductInfo) => void;
 }
 
 export const CartContext = createContext<ContextValue>({
    total: 0,
    cart: [],
+   specificProductId: 0,
    addToCart: () => { },
    removeCart: () => { },
    removeItems: () => { },
    subToTal: () => { },
-   specificProduct: () => { }
+   specificProduct: () => { },
+   removeallpructs: () => {},
 });
 
 class CartProvider extends Component<{}, State> {
-   state: State = {
+   public state: State = {
       cart: [],
       total: 0,
+      specificProductId: 0,
    };
    subTotal = (cart: CartItem[]) => {
       let totalup = 0;
@@ -67,6 +72,10 @@ class CartProvider extends Component<{}, State> {
 
       this.setState({ cart: [...removeItems] });
       this.subTotal(removeItems);
+   };
+   removeallpructs = (product: ProductInfo) => {
+      this.setState({cart:[]})
+      this.subTotal([])
    };
    addProductToCart = (product: ProductInfo) => {
       let updatedCart = [...this.state.cart];
@@ -104,6 +113,8 @@ class CartProvider extends Component<{}, State> {
             value={{
                total: this.state.total,
                cart: this.state.cart,
+               specificProductId: this.state.specificProductId,
+               removeallpructs: this.removeallpructs,
                addToCart: this.addProductToCart,
                removeCart: this.removeTocart,
                removeItems: this.removeOneitem,

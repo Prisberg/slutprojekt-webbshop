@@ -98,13 +98,13 @@ const SideCart: React.FC<Props> = () => {
                     <Table>
                         <TableBody>
                             {cart.map((product) => (
-                                <TableRow key={product.name}>
+                                <TableRow key={product.model}>
                                     <TableCell>
                                         <img src={product.image}
 
                                             height="100" />
                                     </TableCell>
-                                    <TableCell>{product.name}</TableCell>
+                                    <TableCell>{product.model}</TableCell>
                                     <TableCell>{product.price} kr</TableCell>
                                     <TableCell>
                                         <ButtonGroup sx={{

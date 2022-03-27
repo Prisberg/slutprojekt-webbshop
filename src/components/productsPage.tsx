@@ -33,7 +33,6 @@ export default function Products() {
             item justifyContent="center" key={productType.id} xs={12} sm={6} md={4} xl={4} lg={4}>
                     <Product 
                     productType={productType}
-                    handleReadMore={() => {}}
                     />
 
         </Grid>
