@@ -17,15 +17,17 @@ interface ContextValue extends State {
    removeCart: (product: ProductInfo) => void;
    removeItems: (product: ProductInfo) => void;
    subToTal: (cart: CartItem[]) => void;
+   specificProduct: () => void;
 }
 
 export const CartContext = createContext<ContextValue>({
    total: 0,
    cart: [],
-   addToCart: () => {console.log('hej')},
-   removeCart: () => {},
-   removeItems: () => {},
-   subToTal: () => {},
+   addToCart: () => { },
+   removeCart: () => { },
+   removeItems: () => { },
+   subToTal: () => { },
+   specificProduct: () => { }
 });
 
 class CartProvider extends Component<{}, State> {
@@ -90,8 +92,13 @@ class CartProvider extends Component<{}, State> {
       this.subTotal(updatedCart);
    };
 
+   specificProduct = () => {
+      //gets pathname
+      setTimeout(() => {console.log(window.location.pathname)}, 1000);
+      console.log('clicked specific product')
+   }
+
    render() {
-      console.log('CONTEXT RENDER');
       return (
          <CartContext.Provider
             value={{
@@ -101,6 +108,7 @@ class CartProvider extends Component<{}, State> {
                removeCart: this.removeTocart,
                removeItems: this.removeOneitem,
                subToTal: this.subTotal,
+               specificProduct: this.specificProduct,
             }}
          >
             {this.props.children}

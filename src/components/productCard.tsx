@@ -8,34 +8,38 @@ import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
 import { useContext } from 'react';
 import { CartContext } from './Context';
-import { ProductInfo } from './mockedProducts';
+import { ProductInfo, products } from './mockedProducts';
 
 type Props = {
     productType: ProductInfo;
-    handleReadMore: () => void;
 }
 
 const Product: React.FC<Props> = ({ productType }) => {
-    
-    
-    const { addToCart } = useContext(CartContext);
 
+    const { addToCart, specificProduct } = useContext(CartContext);
     const [open, setOpen] = React.useState(false);
-
-
     const handleClick = () => {
         setOpen(true);
      };
 
+/*      function moreInformation() {
+        let productId = productType.id
+        let selectedProduct = products.filter((products) => {
+            return products.id === productId 
+        })
+        console.log(selectedProduct)
+                localStorage.setItem()
+    } */
+
     return (
         <Card sx={cardStyling}>
-            <Link to='product-info'
+            <Link to={`product-info-${productType.id}`}
                 style={linkStyle}>
-                <Button sx={buttonStyle} >
+                <Button sx={buttonStyle} onClick={specificProduct} >
                     <Typography sx={typographyStyle}>
                         Click for more information
                     </Typography>
-                    <CardMedia sx={mediCardStyle}
+                    <CardMedia sx={mediaCardStyle}
                         image={productType.image}
                         title={productType.name} />
                 </Button>
@@ -105,7 +109,7 @@ const boxStyle: SxProps = {
     flexDirection: 'column',
     fontSize: '50px'
 }
-const mediCardStyle: SxProps = {
+const mediaCardStyle: SxProps = {
     height: '100%',
     width: '100%',
     display: 'block',
