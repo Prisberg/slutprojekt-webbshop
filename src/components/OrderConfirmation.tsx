@@ -42,20 +42,15 @@ function Confirmation() {
             </TableBody>
           ))}
         </Grid>
-      </Box>
-
-      
+      </Box>      
         <Link to={"/"} style={{ textDecoration: "none" }}>
           <Button
             sx={buttonStyle}
             onClick={() => {cart.map((product)=>{
-              removeallpructs(product);
-            } )}}
-          >
+              removeallpructs(product); } )}}>
             Keep browsing
           </Button>
         </Link>
-   
       <TableCell>{total}kr</TableCell>
     </Card>
   );
