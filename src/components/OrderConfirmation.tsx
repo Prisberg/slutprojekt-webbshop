@@ -32,11 +32,12 @@ function Confirmation() {
         <Grid container spacing={4} sx={{ display: "flex" }}>
           {cart.map((product) => (
             <TableBody>
-              <TableRow key={product.name}>
+              <TableRow key={product.model}>
                 <TableCell>
                   <img src={product.image} height="100" />
                 </TableCell>
-                <TableCell>{product.name}</TableCell>
+                <TableCell>{product.model}</TableCell>
+                <TableCell>{product.quantity}</TableCell>
                 <TableCell>{product.price} kr</TableCell>
               </TableRow>
             </TableBody>

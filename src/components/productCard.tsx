@@ -37,13 +37,13 @@ const Product: React.FC<Props> = ({ productType }) => {
                     </Typography>
                     <CardMedia sx={mediCardStyle}
                         image={productType.image}
-                        title={productType.name} />
+                         />
                 </Button>
             </Link>
             <CardContent>
                 <Box sx={boxStyle}>
                     <Typography variant="h5" gutterBottom>
-                        {productType.name}
+                       Rolex
                     </Typography>
                     <Typography sx={{ fontSize: '20px', }}>
                         {productType.model}
