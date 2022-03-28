@@ -8,6 +8,7 @@ import Daydate from "../assets/images/daydate.jpg";
 export interface ProductInfo {
     id: number;
     model: string;
+    maker: string;
     describtion: string;
     price: number;
     image: string;
@@ -22,6 +23,7 @@ export const products: ProductInfo[] = [
     {
         id: 0,
         model: 'Submariner-G',
+        maker: 'Rolex',
         describtion: 'Green',
         price: 100000,
         image: Submariner,
@@ -30,6 +32,7 @@ export const products: ProductInfo[] = [
     {
         id: 1,
         model: 'Submariner-B',
+        maker: 'Rolex',
         describtion: 'Blue',
         price: 150000,
         image: SubmarinerBlue,
@@ -38,6 +41,7 @@ export const products: ProductInfo[] = [
     {
         id: 2,
         model: 'Air-King',
+        maker: 'Rolex',
         describtion: 'Silver',
         price: 120000,
         image: AirKing,
@@ -46,6 +50,7 @@ export const products: ProductInfo[] = [
     {
         id: 3,
         model: 'Explorer',
+        maker: 'Rolex',
         describtion: 'Black',
         price: 170000,
         image: Explorer,
@@ -54,6 +59,7 @@ export const products: ProductInfo[] = [
     {
         id: 4,
         model: 'Datejust',
+        maker: 'Rolex',
         describtion: 'Green',
         price: 160000,
         image: Datejust,
@@ -62,6 +68,7 @@ export const products: ProductInfo[] = [
     {
         id: 5,
         model: 'Day-Date',
+        maker: 'Rolex',
         describtion: 'Gold',
         price: 175000,
         image: Daydate,

@@ -32,7 +32,7 @@ const Product: React.FC<Props> = ({ productType }) => {
              <CardContent>
                 <Box sx={boxStyle}>
                     <Typography variant="h5" gutterBottom>
-                       Rolex
+                       {productType.maker}
                     </Typography>
                     <Typography sx={{ fontSize: '20px', }}>
                         {productType.model}

@@ -23,30 +23,31 @@ function ProductInfo() {
       paddingTop: '10rem'
     }}>
       <CardContent>
-        <Typography variant="h5" gutterBottom>
-          Rolex
-        </Typography>
         {selectedProduct.map((selectedProduct) => (
-          <Box sx={{
-            display: 'flex'
-          }}
+          <Box
+            key={selectedProduct.id}
+            sx={{
+              display: 'flex'
+            }}
           >
+            <Typography variant="h5" gutterBottom>
+              {selectedProduct.maker}
+            </Typography>
             <Box
               component="img"
               alt="productImage"
-              key={selectedProduct.image}
               src={selectedProduct.image}
             />
-            <Typography sx={{ fontSize: '20px', }} key={selectedProduct.model} >
-            {selectedProduct.model}
+            <Typography sx={{ fontSize: '20px', }}>
+              {selectedProduct.model}
             </Typography>
-            <Typography variant="h3" key={selectedProduct.price}>
+            <Typography variant="h3">
               {selectedProduct.price}
             </Typography>
-            <Typography key={selectedProduct.inDepth}>
+            <Typography>
               {selectedProduct.inDepth}
             </Typography>
-            <CardActions disableSpacing sx={cardActionStyling} key={selectedProduct.id}>
+            <CardActions disableSpacing sx={cardActionStyling}>
               <Button sx={buyButtonStyle}
                 onClick={() => { addToCart(selectedProduct) }}
               >
