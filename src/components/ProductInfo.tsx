@@ -27,13 +27,26 @@ function ProductInfo() {
           Rolex
         </Typography>
         {selectedProduct.map((selectedProduct) => (
-          <Box>
-            <CardMedia
-              image={selectedProduct.image}
+          <Box sx={{
+            display: 'flex'
+          }}
+          >
+            <Box
+              component="img"
+              alt="productImage"
+              key={selectedProduct.image}
+              src={selectedProduct.image}
             />
-            <Typography sx={{ fontSize: '20px', }} key={selectedProduct.model} />
-            <Typography variant="body2" color="textSecondary" key={selectedProduct.price} />
-            <CardActions disableSpacing sx={cardActionStyling}>
+            <Typography sx={{ fontSize: '20px', }} key={selectedProduct.model} >
+            {selectedProduct.model}
+            </Typography>
+            <Typography variant="h3" key={selectedProduct.price}>
+              {selectedProduct.price}
+            </Typography>
+            <Typography key={selectedProduct.inDepth}>
+              {selectedProduct.inDepth}
+            </Typography>
+            <CardActions disableSpacing sx={cardActionStyling} key={selectedProduct.id}>
               <Button sx={buyButtonStyle}
                 onClick={() => { addToCart(selectedProduct) }}
               >
