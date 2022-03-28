@@ -14,10 +14,14 @@ import {
 } from "@mui/material";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+
+import { useContext } from 'react';
 import { CartContext } from "./Context";
+
 
 function Confirmation() {
   const { cart, total, removeallpructs } = useContext(CartContext);
+
 
   return (
     <Card sx={cardStyle}>

@@ -73,6 +73,7 @@ const SideCart: React.FC<Props> = () => {
                             variant="h6"
                             sx={headerSix}>
                             View your selections
+
                         </Typography>
                     </IconButton>
                 </Toolbar>
@@ -185,5 +186,7 @@ const linkStyle: React.CSSProperties = {
 }
 const checkoutStyle: SxProps = {
     color: 'white',
-    fontSize: '2rem'
+    fontSize: '2rem' 
 }
+
+
