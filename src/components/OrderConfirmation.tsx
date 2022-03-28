@@ -18,41 +18,40 @@ import { CartContext } from "./Context";
 
 function Confirmation() {
   const { cart, total, removeallpructs } = useContext(CartContext);
-  
+
   return (
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
         <Typography variant="h3">Order confirmartion</Typography>
-
-        <Typography
-          sx={{
-            textAlign: "center",
-          }}
-        ></Typography>
         <Grid container spacing={4} sx={{ display: "flex" }}>
-          {cart.map((product) => ( 
-            <TableBody>
-              <TableRow key={product.id}>
-                <TableCell>
-                  <img src={product.image} height="100" />
-                </TableCell>
-                <TableCell>{product.model}</TableCell>
-                <TableCell>{product.quantity}</TableCell>
-                <TableCell>{product.price} kr</TableCell>
-              </TableRow>
+          <Table>
+            <TableBody >
+              {cart.map((product) => (
+                <TableRow key={product.id}>
+                  <TableCell>
+                    <img src={product.image} height="100" />
+                  </TableCell>
+                  <TableCell>{product.model}</TableCell>
+                  <TableCell>{product.quantity}</TableCell>
+                  <TableCell>{product.price} kr</TableCell>
+                </TableRow>
+              ))}
             </TableBody>
-          ))}
+          </Table>
         </Grid>
-      </Box>      
-        <Link to={"/"} style={{ textDecoration: "none" }}>
-          <Button
-            sx={buttonStyle}
-            onClick={() => {cart.map((product)=>{
-              removeallpructs(product); } )}}>
-            Keep browsing
-          </Button>
-        </Link>
-      <TableCell>{total}kr</TableCell>
+      </Box>
+      <Link to={"/"} style={{ textDecoration: "none" }}>
+        <Button
+          sx={buttonStyle}
+          onClick={() => {
+            cart.map((product) => {
+              removeallpructs(product);
+            })
+          }}>
+          Keep browsing
+        </Button>
+      </Link>
+      <Typography>{total}kr</Typography>
     </Card>
   );
 }
