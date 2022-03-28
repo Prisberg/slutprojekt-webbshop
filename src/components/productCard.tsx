@@ -28,7 +28,6 @@ const Product: React.FC<Props> = ({ productType }) => {
                             />
                     </Button>
                 </Link>
-             
              <CardContent>
                 <Box sx={boxStyle}>
                     <Typography variant="h5" gutterBottom>

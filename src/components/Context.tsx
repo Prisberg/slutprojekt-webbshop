@@ -27,7 +27,7 @@ export const CartContext = createContext<ContextValue>({
    removeCart: () => { },
    removeItems: () => { },
    subToTal: () => { },
-   removeallpructs: () => {},
+   removeallpructs: () => { },
 });
 
 class CartProvider extends Component<{}, State> {
