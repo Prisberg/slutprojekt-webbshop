@@ -27,13 +27,13 @@ export default function Products() {
             >
             {products.map((productType) => (
         <Grid 
+        key={productType.id}
             sx={{
                 display: 'flex',
             }}
-            item justifyContent="center" key={productType.id} xs={12} sm={6} md={4} xl={4} lg={4}>
+            item justifyContent="center" xs={12} sm={6} md={4} xl={4} lg={4}>
                     <Product 
                     productType={productType}
-                    handleReadMore={() => {}}
                     />
 
         </Grid>
