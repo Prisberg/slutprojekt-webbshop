@@ -4,7 +4,7 @@ import Product from "./productCard";
 import Submariner from "../assets/images/SubmarinerGreen.jpg";
 import SubmarinerBlue from "../assets/images/Rolex-submariner.jpeg";
 import AirKing from "../assets/images/air-king.jpg";
-import { products } from '../components/mockedProducts';
+import { products } from './mockedData';
 
 
 export default function Products() {
@@ -27,13 +27,13 @@ export default function Products() {
             >
             {products.map((productType) => (
         <Grid 
+        key={productType.id}
             sx={{
                 display: 'flex',
             }}
-            item justifyContent="center" key={productType.id} xs={12} sm={6} md={4} xl={4} lg={4}>
+            item justifyContent="center" xs={12} sm={6} md={4} xl={4} lg={4}>
                     <Product 
                     productType={productType}
-                    handleReadMore={() => {}}
                     />
 
         </Grid>

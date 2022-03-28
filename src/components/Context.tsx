@@ -1,38 +1,41 @@
 import { Component, createContext } from 'react';
-import { ProductInfo } from '../components/mockedProducts';
+import { ProductInfo } from './mockedData';
 
 interface CartItem extends ProductInfo {
    quantity: number;
    subTotal: number;
    totalSum: number;
 }
+
 interface State {
    cart: CartItem[];
-   total: number;
+   total: number;   
 }
-
 
 interface ContextValue extends State {
    addToCart: (product: ProductInfo) => void;
    removeCart: (product: ProductInfo) => void;
    removeItems: (product: ProductInfo) => void;
    subToTal: (cart: CartItem[]) => void;
+   removeallpructs:(product: ProductInfo) => void;
 }
 
 export const CartContext = createContext<ContextValue>({
    total: 0,
    cart: [],
-   addToCart: () => {console.log('hej')},
-   removeCart: () => {},
-   removeItems: () => {},
-   subToTal: () => {},
+   addToCart: () => { },
+   removeCart: () => { },
+   removeItems: () => { },
+   subToTal: () => { },
+   removeallpructs: () => { },
 });
 
 class CartProvider extends Component<{}, State> {
-   state: State = {
+   public state: State = {
       cart: [],
       total: 0,
    };
+
    subTotal = (cart: CartItem[]) => {
       let totalup = 0;
       cart.forEach((element) => {
@@ -58,6 +61,7 @@ class CartProvider extends Component<{}, State> {
          }
       }
    };
+
    removeTocart = (product: ProductInfo) => {
       const removeItems: CartItem[] = this.state.cart.filter(
          (item) => item.id !== product.id,
@@ -66,6 +70,12 @@ class CartProvider extends Component<{}, State> {
       this.setState({ cart: [...removeItems] });
       this.subTotal(removeItems);
    };
+
+   removeallpructs = (product: ProductInfo) => {
+      this.setState({cart:[]})
+      this.subTotal([])
+   };
+
    addProductToCart = (product: ProductInfo) => {
       let updatedCart = [...this.state.cart];
 
@@ -91,12 +101,12 @@ class CartProvider extends Component<{}, State> {
    };
 
    render() {
-      console.log('CONTEXT RENDER');
       return (
          <CartContext.Provider
             value={{
                total: this.state.total,
                cart: this.state.cart,
+               removeallpructs: this.removeallpructs,
                addToCart: this.addProductToCart,
                removeCart: this.removeTocart,
                removeItems: this.removeOneitem,

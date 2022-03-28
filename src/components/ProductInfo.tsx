@@ -1,72 +1,107 @@
 
-import {
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-} from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardMedia, Table, TableBody, TableCell, TableContainer, TableRow, Typography, } from "@mui/material";
 import { Box, SxProps } from "@mui/system";
+import { CSSProperties, useContext } from "react";
+import { useParams } from 'react-router-dom';
+import { CartContext } from "./Context";
+import { products } from "./mockedData";
 
-function createData(name: string, value: any) {
-  return { name, value };
-}
-
-const rows = [
-  createData('Name', 'Rolex'),
-  createData('Circumference', '46 mm'),
-  createData('Use', 'Have them around your wrist'),
-  createData('Back case', 'solid'),
-  createData('Glass', 'Diamond glass on top'),
-  createData('Thickness', '8 mm'),
-  createData('Bracelet', 'steel'),
-];
 
 function ProductInfo() {
+  let { id } = useParams();
+  let idString = `${id}`;
+  let idNumber = parseFloat(idString);
+
+  let selectedProduct = products.filter((products) => {
+    return products.id === idNumber
+  });
+
+  const { addToCart } = useContext(CartContext);
+
   return (
-    <TableContainer sx={containerStyling}>
-      <Table sx={tableStyling}>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.value}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Button sx={buttonStyling}>
-        Add to cart
-      </Button>
-    </TableContainer >
+    <Card sx={{
+      paddingTop: '10rem'
+    }}>
+      <CardContent>
+        {selectedProduct.map((selectedProduct) => (
+          <Box
+            key={selectedProduct.id}
+            sx={{
+              display: 'flex'
+            }}
+          >
+            <Typography variant="h5" gutterBottom>
+              {selectedProduct.maker}
+            </Typography>
+            <Box
+              component="img"
+              alt="productImage"
+              src={selectedProduct.image}
+            />
+            <Typography sx={{ fontSize: '20px', }}>
+              {selectedProduct.model}
+            </Typography>
+            <Typography variant="h3">
+              {selectedProduct.price}
+            </Typography>
+            <Typography>
+              {selectedProduct.inDepth}
+            </Typography>
+            <CardActions disableSpacing sx={cardActionStyling}>
+              <Button sx={buyButtonStyle}
+                onClick={() => { addToCart(selectedProduct) }}
+              >
+                Buy now
+              </Button>
+            </CardActions>
+          </Box>
+        ))}
+      </CardContent>
+    </Card>
   );
-}
+};
 
 export default ProductInfo;
 
 
-const containerStyling: SxProps = {
-  justifyContent: 'center',
-  display: 'flex',
-  paddingTop: { xs: '6rem', sm: '10rem' },
+const linkStyle: CSSProperties = {
+  textDecoration: 'none',
+  flexGrow: 1,
 }
-const buttonStyling: SxProps = {
+const cardStyling: SxProps = {
+  minWidth: '20rem',
+  minHeight: '33rem',
+}
+const cardActionStyling: SxProps = {
+  display: 'flex',
+  justifyContent: 'flex-end',
+}
+const buyButtonStyle: SxProps = {
   backgroundColor: 'black',
   color: 'white',
-  width: '8rem',
-  height: '3rem',
-  marginTop: '1rem',
-  display: 'block',
   '&:hover': {
     backgroundColor: '#5f5f5f',
     color: '#fff',
   }
 }
-const tableStyling: SxProps = {
-  maxWidth: '30rem',
-  textAlign: 'center',
-  backgroundColor: 'white',
+const boxStyle: SxProps = {
+  display: 'flex',
+  flexDirection: 'column',
+  fontSize: '50px'
+}
+const mediaCardStyle: SxProps = {
+  height: '100%',
+  width: '100%',
+  display: 'block',
+  objectFit: 'cover',
+}
+const typographyStyle: CSSProperties = {
+  color: 'black',
+  borderColor: 'black',
+  fontSize: '0.8rem',
+}
+const buttonStyle: SxProps = {
+  height: '23em',
+  width: '100%',
+  display: 'block',
 }

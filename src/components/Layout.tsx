@@ -24,7 +24,7 @@ function Layout() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Products />} />
-          <Route path="product-info" element={<ProductInfo />} />
+          <Route path="product-info/:id" element={<ProductInfo />} />
           <Route path="checkout" element={<Overview />} />
           <Route path="checkout/adress" element={<Checkout />} />
           <Route path="checkout/delivery" element={<Delivery />} />
