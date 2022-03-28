@@ -6,6 +6,7 @@ import Select from '@mui/material/Select';
 import { Card, Grid, Radio, SxProps, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Button } from '@mui/material';
 import { Box, spacing } from '@mui/system';
 import { Link } from 'react-router-dom';
+import { shipping } from '../components/mockedData'
 
 interface Props {
 
@@ -36,177 +37,59 @@ const Delivery: React.FC<Props> = () => {
                     <TableContainer>
                         <Table sx={table} aria-label="simple table">
                             <TableBody>
-                                <TableRow>
-                                    <TableCell sx={flexColumn}>
-                                        <Box sx={spaceBetween}>
-                                            <Box sx={flexRow}>
-                                                <Radio
-                                                    checked={selectedValue === 'a'}
-                                                    onChange={handleChange}
-                                                    value="a"
-                                                    color="default"
-                                                    name="radio-button"
-                                                    inputProps={{ 'aria-label': 'a' }}
-                                                    size="small"
-                                                />
+                                {shipping.map((shipping) => (
+                                    <TableRow key={shipping.id}>
+                                        <TableCell sx={flexColumn}>
+                                            <Box sx={spaceBetween}>
+                                                <Box sx={flexRow}>
+                                                    <Radio
+                                                        checked={selectedValue === `${shipping.id}`}
+                                                        onChange={handleChange}
+                                                        value={`${shipping.id}`}
+                                                        color="default"
+                                                        name="radio-button"
+                                                        inputProps={{ 'aria-label': `${shipping.id}` }}
+                                                        size="small"
+                                                    />
+                                                    <Typography>
+                                                        {shipping.shippingType}
+                                                    </Typography>
+                                                </Box>
                                                 <Typography>
-                                                    Letter - Postnord
+                                                    {shipping.shippingCost} kr
                                                 </Typography>
                                             </Box>
-                                            <Typography>
-                                                0 kr
+                                            <Typography sx={leftMargin}>
+                                                {shipping.shippingDescription}
                                             </Typography>
-                                        </Box>
-                                        <Typography sx={leftMargin}>
-                                            3 business days
-                                        </Typography>
-                                        <FormControl
-                                            variant="outlined"
-                                            sx={formControl}
-                                        >
-                                            <InputLabel id="select-outlined-label">
-                                                Delivery date
-                                            </InputLabel>
-                                            <Select
-                                                labelId="select-outlined-label"
-                                                id="select-outlined"
-                                                value={DeliveryDate}
-
-                                                label="Leveransdatum"
+                                            <FormControl
+                                                variant="outlined"
+                                                sx={formControl}
                                             >
-                                                <MenuItem sx={menuItemFontSize} value={10}>
-                                                    Thursday april 8th
-                                                </MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell sx={flexColumn}>
-                                        <Box sx={spaceBetween}>
-                                            <Box sx={flexRow}>
-                                                <Radio
-                                                    checked={selectedValue === 'b'}
-                                                    onChange={handleChange}
-                                                    value="b"
-                                                    color="default"
-                                                    name="radio-button"
-                                                    inputProps={{ 'aria-label': 'b' }}
-                                                    size="small"
-                                                />
-                                                <Typography>
-                                                    Express - Postnord
-                                                </Typography>
-                                            </Box>
-                                            <Typography>
-                                                50 kr
-                                            </Typography>
-                                        </Box>
-                                        <Typography sx={leftMargin}>
-                                            Order before 22.00 will be sent
-                                            Sunday-Thursday evening between 17 - 22. Preliminary
-                                            delivery tomorrow.
-                                        </Typography>
-                                        <FormControl
-                                            variant="outlined"
-                                            sx={formControl}
-                                        >
-                                            <InputLabel id="select-outlined-label">
-                                                Delivery date
-                                            </InputLabel>
-                                            <Select
-                                                labelId="select-outlined-label"
-                                                id="select-outlined"
-                                                value={DeliveryDate}
+                                                <InputLabel id="select-outlined-label">
+                                                    Delivery date
+                                                </InputLabel>
+                                                <Select
+                                                    labelId="select-outlined-label"
+                                                    id="select-outlined"
+                                                    value={DeliveryDate}
 
-                                                label="Leveransdatum"
-                                            >
-                                                <MenuItem sx={menuItemFontSize} value={40}>
-                                                    Tuesday april 6th
-                                                </MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell sx={flexColumn}>
-                                        <Box sx={spaceBetween}>
-                                            <Box sx={flexRow}>
-                                                <Radio
-                                                    checked={selectedValue === 'c'}
-                                                    onChange={handleChange}
-                                                    value="c"
-                                                    color="default"
-                                                    name="radio-button"
-                                                    inputProps={{ 'aria-label': 'c' }}
-                                                    size="small"
-                                                />
-                                                <Typography>
-                                                    Earlybird
-                                                </Typography>
-                                            </Box>
-                                            <Typography>
-                                                100 kr
-                                            </Typography>
-                                        </Box>
-                                        <Typography sx={leftMargin}>
-                                            2 business days
-                                            Delivery before 07:00 to your mailbox,
-                                            bigger packages will be left at the door
-                                        </Typography>
-                                        <FormControl
-                                            variant="outlined"
-                                            sx={formControl}
-                                        >
-                                            <InputLabel id="select-outlined-label">
-                                                Delivery date
-                                            </InputLabel>
-                                            <Select
-                                                labelId="select-outlined-label"
-                                                id="select-outlined"
-                                                value={DeliveryDate}
-
-                                                label="Leveransdatum"
-                                            >
-                                                <MenuItem sx={menuItemFontSize} value={3}>
-                                                    Wednesday april 7th
-                                                </MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell sx={flexColumn}>
-                                        <Box sx={spaceBetween}>
-                                            <Box sx={flexRow}>
-                                                <Radio
-                                                    checked={selectedValue === 'f'}
-                                                    onChange={handleChange}
-                                                    value="f"
-                                                    color="default"
-                                                    name="radio-button"
-                                                    inputProps={{ 'aria-label': 'f' }}
-                                                    size="small"
-                                                />
-                                                <Typography >
-                                                    Pick up at store
-                                                </Typography>
-                                            </Box>
-                                            <Typography>
-                                                0 kr
-                                            </Typography>
-                                        </Box>
-                                        <Typography sx={leftMargin}>
-                                            You can pick up your order during opening hours
-                                        </Typography>
-                                    </TableCell>
-                                </TableRow>
+                                                    label="Leveransdatum"
+                                                >
+                                                    <MenuItem sx={menuItemFontSize} value={10}>
+                                                        {shipping.deliveryDate}
+                                                    </MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
                 </Grid>
                 <Grid sx={buttonAlign}>
-                    <Link to={'/checkout/payment'} style={{textDecoration: 'none'}}>
+                    <Link to={'/checkout/payment'} style={{ textDecoration: 'none' }}>
                         <Button sx={button}>
                             Proceed
                         </Button>

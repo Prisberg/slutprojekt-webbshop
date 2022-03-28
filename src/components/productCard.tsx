@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
 import { useContext } from 'react';
 import { CartContext } from './Context';
-import { ProductInfo, products, Props } from './mockedProducts';
+import { ProductInfo, products, Props } from './mockedData';
 
 
 const Product: React.FC<Props> = ({ productType }) => {
