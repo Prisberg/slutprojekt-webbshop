@@ -1,14 +1,35 @@
-
 import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper } from "@mui/material";
 import { border, Box, color, display, margin, SxProps } from "@mui/system";
-import { userInfo } from "os";
-import { Link } from 'react-router-dom';
-
-
+import { useState, useContext } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import { CartContext } from "./Context";
 
 function Checkout() {
 
+  const { inputInformation, addInputInformation } = useContext(CartContext);
+  const navigate = useNavigate();
 
+  const [inputInfo, setInputInfo] = useState({
+    name: '',
+    LName: '',
+    email: '',
+    address: '',
+    city: '',
+    country: '',
+    zip: '',
+    tel: '',
+  })
+
+  const handleProceed = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    addInputInformation(inputInfo);
+    console.log(inputInformation)
+    navigate('/checkout/payment');
+  };
+
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    setInputInfo({ ...inputInfo, [e.target.name]: e.target.value });
+  };
   return (
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
@@ -16,83 +37,107 @@ function Checkout() {
           Billing adress
         </Typography>
 
-        <Typography sx={{
-          textAlign: 'center'
-        }}>
-        </Typography>
-        <Grid container spacing={4} sx={{ display: 'flex' }}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="first-name"
-              name="firstname"
-              label="First Name"
-            />
+        <form onSubmit={handleProceed}>
+          <Grid container spacing={4} sx={{ display: 'flex' }}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="name"
+                required
+                fullWidth
+                placeholder="First name *"
+                value={inputInfo.name}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="LName"
+                required
+                fullWidth
+                placeholder="Last name *"
+                value={inputInfo.LName}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="email"
+                name="email"
+                required
+                fullWidth
+                placeholder="Email *"
+                value={inputInfo.email}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="tel"
+                name="tel"
+                required
+                fullWidth
+                placeholder="Telephone number *"
+                value={inputInfo.tel}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="address"
+                required
+                fullWidth
+                placeholder="Address *"
+                value={inputInfo.address}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="city"
+                required
+                fullWidth
+                placeholder="City *"
+                value={inputInfo.city}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="country"
+                required
+                fullWidth
+                placeholder="country *"
+                value={inputInfo.country}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="zip"
+                required
+                fullWidth
+                placeholder="Zip / Postal code *"
+                value={inputInfo.zip}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Button
+                type="submit"
+                sx={buttonStyle}>
+                Proceed
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="last-name"
-              name="lastname"
-              label="Last name"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="email"
-              name="email"
-              label="Email"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="address"
-              name="address"
-              label="Address line 1"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="city"
-              name="city"
-              label="City"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="country"
-              name="country"
-              label="Country"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="post-code"
-              name="post-code"
-              label="Zip / Postal code"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Link to={'/checkout/delivery'} style={{textDecoration: 'none'}}>
-              <Button sx={buttonStyle}
-              >Proceed</Button>
-            </Link>
-          </Grid>
-        </Grid>
+        </form>
       </Box>
-    </Card>
+    </Card >
   );
 };
 

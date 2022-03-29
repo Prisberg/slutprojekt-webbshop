@@ -2,11 +2,16 @@
 import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper, Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel } from "@mui/material";
 import { border, Box, color, display, margin, SxProps } from "@mui/system";
 import { userInfo } from "os";
+import { useContext } from "react";
 import { Link } from 'react-router-dom';
+import { CartContext } from "./Context";
 
 
 
 function Payment() {
+  const {inputInformation} = useContext(CartContext);
+
+  console.log(inputInformation);
 
   return (
     <form action="" method="get">

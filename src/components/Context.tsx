@@ -9,7 +9,19 @@ interface CartItem extends ProductInfo {
 
 interface State {
    cart: CartItem[];
-   total: number;   
+   total: number;
+   inputInformation: inputInterface [];
+}
+
+export interface inputInterface {
+   name: string;
+   LName: string,
+   email: string,
+   address: string,
+   city: string,
+   country: string,
+   zip: string,
+   tel: string,
 }
 
 interface ContextValue extends State {
@@ -17,23 +29,27 @@ interface ContextValue extends State {
    removeCart: (product: ProductInfo) => void;
    removeItems: (product: ProductInfo) => void;
    subToTal: (cart: CartItem[]) => void;
-   removeallpructs:(product: ProductInfo) => void;
+   removeallpructs: (product: ProductInfo) => void;
+   addInputInformation: (inputInfo: inputInterface) => void;
 }
 
 export const CartContext = createContext<ContextValue>({
    total: 0,
    cart: [],
+   inputInformation: [],
    addToCart: () => { },
    removeCart: () => { },
    removeItems: () => { },
    subToTal: () => { },
    removeallpructs: () => { },
+   addInputInformation: () => { },
 });
 
 class CartProvider extends Component<{}, State> {
    public state: State = {
       cart: [],
       total: 0,
+      inputInformation: [],
    };
 
    subTotal = (cart: CartItem[]) => {
@@ -71,8 +87,8 @@ class CartProvider extends Component<{}, State> {
       this.subTotal(removeItems);
    };
 
-   removeallpructs = (product: ProductInfo) => {
-      this.setState({cart:[]})
+   removeallpructs = () => {
+      this.setState({ cart: [] })
       this.subTotal([])
    };
 
@@ -100,17 +116,25 @@ class CartProvider extends Component<{}, State> {
       this.subTotal(updatedCart);
    };
 
+   addInputInformation = (inputInfo: inputInterface) => {
+      let updatedInputInformation = [...this.state.inputInformation];
+      const currentInput = updatedInputInformation.push(inputInfo);
+      this.setState({ inputInformation: updatedInputInformation });
+   };
+
    render() {
       return (
          <CartContext.Provider
             value={{
                total: this.state.total,
                cart: this.state.cart,
+               inputInformation: this.state.inputInformation,
                removeallpructs: this.removeallpructs,
                addToCart: this.addProductToCart,
                removeCart: this.removeTocart,
                removeItems: this.removeOneitem,
                subToTal: this.subTotal,
+               addInputInformation: this.addInputInformation,
             }}
          >
             {this.props.children}
