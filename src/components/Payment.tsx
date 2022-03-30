@@ -1,36 +1,49 @@
 
-import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper, Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel } from "@mui/material";
-import { border, Box, color, display, margin, SxProps } from "@mui/system";
-import { userInfo } from "os";
-import { useContext } from "react";
-import { Link } from 'react-router-dom';
-import { CartContext, inputProp } from "./Context";
+import { Grid, Button, Typography, TextField, Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel } from "@mui/material";
+import { Box, SxProps } from "@mui/system";
+import { useContext, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { CartContext } from "./Context";
 
 
 
-function Payment()  {
-  const { addressInformation, shippingInformation } = useContext(CartContext);
+function Payment() {
+  const { addressInformation, shippingInformation, storePaymentInformation } = useContext(CartContext);
+  const navigate = useNavigate();
 
   /*Use this in confirmation to display latest information*/
-  const addressInfoLatest = addressInformation[addressInformation.length -1]
-  console.log(addressInfoLatest)
- 
+  const addressInfoLatest = addressInformation[addressInformation.length - 1]
 
-  console.log(addressInformation);
-  console.log(shippingInformation);
+  const [paymentInfo, setPaymentInfo] = useState({
+    name: '',
+    cardNumber: '',
+    expires: '',
+    CVV: '',
+    tel: addressInfoLatest.tel,
+    ssn: '',
+  })
 
+  const handleProceed = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    storePaymentInformation(paymentInfo);
+    navigate('/checkout/confirmation');
+  };
+
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    setPaymentInfo({ ...paymentInfo, [e.target.name]: e.target.value });
+  };
 
   return (
-    <form action="" method="get">
+    <form onSubmit={handleProceed}>
       <Box sx={primaryBox}>
         <Box sx={secondaryBox}>
           <Typography variant="h5" gutterBottom>
-            Betalningsalternativ
+            Payment methods
           </Typography>
           <Accordion>
             <AccordionSummary>
               <Typography>
-                Kortbetalning
+                Payment card
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -38,38 +51,46 @@ function Payment()  {
                 <Grid item xs={12} md={6}>
                   <TextField
                     required
-                    id="cardName"
-                    label="För- och efternamn"
+                    name="name"
+                    label="First- and lastname"
                     fullWidth
                     autoComplete="cc-name"
+                    value={paymentInfo.name}
+                    onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <TextField
                     required
-                    id="cardNumber"
+                    name="cardNumber"
                     label="Kortnummer"
                     fullWidth
                     autoComplete="cc-number"
+                    value={paymentInfo.cardNumber}
+                    onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <TextField
                     required
-                    id="expDate"
-                    label="Utgångsdatum"
+                    name="expires"
+                    label="Expiration date"
                     fullWidth
                     autoComplete="cc-exp"
+                    value={paymentInfo.expires}
+                    onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <TextField
                     required
-                    id="cvv"
+                    name="CVV"
                     label="CVV"
-                    helperText="Sista tre siffrorna på baksidan av kortet"
+                    helperText="Last three digits on the back of your card"
                     fullWidth
                     autoComplete="cc-csc"
+                    value={paymentInfo.CVV}
+                    onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -81,7 +102,7 @@ function Payment()  {
                         value="yes"
                       />
                     }
-                    label="Kom ihåg mina kortuppgifter till nästa gång"
+                    label="Remember my information for next time"
                   />
                 </Grid>
               </Grid>
@@ -103,14 +124,16 @@ function Payment()  {
                   xs={12}
                   md={6}
                 >
-                    <TextField
-                      required
-                      id="cardName"
-                      label="Telefonnummer för Swishbetalning"
-                      fullWidth
-                      value={addressInfoLatest.tel}
-                      autoComplete="tel"
-                    />
+                  <TextField
+                    type="text"
+                    required
+                    name="tel"
+                    label="Telephone number for Swish-payment method"
+                    fullWidth
+                    value={paymentInfo.tel}
+                    onChange={handleChange}
+                    autoComplete="tel"
+                  />
                 </Grid>
               </Grid>
             </AccordionDetails>
@@ -121,7 +144,7 @@ function Payment()  {
               id="panel1a-header"
             >
               <Typography>
-                Faktura
+                Invoice
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -133,20 +156,20 @@ function Payment()  {
                 >
                   <TextField
                     required
-                    id="Personnummer"
-                    label="Personnummer"
+                    name="ssn"
+                    label="Social security number"
                     fullWidth
-                    autoComplete="cc-Personnummer"
+                    autoComplete="personnummer"
+                    value={paymentInfo.ssn}
+                    onChange={handleChange}
                   />
                 </Grid>
               </Grid>
             </AccordionDetails>
           </Accordion>
-          <Link to={'/checkout/confirmation'} style={{ textDecoration: 'none' }}>
-            <Button sx={button}>
-              Proceed
-            </Button>
-          </Link>
+          <Button type="submit" sx={button}>
+            Proceed
+          </Button>
         </Box>
       </Box>
     </form>

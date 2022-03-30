@@ -1,29 +1,16 @@
 import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { Card, Grid, Radio, SxProps, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Button } from '@mui/material';
-import { Box, spacing } from '@mui/system';
-import { Link, useNavigate } from 'react-router-dom';
-import { shipping, shippingInterface } from '../components/mockedData'
+import { Box } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
+import { shipping } from '../components/mockedData'
 import { useContext, useState } from 'react';
 import { CartContext } from './Context';
 
 
 function Delivery() {
     const navigate = useNavigate();
-    const { addressInformation, shippingInformation, storeShippingInformation } = useContext(CartContext);
+    const { storeShippingInformation } = useContext(CartContext);
     const [selectedValue, setSelectedValue] = useState('a');
-    const [shippingInfo, setShippingInfo] = useState({
-        id: 'a',
-        shippingType: '',
-        shippingDescription: '',
-        shippingCost: 0,
-        deliveryDate: 0,
-    })
-
-    console.log(addressInformation)
 
     /*     const deliveryDates = (shipping: shippingInterface) => {
             let date = new Date();
@@ -38,8 +25,8 @@ function Delivery() {
     const handleProceed = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         navigate('/checkout/payment');
-        
-        
+
+
         const filteredShipping: any = shipping.filter((item) => {
             return item.id === selectedValue;
         })

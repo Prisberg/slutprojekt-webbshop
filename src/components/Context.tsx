@@ -36,7 +36,7 @@ export interface paymentInterface {
    expires: string,
    CVV: string,
    tel: string,
-   bill: string,
+   ssn: string,
 }
 
 interface ContextValue extends State {
