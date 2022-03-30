@@ -14,6 +14,8 @@ import { Button, ButtonGroup, Grid, Paper, Table, TableBody, TableCell, TableCon
 import { Link } from 'react-router-dom';
 import { CartContext } from './Context';
 import { useContext } from 'react';
+import Badge from '@mui/material/Badge';
+import WatchOffIcon from '@mui/icons-material/WatchOff';
 
 
 interface AppBarProps extends MuiAppBarProps {
@@ -56,10 +58,19 @@ const SideCart: React.FC<Props> = () => {
         drawerWidth = '100%'
     }
 
+    let carlentg = 0;
+
+   cart.forEach((CartItem) => {
+      carlentg = carlentg + CartItem.quantity;
+   });
+
+    
+
     return (
         <React.Fragment>
             <Box
                 sx={boxStyling}>
+               
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -68,7 +79,13 @@ const SideCart: React.FC<Props> = () => {
                         onClick={handleDrawerOpen}
                         sx={{ ...(open && { display: 'none' }) }}
                     >
+                        <Badge
+                            color="error"
+                            badgeContent={carlentg}
+                            showZero
+                        >
                         <ShoppingBagIcon sx={{ zIndex: 1, fontSize: '3rem', }} />
+                        </Badge>
                         <Typography
                             variant="h6"
                             sx={headerSix}>
@@ -77,13 +94,14 @@ const SideCart: React.FC<Props> = () => {
                         </Typography>
                     </IconButton>
                 </Toolbar>
+                
                 <Drawer
                     sx={{
                         zIndex: 2,
                         position: 'absolute',
                         flexShrink: 0,
                         '& .MuiDrawer-paper': {
-                            width: { xs: drawerWidth, sm: '40%', md: '30%' }
+                            width: { xs: drawerWidth, sm: '40%', md: '30%', lg: '35%' }
                         },
                     }}
                     variant="persistent"
@@ -98,7 +116,12 @@ const SideCart: React.FC<Props> = () => {
                     <Divider />
                     <Table>
                         <TableBody>
+                        {cart.length === 0 ? <Typography>No watch in your cart
+                            <WatchOffIcon/>
+                        
+                        </Typography> : null}
                             {cart.map((product) => (
+                                
                                 <TableRow key={product.model}>
                                     <TableCell>
                                         <img src={product.image}
@@ -106,58 +129,55 @@ const SideCart: React.FC<Props> = () => {
                                             height="100" />
                                     </TableCell>
                                     <TableCell>{product.model}</TableCell>
-                                    <TableCell>{product.price} kr</TableCell>
+                                    <TableCell>{product.subTotal} kr</TableCell>
                                     <TableCell>
-                                        <ButtonGroup sx={{
-                                        }}
-                                        >
-                                            <Button sx={{
-                                                height: '3rem'
-                                            }}
-                                                onClick={() => {
-                                                    removeItems(product);
-                                                }}
-                                            >
-                                                -
-                                            </Button>
-                                            <TextField
-                                                variant="outlined"
-                                                id={quantity}
-                                                value={product.quantity}
-                                            />
-                                            <Button
-                                                sx={{
-                                                    height: '3rem'
-                                                }}
+                                        <ButtonGroup sx={buttonGroup}
+                                        >   
+                                             <Button
+                                                sx={button}
                                                 onClick={() => {
                                                     addToCart(product);
                                                 }}
                                             >
                                                 +
                                             </Button>
+                                            
+                                            <TextField
+                                                variant="outlined"
+                                                id={quantity}
+                                                value={product.quantity}
+                                            />
+                                           
+                                           <Button sx={button}
+                                                onClick={() => {
+                                                    removeItems(product);
+                                                }}
+                                            >
+                                                -
+                                            </Button>
+
                                         </ButtonGroup>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography>{product.subTotal} kr </Typography>
                                     </TableCell>
                                 </TableRow>
                             ))}
                             <TableRow>
-                                <TableCell>{total}kr</TableCell>
+                                <TableCell>Total: {total}kr</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
-                    <Link to={'checkout'} style={linkStyle}>
-                        <Button
-                            sx={{
-                                backgroundColor: '#3665DD',
-                                width: 200,
-                            }}>
-                            <Typography sx={checkoutStyle}>
-                                Checkout
-                            </Typography>
-                        </Button>
-                    </Link>
+                    {cart.length === 0 ? 
+                    null :  <Link to={'checkout'} style={linkStyle}>
+                    <Button
+                        sx={{
+                            backgroundColor: '#3665DD',
+                            width: 200,
+                        }}>
+                        <Typography sx={checkoutStyle}>
+                            Checkout
+                        </Typography>
+                    </Button>
+                </Link> }
+                    
                 </Drawer>
             </Box >
         </React.Fragment>
@@ -187,6 +207,13 @@ const linkStyle: React.CSSProperties = {
 const checkoutStyle: SxProps = {
     color: 'white',
     fontSize: '2rem' 
+}
+const button: SxProps = {
+    height: '3rem'
+}
+const buttonGroup: SxProps = {
+    display: { xs: 'flex' },
+    flexDirection: { xs: 'column', sm: 'column', lg: 'row' },
 }
 
 
