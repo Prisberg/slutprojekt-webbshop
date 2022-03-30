@@ -14,8 +14,6 @@ import {
 } from "@mui/material";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-
-import { useContext } from 'react';
 import { CartContext } from "./Context";
 
 
