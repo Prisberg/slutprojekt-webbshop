@@ -6,7 +6,7 @@ import { CartContext } from "./Context";
 
 function Checkout() {
 
-  const { inputInformation, addInputInformation } = useContext(CartContext);
+  const { addressInformation, storeAddressInformation } = useContext(CartContext);
   const navigate = useNavigate();
 
   const [inputInfo, setInputInfo] = useState({
@@ -22,9 +22,8 @@ function Checkout() {
 
   const handleProceed = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    addInputInformation(inputInfo);
-    console.log(inputInformation)
-    navigate('/checkout/payment');
+    storeAddressInformation(inputInfo);
+    navigate('/checkout/delivery');
   };
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {

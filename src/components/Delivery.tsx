@@ -5,98 +5,109 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Card, Grid, Radio, SxProps, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Button } from '@mui/material';
 import { Box, spacing } from '@mui/system';
-import { Link } from 'react-router-dom';
-import { shipping } from '../components/mockedData'
+import { Link, useNavigate } from 'react-router-dom';
+import { shipping, shippingInterface } from '../components/mockedData'
+import { useContext, useState } from 'react';
+import { CartContext } from './Context';
 
-interface Props {
 
+function Delivery() {
+    const navigate = useNavigate();
+    const { addressInformation, shippingInformation, storeShippingInformation } = useContext(CartContext);
+    const [selectedValue, setSelectedValue] = useState('a');
+    const [shippingInfo, setShippingInfo] = useState({
+        id: 'a',
+        shippingType: '',
+        shippingDescription: '',
+        shippingCost: 0,
+        deliveryDate: 0,
+    })
 
-}
+    console.log(addressInformation)
 
-const Delivery: React.FC<Props> = () => {
-    const [DeliveryDate, setDeliveryDate] = React.useState('');
-    const [selectedValue, setSelectedValue] = React.useState('a');
+    /*     const deliveryDates = (shipping: shippingInterface) => {
+            let date = new Date();
+            shipping.deliveryDate
+        }
+     */
 
-    const handleChanged = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setDeliveryDate(event.target.value as string);
-    };
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedValue(event.target.value);
     };
 
+    const handleProceed = (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+        navigate('/checkout/payment');
+        
+        
+        const filteredShipping: any = shipping.filter((item) => {
+            return item.id === selectedValue;
+        })
+        storeShippingInformation(filteredShipping);
+    };
+
+
+
     return (
         <Card sx={cardStyle}>
-            <Box sx={boxStyle}>
-                <Typography
-                    variant='h3'
-                    sx={h1}>
-                    Shipping options
-                </Typography>
-                <Grid sx={mainStyle}>
-                    <TableContainer>
-                        <Table sx={table} aria-label="simple table">
-                            <TableBody>
-                                {shipping.map((shipping) => (
-                                    <TableRow key={shipping.id}>
-                                        <TableCell sx={flexColumn}>
-                                            <Box sx={spaceBetween}>
-                                                <Box sx={flexRow}>
-                                                    <Radio
-                                                        checked={selectedValue === `${shipping.id}`}
-                                                        onChange={handleChange}
-                                                        value={`${shipping.id}`}
-                                                        color="default"
-                                                        name="radio-button"
-                                                        inputProps={{ 'aria-label': `${shipping.id}` }}
-                                                        size="small"
-                                                    />
+            <form
+                onSubmit={handleProceed}
+            >
+                <Box sx={boxStyle}>
+                    <Typography
+                        variant='h3'
+                        sx={h1}>
+                        Shipping options
+                    </Typography>
+                    <Grid sx={mainStyle}>
+                        <TableContainer>
+                            <Table sx={table} aria-label="simple table">
+                                <TableBody>
+                                    {shipping.map((shipping) => (
+                                        <TableRow key={shipping.id}>
+                                            <TableCell sx={flexColumn}>
+                                                <Box sx={spaceBetween}>
+                                                    <Box sx={flexRow}>
+                                                        <Radio
+                                                            checked={selectedValue === `${shipping.id}`}
+                                                            onChange={handleChangeRadio}
+                                                            value={`${shipping.id}`}
+                                                            color="default"
+                                                            name="radio-button"
+                                                            inputProps={{ 'aria-label': `${shipping.id}` }}
+                                                            size="small"
+                                                        />
+                                                        <Typography>
+                                                            {shipping.shippingType}
+                                                        </Typography>
+                                                    </Box>
                                                     <Typography>
-                                                        {shipping.shippingType}
+                                                        {shipping.shippingCost} kr
                                                     </Typography>
                                                 </Box>
-                                                <Typography>
-                                                    {shipping.shippingCost} kr
+                                                <Typography sx={leftMargin}>
+                                                    {shipping.shippingDescription}
                                                 </Typography>
-                                            </Box>
-                                            <Typography sx={leftMargin}>
-                                                {shipping.shippingDescription}
-                                            </Typography>
-                                            <FormControl
-                                                variant="outlined"
-                                                sx={formControl}
-                                            >
-                                                <InputLabel id="select-outlined-label">
-                                                    Delivery date
-                                                </InputLabel>
-                                                <Select
-                                                    labelId="select-outlined-label"
-                                                    id="select-outlined"
-                                                    value={DeliveryDate}
-
-                                                    label="Leveransdatum"
-                                                >
-                                                    <MenuItem sx={menuItemFontSize} value={10}>
-                                                        {shipping.deliveryDate}
-                                                    </MenuItem>
-                                                </Select>
-                                            </FormControl>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Grid>
-                <Grid sx={buttonAlign}>
-                    <Link to={'/checkout/payment'} style={{ textDecoration: 'none' }}>
-                        <Button sx={button}>
+                                                <Typography sx={leftMargin}>
+                                                    {shipping.deliveryDate}
+                                                </Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Grid>
+                    <Grid sx={buttonAlign}>
+                        <Button
+                            type='submit'
+                            sx={button}>
                             Proceed
                         </Button>
-                    </Link>
-                </Grid>
-            </Box>
-        </Card>
+                    </Grid>
+                </Box>
+            </form>
+        </Card >
     );
 };
 
@@ -116,10 +127,10 @@ const leftMargin: SxProps = {
 const paddingLeft: SxProps = {
     paddingLeft: '1rem'
 }
-const formControl: SxProps = {
+/* const formControl: SxProps = {
     maxWidth: { xs: '9rem', md: '15rem' },
     fontSize: '0.9rem',
-}
+} */
 const menuItemFontSize: SxProps = {
     fontSize: '0.9rem'
 }

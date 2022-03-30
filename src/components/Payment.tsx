@@ -4,14 +4,21 @@ import { border, Box, color, display, margin, SxProps } from "@mui/system";
 import { userInfo } from "os";
 import { useContext } from "react";
 import { Link } from 'react-router-dom';
-import { CartContext } from "./Context";
+import { CartContext, inputProp } from "./Context";
 
 
 
-function Payment() {
-  const {inputInformation} = useContext(CartContext);
+function Payment()  {
+  const { addressInformation, shippingInformation } = useContext(CartContext);
 
-  console.log(inputInformation);
+  /*Use this in confirmation to display latest information*/
+  const addressInfoLatest = addressInformation[addressInformation.length -1]
+  console.log(addressInfoLatest)
+ 
+
+  console.log(addressInformation);
+  console.log(shippingInformation);
+
 
   return (
     <form action="" method="get">
@@ -96,13 +103,14 @@ function Payment() {
                   xs={12}
                   md={6}
                 >
-                  <TextField
-                    required
-                    id="cardName"
-                    label="Telefonnummer för Swishbetalning"
-                    fullWidth
-                    autoComplete="tel"
-                  />
+                    <TextField
+                      required
+                      id="cardName"
+                      label="Telefonnummer för Swishbetalning"
+                      fullWidth
+                      value={addressInfoLatest.tel}
+                      autoComplete="tel"
+                    />
                 </Grid>
               </Grid>
             </AccordionDetails>
