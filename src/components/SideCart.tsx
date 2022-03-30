@@ -165,30 +165,19 @@ const SideCart: React.FC<Props> = () => {
                             </TableRow>
                         </TableBody>
                     </Table>
-                    <Link to={'checkout'} style={linkStyle}>
-                        <Button
-                            sx={{
-                                backgroundColor: '#3665DD',
-                                width: 200,
-                            }}>
-                            <Typography sx={checkoutStyle}>
-                                Checkout
-                            </Typography>
-                        </Button>
-                    </Link>
-                    {/* {cart.length === 0 ? 
-                    <Link to={'checkout'} style={linkStyle}>
-                        <Button
-                            sx={{
-                                backgroundColor: '#3665DD',
-                                width: 200,
-                            }}>
-                            <Typography sx={checkoutStyle}>
-                                Checkout
-                            </Typography>
-                        </Button>
-                    </Link>
-                    : null} */}
+                    {cart.length === 0 ? 
+                    null :  <Link to={'checkout'} style={linkStyle}>
+                    <Button
+                        sx={{
+                            backgroundColor: '#3665DD',
+                            width: 200,
+                        }}>
+                        <Typography sx={checkoutStyle}>
+                            Checkout
+                        </Typography>
+                    </Button>
+                </Link> }
+                    
                 </Drawer>
             </Box >
         </React.Fragment>
