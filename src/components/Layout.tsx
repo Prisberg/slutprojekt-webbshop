@@ -4,14 +4,24 @@ import Delivery from "./Delivery";
 import Navbar from "./Navbar";
 import ProductInfo from "./ProductInfo";
 import Products from "./productsPage";
-import { Box, SxProps } from "@mui/material";
+import { Box, createTheme, SxProps, ThemeProvider } from "@mui/material";
 import background from '../assets/images/nav-background.jpg'
 import Payment from "./Payment";
 import Overview from "./OrderOverview";
 import Confirmation from "./OrderConfirmation";
 
 
+
 function Layout() {
+
+  const theme = createTheme({
+    typography: {
+      fontFamily: [
+        'Cormorant SC',
+        'serif',
+      ].join(','),
+    },});
+
   return (
     <div>
       <Box

@@ -1,13 +1,13 @@
-
 import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper } from "@mui/material";
-import { border, Box, color, display, margin, SxProps } from "@mui/system";
-import { userInfo } from "os";
+import { Box, SxProps } from "@mui/system";
+import { InputHTMLAttributes, useState } from "react";
 import { Link } from 'react-router-dom';
+import * as Yup from "yup";
+import { withFormik, FormikProps, FormikErrors, Form, Field, Formik, useFormik } from 'formik';
 
 
 
 function Checkout() {
-
 
   return (
     <Card sx={cardStyle}>
@@ -15,82 +15,52 @@ function Checkout() {
         <Typography variant="h3">
           Billing adress
         </Typography>
-
-        <Typography sx={{
-          textAlign: 'center'
-        }}>
-        </Typography>
+        
+          <form >
         <Grid container spacing={4} sx={{ display: 'flex' }}>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
-              fullWidth
-              id="first-name"
-              name="firstname"
-              label="First Name"
+              label="Title"
+              id="title"
+              name="title"
+              type="text"
+              
+              
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
-              fullWidth
-              id="last-name"
-              name="lastname"
-              label="Last name"
+              label="Content"
+              id="content"
+              name="content"
+              type="text"
+              
+              
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="email"
-              name="email"
-              label="Email"
+          <TextField
+              label="Author"
+              id="author"
+              name="author"
+              type="text"
+              
+
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="address"
-              name="address"
-              label="Address line 1"
-            />
+          
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="city"
-              name="city"
-              label="City"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="country"
-              name="country"
-              label="Country"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              fullWidth
-              id="post-code"
-              name="post-code"
-              label="Zip / Postal code"
-            />
-          </Grid>
+         
+          
           <Grid item xs={12} sm={6}>
             <Link to={'/checkout/delivery'} style={{textDecoration: 'none'}}>
               <Button sx={buttonStyle}
+              
+              type="submit"
               >Proceed</Button>
             </Link>
           </Grid>
-        </Grid>
+          </form>
       </Box>
     </Card>
   );
@@ -121,4 +91,4 @@ const cardStyle: SxProps = {
   backgroundColor: 'rgba(0,0,0,0)',
   marginLeft: 'auto',
   marginRight: 'auto',
-}
+} 
