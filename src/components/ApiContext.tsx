@@ -2,10 +2,6 @@ import { createContext, FC, useContext, useState } from "react";
 import { CartContext } from './Context';
 import { fakeFetch } from "./ConfirmationFetch";
 import { ProductInfo } from "./mockedData";
-import { ShippingProvider } from "./shippingData";
-import { CartItem, useCart } from "./Context"
-
-
 
 
  export interface ContextValue {
