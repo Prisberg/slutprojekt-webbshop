@@ -3,10 +3,13 @@ import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel
 import { border, Box, color, display, margin, SxProps } from "@mui/system";
 import { userInfo } from "os";
 import { Link } from 'react-router-dom';
+import { useUser } from "./ApiContext";
 
 
 
 function Payment() {
+
+  const { isLoading } = useUser();
 
   return (
     <form action="" method="get">

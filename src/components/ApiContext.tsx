@@ -1,18 +1,14 @@
 import { createContext, FC, useContext, useState } from "react";
 import { CartContext } from './Context';
 import { fakeFetch } from "./ConfirmationFetch";
-import { ProductInfo } from "./mockedData";
-import { ShippingProvider } from "./shippingData";
-import { CartItem, useCart } from "./Context"
+
 
 
 
 
  export interface ContextValue {
     isLoading: boolean;
-    product?: ProductInfo
     confirm: () => void;
-    
 }
 
 export const ConfirmationContext = createContext<ContextValue>({
@@ -26,7 +22,7 @@ const UserProvider: FC = (props) => {
 
     const confirm = async () => {
         setLoading(true);
-        const user = await fakeFetch("api/confirm");
+        await fakeFetch("api/confirm");
         // removeallpructs();
         setLoading(false);
     } 
