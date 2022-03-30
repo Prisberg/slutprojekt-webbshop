@@ -3,9 +3,20 @@ import logo from '../assets/images/logo.png'
 import background from '../assets/images/nav-background.jpg'
 import SideCart from "./SideCart";
 import { Link, Outlet } from "react-router-dom";
+import { ThemeProvider } from '@emotion/react';
 
 function Navbar() {
+
+   const theme = createTheme({
+      typography: {
+        fontFamily: [
+          'Cormorant SC',
+          'serif',
+        ].join(','),
+      },});
+
    return (
+      <ThemeProvider theme={theme}>
       <AppBar position="absolute" sx={appbarStyle}>
          <Box
             component="img"
@@ -35,6 +46,7 @@ function Navbar() {
          </Toolbar>
          <Outlet />
       </AppBar >
+      </ThemeProvider>
    );
 }
 

@@ -2,20 +2,30 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import { Box, CardMedia, SxProps, Typography } from '@mui/material';
+import { Box, CardMedia, createMuiTheme, SxProps, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
 import { useContext } from 'react';
 import { CartContext } from './Context';
 import { ProductInfo, products, Props } from './mockedData';
-
+import { createTheme } from '@mui/material/styles'
+import { ThemeProvider } from '@emotion/react';
 
 const Product: React.FC<Props> = ({ productType }) => {
 
     const { addToCart } = useContext(CartContext);
 
+    const theme = createTheme({
+        typography: {
+          fontFamily: [
+            'Cormorant SC',
+            'serif',
+          ].join(','),
+        },});
+
     return (
+        <ThemeProvider theme={theme}>
         <Card sx={cardStyling}>
                 <Link to={`product-info/${productType.id}`}
                     style={linkStyle}>
@@ -41,7 +51,7 @@ const Product: React.FC<Props> = ({ productType }) => {
                     </Typography>
                 </Box>
                 <Typography variant="body2" color="textSecondary">
-                    {productType.price}
+                    {productType.price} kr
                 </Typography>
                 <CardActions disableSpacing sx={cardActionStyling}>
                     <Button sx={buyButtonStyle}
@@ -52,6 +62,7 @@ const Product: React.FC<Props> = ({ productType }) => {
                 </CardActions>
             </CardContent>
         </Card>
+        </ThemeProvider>
     );
 };
 
@@ -63,6 +74,7 @@ const linkStyle: CSSProperties = {
     flexGrow: 1,
 }
 const cardStyling: SxProps = {
+    fontFamily: 'Cormorant SC, serif',
     minWidth: '20rem',
     minHeight: '33rem',
 }

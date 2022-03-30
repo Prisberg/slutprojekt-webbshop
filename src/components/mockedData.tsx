@@ -1,6 +1,6 @@
 import Submariner from "../assets/images/SubmarinerGreen.jpg";
 import SubmarinerBlue from "../assets/images/Rolex-submariner.jpeg";
-import AirKing from "../assets/images/air-king.jpg";
+import Oyster from "../assets/images/oyster.jpg"
 import Explorer from "../assets/images/Explorer.jpg";
 import Datejust from "../assets/images/Datejust.jpg";
 import Daydate from "../assets/images/daydate.jpg";
@@ -40,11 +40,11 @@ export const products: ProductInfo[] = [
     },
     {
         id: 2,
-        model: 'Air-King',
+        model: 'Oyster',
         maker: 'Rolex',
         describtion: 'Silver',
         price: 120000,
-        image: AirKing,
+        image: Oyster,
         inDepth: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie, erat scelerisque laoreet, ligula leo maximus lacus, eu fringilla magna diam dignissim arcu. Phasellus est est, dignissim fermentum urna vel, mollis tincidunt lectus. Morbi in turpis quis arcu luctus posuere sit amet at leo. Nulla facilisi. Curabitur dui urna, feugiat id metus eu, consequat accumsan orci. Nulla facilisi. Fusce lobortis magna nec elit semper, tincidunt rhoncus diam gravida. In elementum, turpis eget tempus accumsan, urna dui vestibulum libero, a consequat enim justo ut leo. Maecenas erat neque, luctus quis odio consectetur, vestibulum sollicitudin justo. Proin aliquet quis purus sit amet vestibulum. Duis cursus gravida felis eget pretium. Quisque vitae suscipit nibh, eu tristique ligula. Donec vehicula varius dolor, nec lacinia ipsum efficitur non. Sed ultricies nibh tincidunt lectus rutrum, eu finibus ipsum facilisis. Duis consequat dui et efficitur luctus. Aliquam massa nunc, egestas et dui vitae, sodales fringilla elit.',
     },
     {
