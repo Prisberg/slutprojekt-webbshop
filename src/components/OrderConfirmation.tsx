@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useUser } from "./ApiContext";
 import { CartContext } from "./Context";
 
 
@@ -21,8 +22,13 @@ function Confirmation() {
   const { cart, total, removeallpructs } = useContext(CartContext);
   let ordernumber = Math.round(Math.random() * 999999999999);
 
+  const { isLoading } = useUser();
+
 
   return (
+    <div>
+    {isLoading ? (
+      <span> loading </span> ) : (
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
         <div style={{
@@ -63,6 +69,8 @@ function Confirmation() {
       </Link>
       <Typography>{total}kr</Typography>
     </Card>
+    )}
+    </div>
   );
 }
 
