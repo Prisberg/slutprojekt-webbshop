@@ -1,7 +1,7 @@
-import { Component, createContext } from 'react';
+import { Component, createContext, useContext } from 'react';
 import { ProductInfo } from './mockedData';
 
-interface CartItem extends ProductInfo {
+export interface CartItem extends ProductInfo {
    quantity: number;
    subTotal: number;
    totalSum: number;
@@ -120,5 +120,5 @@ class CartProvider extends Component<{}, State> {
 }
 
 export default CartProvider;
-
+export const useCart = () => useContext(CartContext);
 

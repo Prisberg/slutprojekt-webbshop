@@ -9,6 +9,7 @@ import background from '../assets/images/nav-background.jpg'
 import Payment from "./Payment";
 import Overview from "./OrderOverview";
 import Confirmation from "./OrderConfirmation";
+import ConfirmationPage from "./ConfirmPage";
 
 
 function Layout() {
@@ -30,6 +31,7 @@ function Layout() {
           <Route path="checkout/delivery" element={<Delivery />} />
           <Route path="checkout/payment" element={<Payment />} />
           <Route path="checkout/confirmation" element={<Confirmation />} />
+          <Route path="/checkout/confirmation/checkout/order" element={<ConfirmationPage />}/>
           <Route
             path="*"
             element={

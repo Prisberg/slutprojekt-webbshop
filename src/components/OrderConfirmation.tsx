@@ -19,18 +19,26 @@ import { CartContext } from "./Context";
 
 function Confirmation() {
   const { cart, total, removeallpructs } = useContext(CartContext);
+  let ordernumber = Math.round(Math.random() * 999999999999);
 
 
   return (
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
+        <div style={{
+          textAlign: 'center'
+        }}>
         <Typography variant="h3">Order confirmartion</Typography>
+        <Typography>Thank you for your order</Typography>
+        <span>Your order number</span>
+        <Typography sx={productStyle}>{ordernumber}</Typography>
+        </div>
         <Grid container spacing={4} sx={{ display: "flex" }}>
           <Table>
             <TableBody >
               {cart.map((product) => (
                 <TableRow key={product.id}>
-                  <TableCell>
+                  <TableCell> 
                     <img src={product.image} height="100" />
                   </TableCell>
                   <TableCell>{product.model}</TableCell>
@@ -42,7 +50,7 @@ function Confirmation() {
           </Table>
         </Grid>
       </Box>
-      <Link to={"/"} style={{ textDecoration: "none" }}>
+      <Link to={"/checkout/confirmation/checkout/order"} style={{ textDecoration: "none" }}>
         <Button
           sx={buttonStyle}
           onClick={() => {
@@ -84,3 +92,6 @@ const cardStyle: SxProps = {
   marginLeft: "auto",
   marginRight: "auto",
 };
+const productStyle: SxProps = {
+  marginBottom: '2rem',
+}
