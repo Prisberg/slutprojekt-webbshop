@@ -60,17 +60,17 @@ const SideCart: React.FC<Props> = () => {
 
     let carlentg = 0;
 
-   cart.forEach((CartItem) => {
-      carlentg = carlentg + CartItem.quantity;
-   });
+    cart.forEach((CartItem) => {
+        carlentg = carlentg + CartItem.quantity;
+    });
 
-    
+
 
     return (
         <React.Fragment>
             <Box
                 sx={boxStyling}>
-               
+
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -84,7 +84,7 @@ const SideCart: React.FC<Props> = () => {
                             badgeContent={carlentg}
                             showZero
                         >
-                        <ShoppingBagIcon sx={{ zIndex: 1, fontSize: '3rem', }} />
+                            <ShoppingBagIcon sx={{ zIndex: 1, fontSize: '3rem', }} />
                         </Badge>
                         <Typography
                             variant="h6"
@@ -94,7 +94,7 @@ const SideCart: React.FC<Props> = () => {
                         </Typography>
                     </IconButton>
                 </Toolbar>
-                
+
                 <Drawer
                     sx={{
                         zIndex: 2,
@@ -116,12 +116,12 @@ const SideCart: React.FC<Props> = () => {
                     <Divider />
                     <Table>
                         <TableBody>
-                        {cart.length === 0 ? <Typography>No watch in your cart
-                            <WatchOffIcon/>
-                        
-                        </Typography> : null}
+                            {cart.length === 0 ? <Typography>No watch in your cart
+                                <WatchOffIcon />
+
+                            </Typography> : null}
                             {cart.map((product) => (
-                                
+
                                 <TableRow key={product.model}>
                                     <TableCell>
                                         <img src={product.image}
@@ -132,8 +132,8 @@ const SideCart: React.FC<Props> = () => {
                                     <TableCell>{product.subTotal} kr</TableCell>
                                     <TableCell>
                                         <ButtonGroup sx={buttonGroup}
-                                        >   
-                                             <Button
+                                        >
+                                            <Button
                                                 sx={button}
                                                 onClick={() => {
                                                     addToCart(product);
@@ -141,14 +141,14 @@ const SideCart: React.FC<Props> = () => {
                                             >
                                                 +
                                             </Button>
-                                            
+
                                             <TextField
                                                 variant="outlined"
                                                 id={quantity}
                                                 value={product.quantity}
                                             />
-                                           
-                                           <Button sx={button}
+
+                                            <Button sx={button}
                                                 onClick={() => {
                                                     removeItems(product);
                                                 }}
@@ -165,19 +165,16 @@ const SideCart: React.FC<Props> = () => {
                             </TableRow>
                         </TableBody>
                     </Table>
-                    {cart.length === 0 ? 
-                    null :  <Link to={'checkout'} style={linkStyle}>
-                    <Button
-                        sx={{
-                            backgroundColor: '#3665DD',
-                            width: 200,
-                        }}>
-                        <Typography sx={checkoutStyle}>
-                            Checkout
-                        </Typography>
-                    </Button>
-                </Link> }
-                    
+                    {cart.length === 0 ?
+                        null : <Link to={'checkout'} style={linkStyle}>
+                            <Button
+                                sx={checkoutButton}>
+                                <Typography sx={checkoutStyle}>
+                                    Checkout
+                                </Typography>
+                            </Button>
+                        </Link>}
+
                 </Drawer>
             </Box >
         </React.Fragment>
@@ -186,6 +183,15 @@ const SideCart: React.FC<Props> = () => {
 
 export default SideCart;
 
+const checkoutButton: SxProps = {
+    backgroundColor: 'black',
+    width: 200,
+    color: 'white',
+    '&:hover': {
+        backgroundColor: '#5f5f5f',
+        color: '#fff',
+    }
+}
 const boxStyling: SxProps = {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -206,7 +212,7 @@ const linkStyle: React.CSSProperties = {
 }
 const checkoutStyle: SxProps = {
     color: 'white',
-    fontSize: '2rem' 
+    fontSize: '2rem'
 }
 const button: SxProps = {
     height: '3rem'

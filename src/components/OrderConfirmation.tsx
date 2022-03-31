@@ -2,12 +2,18 @@ import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "./Context";
+import { shipping } from "./mockedData";
 
 
 function Confirmation() {
   const { cart, total, removeallpructs, addressInformation, shippingInformation, paymentInformation } = useContext(CartContext);
 
+  /*   const addressInfoLatest = addressInformation[addressInformation.length - 1]
+    const shippingInfoLatest = shippingInformation[shippingInformation.length - 1]
+    const addressInfoLatest = addressInformation[addressInformation.length - 1] */
+
   let ordernumber = Math.round(Math.random() * 999999999999);
+  console.log(shippingInformation)
 
   return (
     <Card sx={cardStyle}>
@@ -15,14 +21,17 @@ function Confirmation() {
         <div style={{
           textAlign: 'center'
         }}>
-        <Typography variant="h3">Order confirmartion</Typography>
-        <Typography>Thank you for your order</Typography>
-        <Typography>Your order number</Typography>
-        <Typography>{ordernumber}</Typography>
+          <Typography variant="h3">Order confirmartion</Typography>
+          <Typography>Thank you for your order</Typography>
+          <Typography>Your order number: {ordernumber}</Typography>
         </div>
         <Grid container spacing={4} sx={{ display: "flex" }}>
-          <Table>
-            <TableBody >
+          <Table sx={{
+            margin: '3rem'
+          }}>
+            <TableBody sx={{
+              padding: '1rem'
+            }} >
               {cart.map((product) => (
                 <TableRow key={product.id}>
                   <TableCell>
@@ -33,24 +42,21 @@ function Confirmation() {
                   <TableCell>{product.price} kr</TableCell>
                 </TableRow>
               ))}
-            </TableBody >
-            <TableBody >
               {addressInformation.map((addressInfo) => (
                 <TableRow>
-                  <TableCell>{addressInfo.name}{addressInfo.LName}</TableCell>
-                  <TableCell>{addressInfo.address}</TableCell>
-                  <TableCell>{addressInfo.city} kr</TableCell>
+                  <TableCell>Ordered by: {addressInfo.name} {addressInfo.LName}</TableCell>
+                  <TableCell>Deliver to: {addressInfo.address}</TableCell>
+                  <TableCell>{addressInfo.city}</TableCell>
                 </TableRow>
               ))}
-            </TableBody>
-            <TableBody >
-              {shippingInformation.map((shippingInfo) => (
+{/*          funkar inte än     {shippingInformation.map((shippingInfo) => (
                 <TableRow>
                   <TableCell>{shippingInfo.shippingType}</TableCell>
-                  <TableCell>{shippingInfo.shippingDescription}</TableCell>
+                  <TableCell>Deliver to: {shippingInfo.shippingDescription}</TableCell>
+                  <TableCell>{total} kr</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
+              ))}*/}
+            </TableBody> 
           </Table>
         </Grid>
       </Box>
@@ -65,7 +71,6 @@ function Confirmation() {
           Keep browsing
         </Button>
       </Link>
-      <Typography>{total}kr</Typography>
     </Card>
   );
 }

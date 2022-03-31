@@ -63,7 +63,7 @@ function Payment() {
                   <TextField
                     required
                     name="cardNumber"
-                    label="Kortnummer"
+                    label="Card number"
                     fullWidth
                     autoComplete="cc-number"
                     value={paymentInfo.cardNumber}
@@ -168,7 +168,7 @@ function Payment() {
             </AccordionDetails>
           </Accordion>
           <Button type="submit" sx={button}>
-            Proceed
+            Purchase
           </Button>
         </Box>
       </Box>

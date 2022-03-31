@@ -1,6 +1,6 @@
 
 import { Button, Card, CardActions, CardContent, CardMedia, Table, TableBody, TableCell, TableContainer, TableRow, Typography, } from "@mui/material";
-import { Box, SxProps } from "@mui/system";
+import { Box, height, SxProps } from "@mui/system";
 import { CSSProperties, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { CartContext } from "./Context";
@@ -19,45 +19,68 @@ function ProductInfo() {
   const { addToCart } = useContext(CartContext);
 
   return (
-    <Card sx={{
-      paddingTop: '10rem'
-    }}>
-      <CardContent>
-        {selectedProduct.map((selectedProduct) => (
-          <Box
-            key={selectedProduct.id}
-            sx={{
-              display: 'flex'
-            }}
-          >
-            <Typography variant="h5" gutterBottom>
-              {selectedProduct.maker}
-            </Typography>
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%',
+        paddingTop: '7rem',
+        display: 'flex',
+        justifyContent: 'center'
+      }}
+    >
+      <Card sx={{
+        width: '80%',
+        maxHeight: '70%'
+      }}>
+        <CardContent sx={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}>
+          {selectedProduct.map((selectedProduct) => (
             <Box
-              component="img"
-              alt="productImage"
-              src={selectedProduct.image}
-            />
-            <Typography sx={{ fontSize: '20px', }}>
-              {selectedProduct.model}
-            </Typography>
-            <Typography variant="h3">
-              {selectedProduct.price}
-            </Typography>
-            <Typography>
-              {selectedProduct.inDepth}
-            </Typography>
-            <CardActions disableSpacing sx={cardActionStyling}>
-              <Button sx={buyButtonStyle}
-                onClick={() => { addToCart(selectedProduct) }}
-              >
-                Buy now
-              </Button>
-            </CardActions>
-          </Box>
-        ))}
-      </CardContent>
-    </Card>
+              key={selectedProduct.id}
+              sx={{
+                display: 'flex'
+              }}
+            >
+              <Box
+                component="img"
+                alt="productImage"
+                sx={{
+                  height: '100%',
+                  width: '100%',
+                  display: 'block',
+                  objectFit: 'contain',
+                }}
+                src={selectedProduct.image}
+              />
+              <Box>
+              <Typography variant="h5" gutterBottom>
+                {selectedProduct.maker}
+              </Typography>
+
+                <Typography sx={{ fontSize: '20px', }}>
+                  {selectedProduct.model}
+                </Typography>
+                <Typography variant="h3">
+                  {selectedProduct.price} kr
+                </Typography>
+                <Typography>
+                  {selectedProduct.inDepth}
+                </Typography>
+                <CardActions disableSpacing sx={cardActionStyling}>
+                  <Button sx={buyButtonStyle}
+                    onClick={() => { addToCart(selectedProduct) }}
+                  >
+                    Buy now
+                  </Button>
+                </CardActions>
+              </Box>
+            </Box>
+          ))}
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 
