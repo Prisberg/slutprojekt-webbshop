@@ -1,12 +1,34 @@
 import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper } from "@mui/material";
-import { Box, SxProps } from "@mui/system";
-import { InputHTMLAttributes, useState } from "react";
-import { Link } from 'react-router-dom';
-import { withFormik, FormikProps, FormikErrors, Form, Field, Formik, useFormik } from 'formik';
-
-
+import { border, Box, color, display, margin, SxProps } from "@mui/system";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import { CartContext } from "./Context";
 
 function Checkout() {
+
+  const { addressInformation, storeAddressInformation } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const [inputInfo, setInputInfo] = useState({
+    name: '',
+    LName: '',
+    email: '',
+    address: '',
+    city: '',
+    country: '',
+    zip: '',
+    tel: '',
+  })
+
+  const handleProceed = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    storeAddressInformation(inputInfo);
+    navigate('/checkout/delivery');
+  };
+
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    setInputInfo({ ...inputInfo, [e.target.name]: e.target.value });
+  };
 
   return (
     <Card sx={cardStyle}>
@@ -14,54 +36,107 @@ function Checkout() {
         <Typography variant="h3">
           Billing adress
         </Typography>
-        
-          <form >
-        <Grid container spacing={4} sx={{ display: 'flex' }}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Title"
-              id="title"
-              name="title"
-              type="text"
-              
-              
-            />
+        <form onSubmit={handleProceed}>
+          <Grid container spacing={4} sx={{ display: 'flex' }}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="name"
+                required
+                fullWidth
+                placeholder="First name *"
+                value={inputInfo.name}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="LName"
+                required
+                fullWidth
+                placeholder="Last name *"
+                value={inputInfo.LName}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="email"
+                name="email"
+                required
+                fullWidth
+                placeholder="Email *"
+                value={inputInfo.email}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="tel"
+                name="tel"
+                required
+                fullWidth
+                placeholder="Telephone number *"
+                value={inputInfo.tel}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="address"
+                required
+                fullWidth
+                placeholder="Address *"
+                value={inputInfo.address}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="city"
+                required
+                fullWidth
+                placeholder="City *"
+                value={inputInfo.city}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="country"
+                required
+                fullWidth
+                placeholder="country *"
+                value={inputInfo.country}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                type="text"
+                name="zip"
+                required
+                fullWidth
+                placeholder="Zip / Postal code *"
+                value={inputInfo.zip}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Button
+                type="submit"
+                sx={buttonStyle}>
+                Proceed
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Content"
-              id="content"
-              name="content"
-              type="text"
-              
-              
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-          <TextField
-              label="Author"
-              id="author"
-              name="author"
-              type="text"
-              
-
-            />
-          </Grid>
-          
-          </Grid>
-         
-          
-          <Grid item xs={12} sm={6}>
-            <Link to={'/checkout/delivery'} style={{textDecoration: 'none'}}>
-              <Button sx={buttonStyle}
-              
-              type="submit"
-              >Proceed</Button>
-            </Link>
-          </Grid>
-          </form>
+        </form>
       </Box>
-    </Card>
+    </Card >
   );
 };
 

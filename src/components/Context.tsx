@@ -1,5 +1,5 @@
 import { Component, createContext } from 'react';
-import { ProductInfo } from './mockedData';
+import { ProductInfo, shippingInterface } from './mockedData';
 
 interface CartItem extends ProductInfo {
    quantity: number;
@@ -9,7 +9,34 @@ interface CartItem extends ProductInfo {
 
 interface State {
    cart: CartItem[];
-   total: number;   
+   total: number;
+   addressInformation: AddressInterface[];
+   shippingInformation: shippingInterface[];
+   paymentInformation: paymentInterface[];
+}
+
+export type inputProp = {
+   addressType: AddressInterface;
+}
+
+export interface AddressInterface {
+   name: string;
+   LName: string,
+   email: string,
+   address: string,
+   city: string,
+   country: string,
+   zip: string,
+   tel: string,
+}
+
+export interface paymentInterface {
+   name: string;
+   cardNumber: string,
+   expires: string,
+   CVV: string,
+   tel: string,
+   ssn: string,
 }
 
 interface ContextValue extends State {
@@ -17,23 +44,35 @@ interface ContextValue extends State {
    removeCart: (product: ProductInfo) => void;
    removeItems: (product: ProductInfo) => void;
    subToTal: (cart: CartItem[]) => void;
-   removeallpructs:(product: ProductInfo) => void;
+   removeallpructs: (product: ProductInfo) => void;
+   storeAddressInformation: (inputInfo: AddressInterface) => void;
+   storeShippingInformation: (shippingInfo: shippingInterface) => void;
+   storePaymentInformation: (paymentInfo: paymentInterface) => void;
 }
 
 export const CartContext = createContext<ContextValue>({
    total: 0,
    cart: [],
+   addressInformation: [],
+   shippingInformation: [],
+   paymentInformation: [],
    addToCart: () => { },
    removeCart: () => { },
    removeItems: () => { },
    subToTal: () => { },
    removeallpructs: () => { },
+   storeAddressInformation: () => { },
+   storeShippingInformation: () => { },
+   storePaymentInformation: () => { },
 });
 
 class CartProvider extends Component<{}, State> {
    public state: State = {
       cart: [],
       total: 0,
+      addressInformation: [],
+      shippingInformation: [],
+      paymentInformation: [],
    };
 
    subTotal = (cart: CartItem[]) => {
@@ -71,8 +110,8 @@ class CartProvider extends Component<{}, State> {
       this.subTotal(removeItems);
    };
 
-   removeallpructs = (product: ProductInfo) => {
-      this.setState({cart:[]})
+   removeallpructs = () => {
+      this.setState({ cart: [] })
       this.subTotal([])
    };
 
@@ -100,17 +139,41 @@ class CartProvider extends Component<{}, State> {
       this.subTotal(updatedCart);
    };
 
+   storeAddressInformation = (inputInfo: AddressInterface) => {
+      let updatedaddressInformation = [...this.state.addressInformation];
+      const currentInput = updatedaddressInformation.push(inputInfo);
+      this.setState({ addressInformation: updatedaddressInformation });
+   };
+
+   storeShippingInformation = (shippingInfo: shippingInterface) => {
+      let updatedShippingInformation = [...this.state.shippingInformation];
+      const currentInput = updatedShippingInformation.push(shippingInfo);
+      this.setState({ shippingInformation: updatedShippingInformation });
+   };
+
+   storePaymentInformation = (paymentInfo: paymentInterface) => {
+      let updatedPaymentInformation = [...this.state.paymentInformation];
+      const currentInput = updatedPaymentInformation.push(paymentInfo);
+      this.setState({ paymentInformation: updatedPaymentInformation });
+   };
+
    render() {
       return (
          <CartContext.Provider
             value={{
                total: this.state.total,
                cart: this.state.cart,
+               addressInformation: this.state.addressInformation,
+               shippingInformation: this.state.shippingInformation,
+               paymentInformation: this.state.paymentInformation,
                removeallpructs: this.removeallpructs,
                addToCart: this.addProductToCart,
                removeCart: this.removeTocart,
                removeItems: this.removeOneitem,
                subToTal: this.subTotal,
+               storeAddressInformation: this.storeAddressInformation,
+               storeShippingInformation: this.storeShippingInformation,
+               storePaymentInformation: this.storePaymentInformation,
             }}
          >
             {this.props.children}

@@ -76,16 +76,16 @@ export const products: ProductInfo[] = [
     },
 ]
 
+export type shippingProps = {
+    shippingType: shippingInterface[];
+}
+
 export interface shippingInterface {
     id: string;
     shippingType: string;
     shippingDescription: string;
     shippingCost: number;
-    deliveryDate: string;
-}
-
- export type shippingProps = {
-    shippingType: shippingInterface;
+    deliveryDate: number;
 }
 
 export const shipping: shippingInterface[] = [
@@ -94,27 +94,27 @@ export const shipping: shippingInterface[] = [
         shippingType: 'Letter - Postnord',
         shippingDescription: '3 business days',
         shippingCost: 0,
-        deliveryDate: 'Thursday April 8th',
+        deliveryDate: 3,
     },
     {
         id: 'b',
         shippingType: 'Express - Postnord',
         shippingDescription: 'Order before 22.00 will be sent Sunday-Thursday evening between 17 - 22. Preliminary delivery tomorrow.', 
         shippingCost: 50,
-        deliveryDate: 'Thursday April 8th',
+        deliveryDate: 1,
     },
     {
         id: 'c',
         shippingType: 'Earlybird',
-        shippingDescription: '2 business days Delivery before 07:00 to your mailbox, bigger packages will be left at the door', 
+        shippingDescription: '2 business days delivery before 07:00 to your mailbox, bigger packages will be left at the door', 
         shippingCost: 100,
-        deliveryDate: 'Thursday April 8th',
+        deliveryDate: 2,
     },
     {
         id: 'd',
         shippingType: 'Pick up at store',
         shippingDescription: 'You can pick up your order during opening hours', 
         shippingCost: 0,
-        deliveryDate: 'Thursday April 8th',
+        deliveryDate: 0,
     },
 ]

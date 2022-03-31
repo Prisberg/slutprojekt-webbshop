@@ -1,24 +1,11 @@
-import {
-  TableContainer,
-  Table,
-  TableBody,
-  TableRow,
-  TableCell,
-  Button,
-  Box,
-  Card,
-  Grid,
-  SxProps,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, Typography, } from "@mui/material";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "./Context";
 
 
 function Confirmation() {
-  const { cart, total, removeallpructs } = useContext(CartContext);
+  const { cart, total, removeallpructs, addressInformation, shippingInformation, paymentInformation } = useContext(CartContext);
 
   let ordernumber = Math.round(Math.random() * 999999999999);
 
@@ -44,6 +31,23 @@ function Confirmation() {
                   <TableCell>{product.model}</TableCell>
                   <TableCell>{product.quantity}</TableCell>
                   <TableCell>{product.price} kr</TableCell>
+                </TableRow>
+              ))}
+            </TableBody >
+            <TableBody >
+              {addressInformation.map((addressInfo) => (
+                <TableRow>
+                  <TableCell>{addressInfo.name}{addressInfo.LName}</TableCell>
+                  <TableCell>{addressInfo.address}</TableCell>
+                  <TableCell>{addressInfo.city} kr</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableBody >
+              {shippingInformation.map((shippingInfo) => (
+                <TableRow>
+                  <TableCell>{shippingInfo.shippingType}</TableCell>
+                  <TableCell>{shippingInfo.shippingDescription}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
