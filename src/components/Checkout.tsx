@@ -29,13 +29,13 @@ function Checkout() {
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     setInputInfo({ ...inputInfo, [e.target.name]: e.target.value });
   };
+
   return (
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
         <Typography variant="h3">
           Billing adress
         </Typography>
-
         <form onSubmit={handleProceed}>
           <Grid container spacing={4} sx={{ display: 'flex' }}>
             <Grid item xs={12} sm={6}>
@@ -165,4 +165,4 @@ const cardStyle: SxProps = {
   backgroundColor: 'rgba(0,0,0,0)',
   marginLeft: 'auto',
   marginRight: 'auto',
-}
+} 

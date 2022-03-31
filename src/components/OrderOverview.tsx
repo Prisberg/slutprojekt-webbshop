@@ -20,9 +20,9 @@ const Overview: React.FC<Props> = () => {
 
 
     return (
-
+        
         <Card sx={cardStyle}>
-        <Box sx={boxStyle}>
+          <div>
           <Typography variant="h3" sx={{
             textAlign: 'center'
           }}>
@@ -30,11 +30,7 @@ const Overview: React.FC<Props> = () => {
           </Typography>
           
           {cart.map((product) => (
-          
-          
-          
-          
-            
+            <Box sx={test}>
             <Card sx={{
               width: '15rem',
               height: '15rem',
@@ -66,18 +62,19 @@ const Overview: React.FC<Props> = () => {
                 
                </Grid>
                </Card>
+               </Box>
                
-            
-
-          
            ))}
-        </Box>
-          <Box sx={buttonAlign}>
+          </div>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
            <Link to={'/checkout/adress'} style={{ textDecoration: 'none' }}>
                   <Button sx={button}
                   >Proceed</Button>
                 </Link>
-            </Box>
+                </div>
             
             <TableCell
             style={{border: '1px solid black'}}
@@ -104,6 +101,8 @@ export default Overview;
     marginRight: 'auto',
   }
   const button: SxProps = {
+    display: 'flex',
+    justifyContent: 'center',
     backgroundColor: 'black',
     color: '#fff',
     '&:hover': {
@@ -114,7 +113,9 @@ export default Overview;
 const buttonAlign: SxProps = {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: '18rem',
+    marginLeft: '25%',
+    marginRight: '25%',
+    marginTop: '40rem',
     marginBottom: '1rem'
 }
 const removeButton: SxProps = {
@@ -126,6 +127,8 @@ const icon: SxProps = {
     color: 'black',
     fontSize: '2rem'
 }
-const total: SxProps = {
-
+const test: SxProps = {
+    display: {xs: 'flex', lg:'unset'},
+    justifyContent: {xs: 'center', lg:'unset'},
+    marginRight: {xs: '25%', lg:'none'}
 }

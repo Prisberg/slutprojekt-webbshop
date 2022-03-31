@@ -7,11 +7,19 @@ import { CartContext } from "./Context";
 function Confirmation() {
   const { cart, total, removeallpructs, addressInformation, shippingInformation, paymentInformation } = useContext(CartContext);
 
+  let ordernumber = Math.round(Math.random() * 999999999999);
 
   return (
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
+        <div style={{
+          textAlign: 'center'
+        }}>
         <Typography variant="h3">Order confirmartion</Typography>
+        <Typography>Thank you for your order</Typography>
+        <Typography>Your order number</Typography>
+        <Typography>{ordernumber}</Typography>
+        </div>
         <Grid container spacing={4} sx={{ display: "flex" }}>
           <Table>
             <TableBody >
