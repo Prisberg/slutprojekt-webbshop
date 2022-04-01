@@ -42,7 +42,7 @@ function Navbar() {
                   </Typography>
                </Button>
             </Link>
-            <SideCart />
+            {<SideCart />}
          </Toolbar>
          <Outlet />
       </AppBar >
