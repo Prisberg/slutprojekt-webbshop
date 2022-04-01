@@ -1,15 +1,22 @@
 
-import { Grid, Button, Typography, TextField, Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel } from "@mui/material";
+import { Grid, Button, Typography, TextField, Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel, createTheme, ThemeProvider, CircularProgress } from "@mui/material";
 import { Box, SxProps } from "@mui/system";
 import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { fakeFetch } from "./ConfirmationFetch";
 import { CartContext } from "./Context";
 
 
+interface Props {
+  setPaymentModal: any;
+}
 
-function Payment() {
+
+function Payment(props: Props) {
   const { addressInformation, shippingInformation, storePaymentInformation } = useContext(CartContext);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false)
+
 
   /*Use this in confirmation to display latest information*/
   const addressInfoLatest = addressInformation[addressInformation.length - 1]
@@ -23,18 +30,39 @@ function Payment() {
     ssn: '',
   })
 
-  const handleProceed = (e: { preventDefault: () => void; }) => {
+  const handleProceed = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    storePaymentInformation(paymentInfo);
-    navigate('/checkout/confirmation');
+    setIsLoading(true);
+    const response = await fakeFetch('');
+    setIsLoading(false);
+    if (response === 'valid') {
+        storePaymentInformation(paymentInfo);
+        navigate('/checkout/confirmation');
+
+    }
+    
+    
   };
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     setPaymentInfo({ ...paymentInfo, [e.target.name]: e.target.value });
   };
 
+  
+
+
+  
+  const theme = createTheme({
+    typography: {
+      fontFamily: [
+        'Cormorant SC',
+        'serif',
+      ].join(','),
+    },});
+
   return (
     <form onSubmit={handleProceed}>
+      <ThemeProvider theme={theme}>
       <Box sx={primaryBox}>
         <Box sx={secondaryBox}>
           <Typography variant="h5" gutterBottom>
@@ -167,11 +195,18 @@ function Payment() {
               </Grid>
             </AccordionDetails>
           </Accordion>
-          <Button type="submit" sx={button}>
-            Purchase
+          <Button type="submit" sx={button}
+          >
+            { isLoading ?  (
+            <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+            </Box>
+            ): 'purchase' }
+
           </Button>
         </Box>
       </Box>
+      </ThemeProvider>
     </form>
   );
 }

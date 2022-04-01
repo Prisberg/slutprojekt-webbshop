@@ -35,4 +35,4 @@ return (
 };
 export default UserProvider;
 
-export const useUser = () => useContext(ConfirmationContext); 
+export const useUser = () => useContext(ConfirmationContext);

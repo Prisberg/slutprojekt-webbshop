@@ -1,4 +1,4 @@
-import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper } from "@mui/material";
+import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper, createTheme, ThemeProvider } from "@mui/material";
 import { border, Box, color, display, margin, SxProps } from "@mui/system";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from 'react-router-dom';
@@ -30,7 +30,16 @@ function Checkout() {
     setInputInfo({ ...inputInfo, [e.target.name]: e.target.value });
   };
 
+  const theme = createTheme({
+    typography: {
+      fontFamily: [
+        'Cormorant SC',
+        'serif',
+      ].join(','),
+    },});
+
   return (
+    <ThemeProvider theme={theme}>
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
         <Typography variant="h3">
@@ -137,6 +146,7 @@ function Checkout() {
         </form>
       </Box>
     </Card >
+    </ThemeProvider>
   );
 };
 
