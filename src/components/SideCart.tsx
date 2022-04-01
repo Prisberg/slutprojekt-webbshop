@@ -116,10 +116,15 @@ const SideCart: React.FC<Props> = () => {
                     <Divider />
                     <Table>
                         <TableBody>
-                            {cart.length === 0 ? <Typography>No watch in your cart
-                                <WatchOffIcon />
-
-                            </Typography> : null}
+                            {cart.length === 0 ?
+                                <TableRow>
+                                    <TableCell>
+                                        <Typography>No watch in your cart
+                                            <WatchOffIcon />
+                                        </Typography>
+                                    </TableCell>
+                                </TableRow>
+                                : null}
                             {cart.map((product) => (
 
                                 <TableRow key={product.model}>

@@ -1,20 +1,45 @@
 import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, Typography, } from "@mui/material";
-import { useContext } from "react";
+import React from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "./Context";
+import { CartContext, CartItem } from "./Context";
 import { shipping } from "./mockedData";
 
 
-function Confirmation() {
+function SaveProducts() {
+  const { cart } = useContext(CartContext);
+  const orderedProducts = [...cart];
+  console.log(orderedProducts);
+  return (
+    <Box>
+      {orderedProducts.map((product) => (
+        <TableRow key={product.id}>
+          <TableCell>
+            <img src={product.image} height="100" />
+          </TableCell>
+          <TableCell>{product.model}</TableCell>
+          <TableCell>{product.quantity}</TableCell>
+          <TableCell>{product.price} kr</TableCell>
+        </TableRow>
+      ))}
+    </Box>
+  );
+}
+
+export default function Confirmation() {
   const { cart, total, removeallpructs, addressInformation, shippingInformation, paymentInformation } = useContext(CartContext);
 
-  /*   const addressInfoLatest = addressInformation[addressInformation.length - 1]
-    const shippingInfoLatest = shippingInformation[shippingInformation.length - 1]
-    const addressInfoLatest = addressInformation[addressInformation.length - 1] */
+  const shippingInfoLatest: any = shippingInformation[shippingInformation.length - 1]
+  const addressInfoLatest = addressInformation[addressInformation.length - 1]
 
   let ordernumber = Math.round(Math.random() * 999999999999);
-  console.log(shippingInformation)
 
+
+    useEffect(() => {
+      // code to run after render goes here
+      removeallpructs();
+    }, []);
+   
   return (
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
@@ -32,50 +57,33 @@ function Confirmation() {
             <TableBody sx={{
               padding: '1rem'
             }} >
-              {cart.map((product) => (
-                <TableRow key={product.id}>
-                  <TableCell>
-                    <img src={product.image} height="100" />
-                  </TableCell>
-                  <TableCell>{product.model}</TableCell>
-                  <TableCell>{product.quantity}</TableCell>
-                  <TableCell>{product.price} kr</TableCell>
-                </TableRow>
-              ))}
-              {addressInformation.map((addressInfo) => (
-                <TableRow>
-                  <TableCell>Ordered by: {addressInfo.name} {addressInfo.LName}</TableCell>
-                  <TableCell>Deliver to: {addressInfo.address}</TableCell>
-                  <TableCell>{addressInfo.city}</TableCell>
-                </TableRow>
-              ))}
-{/*          funkar inte än     {shippingInformation.map((shippingInfo) => (
-                <TableRow>
-                  <TableCell>{shippingInfo.shippingType}</TableCell>
-                  <TableCell>Deliver to: {shippingInfo.shippingDescription}</TableCell>
-                  <TableCell>{total} kr</TableCell>
-                </TableRow>
-              ))}*/}
-            </TableBody> 
+              <SaveProducts />
+              <TableRow>
+                <TableCell>Ordered by: {addressInfoLatest.name} {addressInfoLatest.LName}</TableCell>
+                <TableCell>Deliver to: {addressInfoLatest.address} | {addressInfoLatest.city}</TableCell>
+
+              </TableRow>
+              <TableRow>
+                <TableCell>{shippingInfoLatest[0].shippingType}</TableCell>
+                <TableCell>{shippingInfoLatest[0].shippingDescription}</TableCell>
+                <TableCell>{shippingInfoLatest[0].shippingCost} kr</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Total sum: {total} kr</TableCell>
+              </TableRow>
+            </TableBody>
           </Table>
         </Grid>
       </Box>
       <Link to={"/"} style={{ textDecoration: "none" }}>
         <Button
-          sx={buttonStyle}
-          onClick={() => {
-            cart.map((product) => {
-              removeallpructs(product);
-            })
-          }}>
+          sx={buttonStyle}>
           Keep browsing
         </Button>
       </Link>
     </Card>
   );
 }
-
-export default Confirmation;
 
 const h1: SxProps = {
   textAlign: "center",
