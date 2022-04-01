@@ -62,7 +62,7 @@ function Confirmation() {
                 <TableCell>{shippingInfoLatest[0].shippingCost} kr</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Total sum: {total} kr</TableCell>
+                <TableCell>Total sum: {shippingInfoLatest[0].shippingCost+total} kr</TableCell>
               </TableRow>
             </TableBody>
           </Table>
