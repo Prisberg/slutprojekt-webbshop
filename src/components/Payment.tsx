@@ -5,13 +5,11 @@ import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { fakeFetch } from "./ConfirmationFetch";
 import { CartContext } from "./Context";
-import NavbarTwo from "./Navbar2";
 
 
 interface Props {
   
 }
-
 
 function Payment(props: Props) {
   const { addressInformation, shippingInformation, storePaymentInformation } = useContext(CartContext);
@@ -49,10 +47,6 @@ function Payment(props: Props) {
     setPaymentInfo({ ...paymentInfo, [e.target.name]: e.target.value });
   };
 
-  
-
-
-  
   const theme = createTheme({
     typography: {
       fontFamily: [
@@ -64,7 +58,6 @@ function Payment(props: Props) {
   return (
     <form onSubmit={handleProceed}>
       <ThemeProvider theme={theme}>
-      <NavbarTwo/>
       <Box sx={primaryBox}>
         <Box sx={secondaryBox}>
           <Typography variant="h5" gutterBottom>

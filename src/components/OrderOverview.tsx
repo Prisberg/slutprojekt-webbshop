@@ -1,6 +1,5 @@
 import * as React from 'react';
-import NavbarTwo from "./Navbar2";
-import { TableCell, Button, Box, Card, Grid, SxProps, TextField, Typography, createTheme, ThemeProvider } from "@mui/material";
+import { TableCell, Button, Box, Card, Grid, SxProps, TextField, Typography, createTheme, ThemeProvider, TableRow } from "@mui/material";
 import { Link } from "react-router-dom";
 import { CartContext  } from './Context';
 import { useContext } from 'react';
@@ -10,7 +9,6 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 interface Props {
   
 }
-
 
 const Overview: React.FC<Props> = () => {
 
@@ -25,10 +23,8 @@ const Overview: React.FC<Props> = () => {
       ].join(','),
     },});
 
-
     return (
       <ThemeProvider theme={theme}>
-        <NavbarTwo/>
         <Card sx={cardStyle}>
           <Box sx={{
             backgroundColor: 'white',
@@ -51,9 +47,12 @@ const Overview: React.FC<Props> = () => {
             >Go back</Button>
           </Link>
           
+          <TableRow>
           <TableCell
             sx={orderview}
-            >Total: {total}kr</TableCell> 
+            >Total: {total}kr
+          </TableCell> 
+          </TableRow>
           
           {cart.map((product) => (
             <Card>
@@ -61,10 +60,10 @@ const Overview: React.FC<Props> = () => {
               <img  src={product.image}
                    height="100"
                    />
-           
-           <TableCell>{product.model}</TableCell>
+           <TableRow>
+          <TableCell>{product.model}</TableCell>
           <TableCell>{product.price} kr</TableCell>
-          
+          </TableRow>
             <Grid item xs={12} sm={6} sx={removeButton}>   
               
                 <Button sx={buttonStyle}

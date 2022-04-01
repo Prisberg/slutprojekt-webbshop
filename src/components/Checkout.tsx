@@ -3,7 +3,7 @@ import { Box, SxProps } from "@mui/system";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from "./Context";
-import NavbarTwo from "./Navbar2";
+
 
 function Checkout() {
 
@@ -41,7 +41,6 @@ function Checkout() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavbarTwo/>
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
         <Typography variant="h3">

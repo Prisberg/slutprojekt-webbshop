@@ -7,47 +7,50 @@ import { ThemeProvider } from '@emotion/react';
 
 function Navbar() {
    const location = useLocation();
-   console.log(location.pathname)
+   let locationString = location.pathname.toString()
+
+   console.log(locationString.includes('/checkout'))
 
    const theme = createTheme({
       typography: {
-        fontFamily: [
-          'Cormorant SC',
-          'serif',
-        ].join(','),
-      },});
+         fontFamily: [
+            'Cormorant SC',
+            'serif',
+         ].join(','),
+      },
+   });
 
    return (
       <ThemeProvider theme={theme}>
-      <AppBar position="absolute" sx={appbarStyle}>
-         <Box
-            component="img"
-            alt="background"
-            src={background}
-            sx={backgroundImage}
-         />
-         <Toolbar sx={toolbarStyle}>
-            <Link to='' style={{ textDecoration: 'none', }} >
-               <Button sx={buttonStyle}>
-                  <Box
-                     component="img"
-                     alt="logo"
-                     src={logo}
-                     sx={boxStyle}
-                  />
-                  <Typography
-                     variant="h3"
-                     component='div'
-                     sx={typographyStyle}
-                  >
-                     TIC TOC
-                  </Typography>
-               </Button>
-            </Link>
-            {<SideCart />}
-         </Toolbar>
-         <Outlet />
-      </AppBar >
+         <AppBar position="absolute" sx={appbarStyle}>
+            <Box
+               component="img"
+               alt="background"
+               src={background}
+               sx={backgroundImage}
+            />
+            <Toolbar sx={toolbarStyle}>
+               <Link to='' style={{ textDecoration: 'none', }} >
+                  <Button sx={buttonStyle}>
+                     <Box
+                        component="img"
+                        alt="logo"
+                        src={logo}
+                        sx={boxStyle}
+                     />
+                     <Typography
+                        variant="h3"
+                        component='div'
+                        sx={typographyStyle}
+                     >
+                        TIC TOC
+                     </Typography>
+                  </Button>
+               </Link>
+               {locationString.includes('/checkout') ? null : <SideCart />}
+            </Toolbar>
+            <Outlet />
+         </AppBar >
       </ThemeProvider>
    );
 }

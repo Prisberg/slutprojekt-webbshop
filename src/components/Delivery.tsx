@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { shipping } from '../components/mockedData'
 import { useContext, useState } from 'react';
 import { CartContext } from './Context';
-import NavbarTwo from './Navbar2';
+
 
 
 function Delivery() {
@@ -46,7 +46,7 @@ function Delivery() {
 
     return (
         <ThemeProvider theme={theme}>
-            <NavbarTwo/>
+           
         <Card sx={cardStyle}>
             <form
                 onSubmit={handleProceed}
