@@ -60,7 +60,7 @@ function Confirmation() {
       </Box>
       <Link to={"/"} style={{ textDecoration: "none" }}>
         <Button
-          sx={buttonStyle}>
+          sx={buttonStyle} onClick={removeallpructs}>
           Keep browsing
         </Button>
       </Link>
