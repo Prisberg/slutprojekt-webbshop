@@ -15,7 +15,7 @@ import { CartContext } from './Context';
 import { useContext } from 'react';
 import Badge from '@mui/material/Badge';
 import WatchOffIcon from '@mui/icons-material/WatchOff';
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 interface AppBarProps extends MuiAppBarProps {
@@ -90,11 +90,9 @@ const SideCart: React.FC<Props> = () => {
                             variant="h6"
                             sx={headerSix}>
                             View your selections
-
                         </Typography>
                     </IconButton>
                 </Toolbar>
-
                 <Drawer
                     sx={{
                         zIndex: 2,
@@ -118,14 +116,12 @@ const SideCart: React.FC<Props> = () => {
                         <TableBody>
                             {cart.length === 0 ? <Typography>No watch in your cart
                                 <WatchOffIcon />
-
                             </Typography> : null}
                             {cart.map((product) => (
 
                                 <TableRow key={product.model}>
                                     <TableCell>
                                         <img src={product.image}
-
                                             height="100" />
                                     </TableCell>
                                     <TableCell>{product.model}</TableCell>
@@ -141,30 +137,32 @@ const SideCart: React.FC<Props> = () => {
                                             >
                                                 +
                                             </Button>
-
                                             <TextField
                                                 variant="outlined"
                                                 id={quantity}
                                                 value={product.quantity}
                                                 sx={textfield}
                                             />
-
                                             <Button sx={button}
                                                 onClick={() => {
                                                     removeItems(product);
                                                 }}
                                             >
-                                                -
+                                            -
                                             </Button>
-
+                                                
+                                            <DeleteForeverIcon 
+                                            sx={icon}
+                                            onClick={() => {
+                                            removeCart(product);
+                                            }}
+                                            />
                                         </ButtonGroup>
                                     </TableCell>
                                 </TableRow>
                             ))}
-                            
                             <TableRow>
                             {cart.length === 0 ?
-
                             null :<TableCell>Total: {total}kr</TableCell>}
                             </TableRow>
                         </TableBody>
@@ -180,7 +178,6 @@ const SideCart: React.FC<Props> = () => {
                                 </Typography>
                             </Button>
                         </Link>}
-
                 </Drawer>
             </Box >
         </React.Fragment>
@@ -230,6 +227,13 @@ const buttonGroup: SxProps = {
 }
 const textfield: SxProps= {
     width: "3rem"
+}
+const icon: SxProps= {
+    cursor: 'pointer',
+    color: 'black',
+    '&:hover': {
+        color: 'red',
+    }
 }
 
 
