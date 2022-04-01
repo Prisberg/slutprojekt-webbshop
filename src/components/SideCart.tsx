@@ -160,8 +160,11 @@ const SideCart: React.FC<Props> = () => {
                                     </TableCell>
                                 </TableRow>
                             ))}
+                            
                             <TableRow>
-                                <TableCell>Total: {total}kr</TableCell>
+                            {cart.length === 0 ?
+
+                            null :<TableCell>Total: {total}kr</TableCell>}
                             </TableRow>
                         </TableBody>
                     </Table>

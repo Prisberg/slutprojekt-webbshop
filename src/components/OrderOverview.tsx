@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { TableContainer, Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, TextField, Typography } from "@mui/material";
+import { TableContainer, Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, TextField, Typography, createTheme, ThemeProvider } from "@mui/material";
 import { Link } from "react-router-dom";
 import { CartContext  } from './Context';
 import { useContext } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { padding } from '@mui/system';
+import { border, padding } from '@mui/system';
 
 
 interface Props {
@@ -18,9 +18,17 @@ const Overview: React.FC<Props> = () => {
   const { cart, addToCart, removeCart, removeItems, total} = useContext(CartContext);
   const [quantity] = React.useState('');
 
+  const theme = createTheme({
+    typography: {
+      fontFamily: [
+        'Cormorant SC',
+        'serif',
+      ].join(','),
+    },});
+
 
     return (
-        
+      <ThemeProvider theme={theme}>
         <Card sx={cardStyle}>
           <div>
           <Typography variant="h3" sx={{
@@ -48,18 +56,30 @@ const Overview: React.FC<Props> = () => {
           <TableCell>{product.price} kr</TableCell>
           
             <Grid item xs={12} sm={6} sx={removeButton}>   
-                <Button 
+              
+                <Button sx={buttonStyle}
                 onClick={() => {
-                  removeItems(product);
+                addToCart(product);
+                }}>
+                +
+                </Button>
+
+                <TextField
+                sx={{
+                  width: '3rem'
+                }}
+                variant="outlined"
+                id={quantity}
+                value={product.quantity}
+                >
+                </TextField>
+                <Button sx={buttonStyle}
+                onClick={() => {
+                removeItems(product);
                }}
-                > <DeleteForeverIcon sx={icon}/> </Button>
-                {/* <Button  
-                  onClick={() => {
-                  addToCart(product);
-                  }}>
-                  Add
-                </Button> */}
-                
+                > 
+                -
+                </Button>
                </Grid>
                </Card>
                </Box>
@@ -80,6 +100,7 @@ const Overview: React.FC<Props> = () => {
             style={{border: '1px solid black'}}
             >{total}kr</TableCell> 
       </Card>
+      </ThemeProvider>
     );
 };
 
@@ -131,4 +152,13 @@ const test: SxProps = {
     display: {xs: 'flex', lg:'unset'},
     justifyContent: {xs: 'center', lg:'unset'},
     marginRight: {xs: '25%', lg:'none'}
+}
+const buttonStyle: SxProps = {
+    fontSize: '2rem',
+    border: '1px solid black',
+    borderRadius: '50%',
+    height: '4rem'
+}
+const quantity: SxProps = {
+    width: '2rem', 
 }

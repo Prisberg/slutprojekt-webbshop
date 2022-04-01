@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, Grid, Radio, SxProps, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Button } from '@mui/material';
+import { Card, Grid, Radio, SxProps, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Button, createTheme, ThemeProvider } from '@mui/material';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import { shipping } from '../components/mockedData'
@@ -33,9 +33,18 @@ function Delivery() {
         storeShippingInformation(filteredShipping);
     };
 
+    const theme = createTheme({
+        typography: {
+          fontFamily: [
+            'Cormorant SC',
+            'serif',
+          ].join(','),
+        },});
+
 
 
     return (
+        <ThemeProvider theme={theme}>
         <Card sx={cardStyle}>
             <form
                 onSubmit={handleProceed}
@@ -95,6 +104,7 @@ function Delivery() {
                 </Box>
             </form>
         </Card >
+        </ThemeProvider>
     );
 };
 

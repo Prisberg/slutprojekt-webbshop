@@ -1,62 +1,77 @@
-import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, Typography, } from "@mui/material";
+import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, Typography, createTheme, ThemeProvider, } from "@mui/material";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useUser } from "./ApiContext";
 import { CartContext } from "./Context";
-import { shipping } from "./mockedData";
 
 
 function Confirmation() {
   const { cart, total, removeallpructs, addressInformation, shippingInformation, paymentInformation } = useContext(CartContext);
-
-  /*   const addressInfoLatest = addressInformation[addressInformation.length - 1]
-    const shippingInfoLatest = shippingInformation[shippingInformation.length - 1]
-    const addressInfoLatest = addressInformation[addressInformation.length - 1] */
-
+  const { isLoading } = useUser();
   let ordernumber = Math.round(Math.random() * 999999999999);
-  console.log(shippingInformation)
+
+  
+
+  const theme = createTheme({
+    typography: {
+      fontFamily: [
+        'Cormorant SC',
+        'serif',
+      ].join(','),
+    },});
 
   return (
+    <ThemeProvider theme={theme}>
+      <div>
+      {isLoading ? (
+        <span className="loading">laddar...</span>
+      ) : (
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
         <div style={{
           textAlign: 'center'
         }}>
-          <Typography variant="h3">Order confirmartion</Typography>
-          <Typography>Thank you for your order</Typography>
-          <Typography>Your order number: {ordernumber}</Typography>
+           
+        <Typography variant="h3">Order confirmartion</Typography>
+        <Typography>Thank you for your order</Typography>
+        <Typography>Your order number</Typography>
+        <Typography>{ordernumber}</Typography>
         </div>
         <Grid container spacing={4} sx={{ display: "flex" }}>
-          <Table sx={{
-            margin: '3rem'
-          }}>
-            <TableBody sx={{
-              padding: '1rem'
-            }} >
+          <Table>
+            <TableBody >
               {cart.map((product) => (
                 <TableRow key={product.id}>
                   <TableCell>
                     <img src={product.image} height="100" />
                   </TableCell>
-                  <TableCell>{product.model}</TableCell>
+                  <TableCell >{product.model}</TableCell>
                   <TableCell>{product.quantity}</TableCell>
                   <TableCell>{product.price} kr</TableCell>
                 </TableRow>
               ))}
+            </TableBody >
+            <TableBody>
               {addressInformation.map((addressInfo) => (
+                <Box style={{
+                  
+                  }}>
                 <TableRow>
-                  <TableCell>Ordered by: {addressInfo.name} {addressInfo.LName}</TableCell>
-                  <TableCell>Deliver to: {addressInfo.address}</TableCell>
-                  <TableCell>{addressInfo.city}</TableCell>
+                  <TableCell>{addressInfo.name}{addressInfo.LName}</TableCell>
+                  <TableCell>{addressInfo.address}</TableCell>
+                  <TableCell>{addressInfo.city} kr</TableCell>
                 </TableRow>
+                </Box>
               ))}
-{/*          funkar inte än     {shippingInformation.map((shippingInfo) => (
+            </TableBody>
+            <TableBody >
+              {shippingInformation.map((shippingInfo) => (
                 <TableRow>
                   <TableCell>{shippingInfo.shippingType}</TableCell>
-                  <TableCell>Deliver to: {shippingInfo.shippingDescription}</TableCell>
-                  <TableCell>{total} kr</TableCell>
+                  <TableCell>{shippingInfo.shippingDescription}</TableCell>
                 </TableRow>
-              ))}*/}
-            </TableBody> 
+              ))}
+            </TableBody>
           </Table>
         </Grid>
       </Box>
@@ -71,7 +86,11 @@ function Confirmation() {
           Keep browsing
         </Button>
       </Link>
+      <Typography>{total}kr</Typography>
     </Card>
+    )}
+    </div>
+    </ThemeProvider>
   );
 }
 
@@ -101,3 +120,4 @@ const cardStyle: SxProps = {
   marginLeft: "auto",
   marginRight: "auto",
 };
+

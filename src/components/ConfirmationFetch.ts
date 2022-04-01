@@ -1,13 +1,13 @@
 export async function fakeFetch(_: string){
 
-    return new Promise((resolve)=>{
+  return new Promise((resolve)=>{
 
-        setTimeout(()=>{
+      setTimeout(()=>{
 
-            resolve({validate: "valid"});
+          resolve("valid");
 
-        }, 2000);
+      }, 2000);
 
-    });
+  });
 
 }

@@ -38,7 +38,7 @@ function Layout() {
           <Route path="checkout" element={<Overview />} />
           <Route path="checkout/adress" element={<Checkout />} />
           <Route path="checkout/delivery" element={<Delivery />} />
-          <Route path="checkout/payment" element={<Payment />} />
+          <Route path="checkout/payment" element={<Payment setPaymentModal={undefined} />} />
           <Route path="checkout/confirmation" element={<Confirmation />} />
           <Route
             path="*"
