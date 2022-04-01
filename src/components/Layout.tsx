@@ -16,6 +16,7 @@ import ErrorBoundary from "./ErrorBoundary";
 
 
 
+
 function Layout() {
   const { cart } = useContext(CartContext)
 
@@ -35,8 +36,6 @@ function Layout() {
       ].join(','),
     },
   });
-
-
 
   return (
     <div>
@@ -61,6 +60,7 @@ function Layout() {
             />
           </Routes>
         </ErrorBoundary>
+
       </BrowserRouter>
     </div>
   );

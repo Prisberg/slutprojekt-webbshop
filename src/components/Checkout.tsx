@@ -1,8 +1,9 @@
-import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper } from "@mui/material";
-import { border, Box, color, display, margin, SxProps } from "@mui/system";
+import { Grid, Button, Card, Typography, TextField, createTheme, ThemeProvider } from "@mui/material";
+import { Box, SxProps } from "@mui/system";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from "./Context";
+import NavbarTwo from "./Navbar2";
 
 function Checkout() {
 
@@ -30,7 +31,17 @@ function Checkout() {
     setInputInfo({ ...inputInfo, [e.target.name]: e.target.value });
   };
 
+  const theme = createTheme({
+    typography: {
+      fontFamily: [
+        'Cormorant SC',
+        'serif',
+      ].join(','),
+    },});
+
   return (
+    <ThemeProvider theme={theme}>
+      <NavbarTwo/>
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
         <Typography variant="h3">
@@ -132,11 +143,13 @@ function Checkout() {
                 sx={buttonStyle}>
                 Proceed
               </Button>
+              
             </Grid>
           </Grid>
         </form>
       </Box>
     </Card >
+    </ThemeProvider>
   );
 };
 
@@ -166,3 +179,13 @@ const cardStyle: SxProps = {
   marginLeft: 'auto',
   marginRight: 'auto',
 } 
+const button: SxProps = {
+  marginTop: '1rem',
+  marginLeft: '15rem',
+  backgroundColor: 'black',
+  color: '#fff',
+    '&:hover': {
+        backgroundColor: '#5f5f5f',
+        color: '#fff',
+    },
+}

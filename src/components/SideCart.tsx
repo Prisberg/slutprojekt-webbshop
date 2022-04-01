@@ -4,18 +4,18 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import { Button, ButtonGroup, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { Button, ButtonGroup, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { CartContext } from './Context';
 import { useContext } from 'react';
 import Badge from '@mui/material/Badge';
 import WatchOffIcon from '@mui/icons-material/WatchOff';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 interface AppBarProps extends MuiAppBarProps {
@@ -64,8 +64,6 @@ const SideCart: React.FC<Props> = () => {
         carlentg = carlentg + CartItem.quantity;
     });
 
-
-
     return (
         <React.Fragment>
             <Box
@@ -90,18 +88,16 @@ const SideCart: React.FC<Props> = () => {
                             variant="h6"
                             sx={headerSix}>
                             View your selections
-
                         </Typography>
                     </IconButton>
                 </Toolbar>
-
                 <Drawer
                     sx={{
                         zIndex: 2,
                         position: 'absolute',
                         flexShrink: 0,
                         '& .MuiDrawer-paper': {
-                            width: { xs: drawerWidth, sm: '40%', md: '30%', lg: '35%' }
+                            width: { xs: drawerWidth, sm: '60%', md: '40%', lg: '35%' }
                         },
                     }}
                     variant="persistent"
@@ -126,11 +122,9 @@ const SideCart: React.FC<Props> = () => {
                                 </TableRow>
                                 : null}
                             {cart.map((product) => (
-
                                 <TableRow key={product.model}>
                                     <TableCell>
                                         <img src={product.image}
-
                                             height="100" />
                                     </TableCell>
                                     <TableCell>{product.model}</TableCell>
@@ -146,40 +140,47 @@ const SideCart: React.FC<Props> = () => {
                                             >
                                                 +
                                             </Button>
-
                                             <TextField
                                                 variant="outlined"
                                                 id={quantity}
                                                 value={product.quantity}
+                                                sx={textfield}
                                             />
-
                                             <Button sx={button}
                                                 onClick={() => {
                                                     removeItems(product);
                                                 }}
                                             >
-                                                -
+                                            -
                                             </Button>
-
+                                                
+                                            <DeleteForeverIcon 
+                                            sx={icon}
+                                            onClick={() => {
+                                            removeCart(product);
+                                            }}
+                                            />
                                         </ButtonGroup>
                                     </TableCell>
                                 </TableRow>
                             ))}
                             <TableRow>
-                                <TableCell>Total: {total}kr</TableCell>
+                            {cart.length === 0 ?
+                            null :<TableCell>Total: {total}kr</TableCell>}
                             </TableRow>
                         </TableBody>
                     </Table>
                     {cart.length === 0 ?
                         null : <Link to={'checkout'} style={linkStyle}>
                             <Button
-                                sx={checkoutButton}>
+                                sx={checkoutButton}
+                                onClick={handleDrawerClose}
+                                >
                                 <Typography sx={checkoutStyle}>
                                     Checkout
                                 </Typography>
                             </Button>
                         </Link>}
-
                 </Drawer>
             </Box >
         </React.Fragment>
@@ -220,11 +221,22 @@ const checkoutStyle: SxProps = {
     fontSize: '2rem'
 }
 const button: SxProps = {
-    height: '3rem'
+    height: '3rem',
+    width: '3rem'
 }
 const buttonGroup: SxProps = {
     display: { xs: 'flex' },
     flexDirection: { xs: 'column', sm: 'column', lg: 'row' },
+}
+const textfield: SxProps= {
+    width: "3rem"
+}
+const icon: SxProps= {
+    cursor: 'pointer',
+    color: 'black',
+    '&:hover': {
+        color: 'red',
+    }
 }
 
 

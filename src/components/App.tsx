@@ -1,7 +1,7 @@
-import { BrowserRouter } from 'react-router-dom';
 import CartProvider from './Context';
 import '../App.css'
 import Layout from './Layout';
+
 
 
 
@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div>
-      <CartProvider>
+      <CartProvider> 
       <Layout/>
       </CartProvider>
     </div>

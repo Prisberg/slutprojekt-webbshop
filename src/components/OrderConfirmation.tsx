@@ -6,6 +6,7 @@ import { CartContext, CartItem } from "./Context";
 import { shipping } from "./mockedData";
 
 
+
 function SaveProducts() {
   const { cart } = useContext(CartContext);
   const orderedProducts = [...cart];
@@ -28,12 +29,20 @@ function SaveProducts() {
 
 export default function Confirmation() {
   const { cart, total, removeallpructs, addressInformation, shippingInformation, paymentInformation } = useContext(CartContext);
+  let ordernumber = Math.round(Math.random() * 999999999999);
 
   const shippingInfoLatest: any = shippingInformation[shippingInformation.length - 1]
   const addressInfoLatest = addressInformation[addressInformation.length - 1]
 
   let ordernumber = Math.round(Math.random() * 999999999999);
 
+  const theme = createTheme({
+    typography: {
+      fontFamily: [
+        'Cormorant SC',
+        'serif',
+      ].join(','),
+    },});
 
     useEffect(() => {
       // code to run after render goes here
@@ -41,14 +50,20 @@ export default function Confirmation() {
     }, []);
    
   return (
+    <ThemeProvider theme={theme}>
+      <NavbarTwo/>
+      <div>
+
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
         <div style={{
           textAlign: 'center'
         }}>
-          <Typography variant="h3">Order confirmartion</Typography>
-          <Typography>Thank you for your order</Typography>
-          <Typography>Your order number: {ordernumber}</Typography>
+           
+        <Typography variant="h3">Order confirmartion</Typography>
+        <Typography>Thank you for your order</Typography>
+        <Typography>Your order number</Typography>
+        <Typography>{ordernumber}</Typography>
         </div>
         <Grid container spacing={4} sx={{ display: "flex" }}>
           <Table sx={{
@@ -75,13 +90,21 @@ export default function Confirmation() {
           </Table>
         </Grid>
       </Box>
+      <div style={{
+        marginBottom: '10rem'
+      }}>
       <Link to={"/"} style={{ textDecoration: "none" }}>
         <Button
           sx={buttonStyle}>
           Keep browsing
         </Button>
       </Link>
+      </div>
+      <Typography>{total}kr</Typography>
+      
     </Card>
+    </div>
+    </ThemeProvider>
   );
 }
 
@@ -93,7 +116,9 @@ const boxStyle: SxProps = {
   paddingBottom: "1rem",
 };
 const buttonStyle: SxProps = {
-  marginLeft: "15rem",
+  marginLeft: '25rem',
+  marginTop: '1rem',
+  paddingBottom: '1rem',
   backgroundColor: "black",
   color: "#fff",
   "&:hover": {
@@ -104,8 +129,8 @@ const buttonStyle: SxProps = {
 const cardStyle: SxProps = {
   maxWidth: "60rem",
   paddingTop: "10rem",
-  paddingBottom: "2rem",
   backgroundColor: "rgba(0,0,0,0)",
   marginLeft: "auto",
   marginRight: "auto",
 };
+

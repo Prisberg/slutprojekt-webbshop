@@ -2,19 +2,41 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import { Box, CardMedia, createMuiTheme, SxProps, Typography } from '@mui/material';
+import { Box, CardMedia, Snackbar, SxProps, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
 import { useContext } from 'react';
 import { CartContext } from './Context';
-import { ProductInfo, products, Props } from './mockedData';
+import { Props } from './mockedData';
 import { createTheme } from '@mui/material/styles'
 import { ThemeProvider } from '@emotion/react';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref,
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 const Product: React.FC<Props> = ({ productType }) => {
 
     const { addToCart } = useContext(CartContext);
+
+    const [open, setOpen] = React.useState(false);
+
+   const handleClick = () => {
+      setOpen(true);
+   };
+
+   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
     const theme = createTheme({
         typography: {
@@ -55,11 +77,17 @@ const Product: React.FC<Props> = ({ productType }) => {
                 </Typography>
                 <CardActions disableSpacing sx={cardActionStyling}>
                     <Button sx={buyButtonStyle}
-                    onClick={() => {addToCart(productType)}}
+                    onClick={() => {handleClick(); addToCart(productType)}}
                     >
                         Buy now
                     </Button>
                 </CardActions>
+                <Snackbar open={open} onClose={handleClose} autoHideDuration={6000}>
+            <Alert onClose={handleClose} severity="success">
+               Your watch has been added to your basket!
+            </Alert>
+         </Snackbar>
+                
             </CardContent>
         </Card>
         </ThemeProvider>

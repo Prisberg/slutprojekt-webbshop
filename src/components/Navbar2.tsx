@@ -2,12 +2,10 @@ import { AppBar, Typography, Box, Paper, Toolbar, IconButton, createTheme, Butto
 import logo from '../assets/images/logo.png'
 import background from '../assets/images/nav-background.jpg'
 import SideCart from "./SideCart";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { ThemeProvider } from '@emotion/react';
 
-function Navbar() {
-   const location = useLocation();
-   console.log(location.pathname)
+function NavbarTwo() {
 
    const theme = createTheme({
       typography: {
@@ -44,7 +42,6 @@ function Navbar() {
                   </Typography>
                </Button>
             </Link>
-            {<SideCart />}
          </Toolbar>
          <Outlet />
       </AppBar >
@@ -52,7 +49,7 @@ function Navbar() {
    );
 }
 
-export default Navbar;
+export default NavbarTwo;
 
 const typographyStyle: SxProps = {
    height: '100%',
