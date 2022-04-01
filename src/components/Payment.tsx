@@ -9,7 +9,7 @@ import NavbarTwo from "./Navbar2";
 
 
 interface Props {
-  setPaymentModal: any;
+  
 }
 
 
