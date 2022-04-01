@@ -1,7 +1,7 @@
 import { Grid, Button, Card, Typography, TextField, createTheme, ThemeProvider } from "@mui/material";
 import { Box, SxProps } from "@mui/system";
 import { useState, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from "./Context";
 import NavbarTwo from "./Navbar2";
 
@@ -143,6 +143,7 @@ function Checkout() {
                 sx={buttonStyle}>
                 Proceed
               </Button>
+              
             </Grid>
           </Grid>
         </form>
@@ -178,3 +179,13 @@ const cardStyle: SxProps = {
   marginLeft: 'auto',
   marginRight: 'auto',
 } 
+const button: SxProps = {
+  marginTop: '1rem',
+  marginLeft: '15rem',
+  backgroundColor: 'black',
+  color: '#fff',
+    '&:hover': {
+        backgroundColor: '#5f5f5f',
+        color: '#fff',
+    },
+}
