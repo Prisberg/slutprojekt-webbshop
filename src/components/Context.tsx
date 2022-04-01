@@ -10,6 +10,7 @@ export interface CartItem extends ProductInfo {
 interface State {
    cart: CartItem[];
    total: number;
+   emptyCart: boolean;
    addressInformation: AddressInterface[];
    shippingInformation: shippingInterface[];
    paymentInformation: paymentInterface[];
@@ -48,11 +49,14 @@ interface ContextValue extends State {
    storeAddressInformation: (inputInfo: AddressInterface) => void;
    storeShippingInformation: (shippingInfo: shippingInterface) => void;
    storePaymentInformation: (paymentInfo: paymentInterface) => void;
+   checkCart: () => void;
+   setCart: () => void;
 }
 
 export const CartContext = createContext<ContextValue>({
    total: 0,
    cart: [],
+   emptyCart: true,
    addressInformation: [],
    shippingInformation: [],
    paymentInformation: [],
@@ -64,12 +68,15 @@ export const CartContext = createContext<ContextValue>({
    storeAddressInformation: () => { },
    storeShippingInformation: () => { },
    storePaymentInformation: () => { },
+   checkCart: () => { },
+   setCart: () => { },
 });
 
 class CartProvider extends Component<{}, State> {
    public state: State = {
       cart: [],
       total: 0,
+      emptyCart: true,
       addressInformation: [],
       shippingInformation: [],
       paymentInformation: [],
@@ -157,12 +164,27 @@ class CartProvider extends Component<{}, State> {
       this.setState({ paymentInformation: updatedPaymentInformation });
    };
 
+   checkCart = () => {
+      if (this.state.cart.length === 0) {
+         this.state.emptyCart = true;
+      } else {
+         this.state.emptyCart = false;
+      }
+   }
+
+   setCart = () => {
+      this.state.emptyCart = true;
+      console.log(this.state.emptyCart)
+
+   }
+
    render() {
       return (
          <CartContext.Provider
             value={{
                total: this.state.total,
                cart: this.state.cart,
+               emptyCart: this.state.emptyCart,
                addressInformation: this.state.addressInformation,
                shippingInformation: this.state.shippingInformation,
                paymentInformation: this.state.paymentInformation,
@@ -174,6 +196,8 @@ class CartProvider extends Component<{}, State> {
                storeAddressInformation: this.storeAddressInformation,
                storeShippingInformation: this.storeShippingInformation,
                storePaymentInformation: this.storePaymentInformation,
+               checkCart: this.checkCart,
+               setCart: this.setCart,
             }}
          >
             {this.props.children}

@@ -17,15 +17,7 @@ import ErrorBoundary from "./ErrorBoundary";
 
 
 function Layout() {
-  const { cart } = useContext(CartContext)
-
-  let cartEmpty: boolean;
-
-  if (cart.length === 0) {
-    cartEmpty = true;
-  } else {
-    cartEmpty = false;
-  }
+  let { emptyCart } = useContext(CartContext)
 
   const theme = createTheme({
     typography: {
@@ -35,8 +27,6 @@ function Layout() {
       ].join(','),
     },
   });
-
-
 
   return (
     <div>
@@ -52,13 +42,12 @@ function Layout() {
           <Routes>
             <Route path="/" element={<Products />} />
             <Route path="product-info/:id" element={<ProductInfo />} />
-            <Route path="checkout" element={cartEmpty ? <BadGate /> : <Overview />} />
-            <Route path="checkout/adress" element={cartEmpty ? <BadGate /> : <Checkout />} />
-            <Route path="checkout/delivery" element={cartEmpty ? <BadGate /> : <Delivery />} />
-            <Route path="checkout/payment" element={cartEmpty ? <BadGate /> : <Payment />} />
+            <Route path="checkout" element={emptyCart ? <BadGate /> : <Overview />} />
+            <Route path="checkout/adress" element={emptyCart ? <BadGate /> : <Checkout />} />
+            <Route path="checkout/delivery" element={emptyCart ? <BadGate /> : <Delivery />} />
+            <Route path="checkout/payment" element={emptyCart ? <BadGate /> : <Payment />} />
             <Route path="checkout/confirmation" element={<Confirmation />} />
-            <Route path="*" element={<BadGate />}
-            />
+            <Route path="*" element={<BadGate />} />
           </Routes>
         </ErrorBoundary>
       </BrowserRouter>
