@@ -1,15 +1,40 @@
-import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, Typography, createTheme, ThemeProvider, Paper, } from "@mui/material";
-import { useContext } from "react";
+import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, Typography, } from "@mui/material";
+import React from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "./Context";
-import NavbarTwo from "./Navbar2";
+import { CartContext, CartItem } from "./Context";
+import { shipping } from "./mockedData";
 
 
-function Confirmation() {
+
+function SaveProducts() {
+  const { cart } = useContext(CartContext);
+  const orderedProducts = [...cart];
+  console.log(orderedProducts);
+  return (
+    <Box>
+      {orderedProducts.map((product) => (
+        <TableRow key={product.id}>
+          <TableCell>
+            <img src={product.image} height="100" />
+          </TableCell>
+          <TableCell>{product.model}</TableCell>
+          <TableCell>{product.quantity}</TableCell>
+          <TableCell>{product.price} kr</TableCell>
+        </TableRow>
+      ))}
+    </Box>
+  );
+}
+
+export default function Confirmation() {
   const { cart, total, removeallpructs, addressInformation, shippingInformation, paymentInformation } = useContext(CartContext);
   let ordernumber = Math.round(Math.random() * 999999999999);
 
-  
+  const shippingInfoLatest: any = shippingInformation[shippingInformation.length - 1]
+  const addressInfoLatest = addressInformation[addressInformation.length - 1]
+
+  let ordernumber = Math.round(Math.random() * 999999999999);
 
   const theme = createTheme({
     typography: {
@@ -19,6 +44,11 @@ function Confirmation() {
       ].join(','),
     },});
 
+    useEffect(() => {
+      // code to run after render goes here
+      removeallpructs();
+    }, []);
+   
   return (
     <ThemeProvider theme={theme}>
       <NavbarTwo/>
@@ -36,41 +66,26 @@ function Confirmation() {
         <Typography>{ordernumber}</Typography>
         </div>
         <Grid container spacing={4} sx={{ display: "flex" }}>
-          <Table>
-            <TableBody >
-              {cart.map((product) => (
-                <Grid container  marginTop={'3rem'}>
-                <TableRow key={product.id}>
-                  <TableCell>
-                    <img src={product.image} height="100" />
-                  </TableCell>
-                  <TableCell >{product.model}</TableCell>
-                  <TableCell>{product.quantity}</TableCell>
-                  <TableCell>{product.price} kr</TableCell>
-                </TableRow>
-                </Grid>
-              ))}
-            </TableBody >
-            <TableBody>
-              {addressInformation.map((addressInfo) => (
-                <Box style={{
-                  marginLeft: '2rem'
-                  }}>
-                <TableRow>
-                  <TableCell>{addressInfo.name} {addressInfo.LName}</TableCell>
-                  <TableCell>{addressInfo.address}</TableCell>
-                  <TableCell>{addressInfo.city}</TableCell>
-                </TableRow>
-                </Box>
-              ))}
-            </TableBody>
-            <TableBody >
-              {shippingInformation.map((shippingInfo) => (
-                <TableRow>
-                  <TableCell>{shippingInfo.shippingType}</TableCell>
-                  <TableCell>{shippingInfo.shippingDescription}</TableCell>
-                </TableRow>
-              ))}
+          <Table sx={{
+            margin: '3rem'
+          }}>
+            <TableBody sx={{
+              padding: '1rem'
+            }} >
+              <SaveProducts />
+              <TableRow>
+                <TableCell>Ordered by: {addressInfoLatest.name} {addressInfoLatest.LName}</TableCell>
+                <TableCell>Deliver to: {addressInfoLatest.address} | {addressInfoLatest.city}</TableCell>
+
+              </TableRow>
+              <TableRow>
+                <TableCell>{shippingInfoLatest[0].shippingType}</TableCell>
+                <TableCell>{shippingInfoLatest[0].shippingDescription}</TableCell>
+                <TableCell>{shippingInfoLatest[0].shippingCost} kr</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Total sum: {total} kr</TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </Grid>
@@ -80,12 +95,7 @@ function Confirmation() {
       }}>
       <Link to={"/"} style={{ textDecoration: "none" }}>
         <Button
-          sx={buttonStyle}
-          onClick={() => {
-            cart.map((product) => {
-              removeallpructs(product);
-            })
-          }}>
+          sx={buttonStyle}>
           Keep browsing
         </Button>
       </Link>
@@ -97,8 +107,6 @@ function Confirmation() {
     </ThemeProvider>
   );
 }
-
-export default Confirmation;
 
 const h1: SxProps = {
   textAlign: "center",

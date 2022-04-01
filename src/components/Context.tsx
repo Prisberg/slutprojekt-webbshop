@@ -1,7 +1,7 @@
 import { Component, createContext } from 'react';
 import { ProductInfo, shippingInterface } from './mockedData';
 
-interface CartItem extends ProductInfo {
+export interface CartItem extends ProductInfo {
    quantity: number;
    subTotal: number;
    totalSum: number;
@@ -44,7 +44,7 @@ interface ContextValue extends State {
    removeCart: (product: ProductInfo) => void;
    removeItems: (product: ProductInfo) => void;
    subToTal: (cart: CartItem[]) => void;
-   removeallpructs: (product: ProductInfo) => void;
+   removeallpructs: () => void;
    storeAddressInformation: (inputInfo: AddressInterface) => void;
    storeShippingInformation: (shippingInfo: shippingInterface) => void;
    storePaymentInformation: (paymentInfo: paymentInterface) => void;
