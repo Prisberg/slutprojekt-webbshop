@@ -38,10 +38,19 @@ const Overview: React.FC<Props> = () => {
           }}>
             Order overview
           </Typography>
+
+          {cart.length === 0 ?
+          null :
           <Link to={'/checkout/adress'} style={{ textDecoration: 'none' }}>
-                  <Button sx={button}
-                  >Proceed</Button>
-                </Link>
+            <Button sx={button}
+            >Proceed</Button>
+          </Link>}
+          <br />
+          <Link to={'/'} style={{ textDecoration: 'none' }}>
+            <Button sx={button}
+            >Go back</Button>
+          </Link>
+          
           <TableCell
             sx={orderview}
             >Total: {total}kr</TableCell> 

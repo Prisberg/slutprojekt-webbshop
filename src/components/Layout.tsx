@@ -9,6 +9,7 @@ import background from '../assets/images/nav-background.jpg'
 import Payment from "./Payment";
 import Overview from "./OrderOverview";
 import Confirmation from "./OrderConfirmation";
+import NavbarTwo from "./Navbar2";
 
 
 
@@ -20,7 +21,8 @@ function Layout() {
         'Cormorant SC',
         'serif',
       ].join(','),
-    },});
+    },
+  });
 
   return (
     <div>
@@ -35,7 +37,7 @@ function Layout() {
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="product-info/:id" element={<ProductInfo />} />
-          <Route path="checkout" element={<Overview />} />
+          <Route path="checkout" element={<Overview /> } />
           <Route path="checkout/adress" element={<Checkout />} />
           <Route path="checkout/delivery" element={<Delivery />} />
           <Route path="checkout/payment" element={<Payment />} />

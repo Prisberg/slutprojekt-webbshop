@@ -9,7 +9,7 @@ import NavbarTwo from "./Navbar2";
 
 
 interface Props {
-  setPaymentModal: any;
+  
 }
 
 
@@ -230,6 +230,9 @@ const primaryBox: SxProps = {
   justifyContent: 'center'
 }
 const button: SxProps = {
+  width: '5rem',
+  marginLeft: 'auto',
+  marginRight: 'auto',
   backgroundColor: 'black',
   color: '#fff',
   '&:hover': {
