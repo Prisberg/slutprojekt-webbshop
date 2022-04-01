@@ -2,6 +2,7 @@ import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "./Context";
+import NavbarTwo from "./Navbar2";
 
 
 function Confirmation() {
@@ -20,6 +21,7 @@ function Confirmation() {
 
   return (
     <ThemeProvider theme={theme}>
+      <NavbarTwo/>
       <div>
 
     <Card sx={cardStyle}>

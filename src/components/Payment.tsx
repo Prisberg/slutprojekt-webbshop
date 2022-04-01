@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { fakeFetch } from "./ConfirmationFetch";
 import { CartContext } from "./Context";
+import NavbarTwo from "./Navbar2";
 
 
 interface Props {
@@ -63,6 +64,7 @@ function Payment(props: Props) {
   return (
     <form onSubmit={handleProceed}>
       <ThemeProvider theme={theme}>
+      <NavbarTwo/>
       <Box sx={primaryBox}>
         <Box sx={secondaryBox}>
           <Typography variant="h5" gutterBottom>

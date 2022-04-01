@@ -1,18 +1,15 @@
 import * as React from 'react';
+import NavbarTwo from "./Navbar2";
 import { TableCell, Button, Box, Card, Grid, SxProps, TextField, Typography, createTheme, ThemeProvider } from "@mui/material";
 import { Link } from "react-router-dom";
 import { CartContext  } from './Context';
 import { useContext } from 'react';
-
-
-
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 interface Props {
   
 }
-
 
 
 const Overview: React.FC<Props> = () => {
@@ -31,6 +28,7 @@ const Overview: React.FC<Props> = () => {
 
     return (
       <ThemeProvider theme={theme}>
+        <NavbarTwo/>
         <Card sx={cardStyle}>
           <Box sx={{
             backgroundColor: 'white',
@@ -83,6 +81,14 @@ const Overview: React.FC<Props> = () => {
                 > 
                 -
                 </Button>
+
+                <DeleteForeverIcon 
+                sx={iconDelete}
+                onClick={() => {
+                removeCart(product);
+                }}
+                />
+
                </Grid>
                </Card>
                </Card>
@@ -171,4 +177,11 @@ const buttonAlign: SxProps={
     justifyContent: 'center',
     paddingTop: '1rem',
     paddingBottom: '1rem'
+}
+const iconDelete: SxProps= {
+  cursor: 'pointer',
+  color: 'black',
+  '&:hover': {
+      color: 'red',
+  }
 }
