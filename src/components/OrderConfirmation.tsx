@@ -1,32 +1,12 @@
 import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, Typography, } from "@mui/material";
-import React from "react";
+import React, { useMemo } from "react";
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CartContext, CartItem } from "./Context";
 import { shipping } from "./mockedData";
 
 
-function SaveProducts() {
-  const { cart } = useContext(CartContext);
-  const orderedProducts = [...cart];
-  console.log(orderedProducts);
-  return (
-    <Box>
-      {orderedProducts.map((product) => (
-        <TableRow key={product.id}>
-          <TableCell>
-            <img src={product.image} height="100" />
-          </TableCell>
-          <TableCell>{product.model}</TableCell>
-          <TableCell>{product.quantity}</TableCell>
-          <TableCell>{product.price} kr</TableCell>
-        </TableRow>
-      ))}
-    </Box>
-  );
-}
-
-export default function Confirmation() {
+function Confirmation() {
   const { cart, total, removeallpructs, addressInformation, shippingInformation, paymentInformation } = useContext(CartContext);
 
   const shippingInfoLatest: any = shippingInformation[shippingInformation.length - 1]
@@ -34,12 +14,16 @@ export default function Confirmation() {
 
   let ordernumber = Math.round(Math.random() * 999999999999);
 
+/*
+  const saveProducts = useMemo(() => {
+    return const 
+  })
 
-    useEffect(() => {
-      // code to run after render goes here
-      removeallpructs();
-    }, []);
-   
+   useEffect(() => {
+    // code to run after render goes here
+    removeallpructs();
+  }, []);
+ */
   return (
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
@@ -57,11 +41,20 @@ export default function Confirmation() {
             <TableBody sx={{
               padding: '1rem'
             }} >
-              <SaveProducts />
+              {cart.map((product) => (
+                <TableRow key={product.id}>
+                  <TableCell>
+                    <img src={product.image} height="100" />
+                  </TableCell>
+                  <TableCell>{product.model}</TableCell>
+                  <TableCell>{product.quantity}</TableCell>
+                  <TableCell>{product.price} kr</TableCell>
+                </TableRow>
+              ))}
               <TableRow>
                 <TableCell>Ordered by: {addressInfoLatest.name} {addressInfoLatest.LName}</TableCell>
                 <TableCell>Deliver to: {addressInfoLatest.address} | {addressInfoLatest.city}</TableCell>
-
+                
               </TableRow>
               <TableRow>
                 <TableCell>{shippingInfoLatest[0].shippingType}</TableCell>
@@ -84,6 +77,8 @@ export default function Confirmation() {
     </Card>
   );
 }
+
+export default Confirmation;
 
 const h1: SxProps = {
   textAlign: "center",
