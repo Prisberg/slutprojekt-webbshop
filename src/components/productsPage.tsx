@@ -1,9 +1,6 @@
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Product from "./productCard";
-import Submariner from "../assets/images/SubmarinerGreen.jpg";
-import SubmarinerBlue from "../assets/images/Rolex-submariner.jpeg";
-import AirKing from "../assets/images/air-king.jpg";
 import { products } from './mockedData';
 
 

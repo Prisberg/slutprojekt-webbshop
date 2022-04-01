@@ -2,13 +2,13 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import { Box, CardMedia, createMuiTheme, Snackbar, SxProps, Typography } from '@mui/material';
+import { Box, CardMedia, Snackbar, SxProps, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
 import { useContext } from 'react';
 import { CartContext } from './Context';
-import { ProductInfo, products, Props } from './mockedData';
+import { Props } from './mockedData';
 import { createTheme } from '@mui/material/styles'
 import { ThemeProvider } from '@emotion/react';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';

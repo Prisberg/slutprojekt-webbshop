@@ -1,10 +1,11 @@
 
-import { Button, Card, CardActions, CardContent, CardMedia, Table, TableBody, TableCell, TableContainer, TableRow, Typography, } from "@mui/material";
-import { Box, height, SxProps } from "@mui/system";
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography, } from "@mui/material";
+import { Box, SxProps } from "@mui/system";
 import { CSSProperties, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { CartContext } from "./Context";
 import { products } from "./mockedData";
+import { Link } from 'react-router-dom';
 
 
 function ProductInfo() {
@@ -40,21 +41,25 @@ function ProductInfo() {
             <Box
               key={selectedProduct.id}
               sx={{
-                display: 'flex'
+                display: { xs: '', lg:'flex'}
               }}
             >
               <Box
                 component="img"
                 alt="productImage"
                 sx={{
-                  height: '100%',
-                  width: '100%',
+                  height: {xs: '15rem',  sm: '15rem', lg: '40rem'},
+                  marginRight: {xs: 'auto'},
+                  marginLeft: {xs: 'auto'},
                   display: 'block',
                   objectFit: 'contain',
                 }}
                 src={selectedProduct.image}
               />
-              <Box>
+              <Box sx={{
+                marginTop: {xs: '', lg:'5rem'},
+                marginRight: {xs: 'rem'}
+              }}>
               <Typography variant="h5" gutterBottom>
                 {selectedProduct.maker}
               </Typography>
@@ -69,14 +74,23 @@ function ProductInfo() {
                   {selectedProduct.inDepth}
                 </Typography>
                 <CardActions disableSpacing sx={cardActionStyling}>
+                  <div style={linkStyle}>
                   <Button sx={buyButtonStyle}
                     onClick={() => { addToCart(selectedProduct) }}
                   >
                     Buy now
                   </Button>
+                  </div>
+                  <Link to={'/'} style={linkStyle}>
+                  <Button sx={buyButtonStyle}
+                    onClick={() => { addToCart(selectedProduct) }}
+                  >
+                    Go back
+                  </Button>
+                  </Link>
                 </CardActions>
+                </Box>
               </Box>
-            </Box>
           ))}
         </CardContent>
       </Card>
@@ -100,6 +114,8 @@ const cardActionStyling: SxProps = {
   justifyContent: 'flex-end',
 }
 const buyButtonStyle: SxProps = {
+  margin: 'auto',
+  marginTop: '1rem',
   backgroundColor: 'black',
   color: 'white',
   '&:hover': {

@@ -1,13 +1,11 @@
-import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, Typography, createTheme, ThemeProvider, } from "@mui/material";
+import { Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, Typography, createTheme, ThemeProvider, Paper, } from "@mui/material";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useUser } from "./ApiContext";
 import { CartContext } from "./Context";
 
 
 function Confirmation() {
   const { cart, total, removeallpructs, addressInformation, shippingInformation, paymentInformation } = useContext(CartContext);
-  const { isLoading } = useUser();
   let ordernumber = Math.round(Math.random() * 999999999999);
 
   
@@ -23,9 +21,7 @@ function Confirmation() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-      {isLoading ? (
-        <span className="loading">laddar...</span>
-      ) : (
+
     <Card sx={cardStyle}>
       <Box sx={boxStyle}>
         <div style={{
@@ -41,6 +37,7 @@ function Confirmation() {
           <Table>
             <TableBody >
               {cart.map((product) => (
+                <Grid container  marginTop={'3rem'}>
                 <TableRow key={product.id}>
                   <TableCell>
                     <img src={product.image} height="100" />
@@ -49,17 +46,18 @@ function Confirmation() {
                   <TableCell>{product.quantity}</TableCell>
                   <TableCell>{product.price} kr</TableCell>
                 </TableRow>
+                </Grid>
               ))}
             </TableBody >
             <TableBody>
               {addressInformation.map((addressInfo) => (
                 <Box style={{
-                  
+                  marginLeft: '2rem'
                   }}>
                 <TableRow>
-                  <TableCell>{addressInfo.name}{addressInfo.LName}</TableCell>
+                  <TableCell>{addressInfo.name} {addressInfo.LName}</TableCell>
                   <TableCell>{addressInfo.address}</TableCell>
-                  <TableCell>{addressInfo.city} kr</TableCell>
+                  <TableCell>{addressInfo.city}</TableCell>
                 </TableRow>
                 </Box>
               ))}
@@ -75,6 +73,9 @@ function Confirmation() {
           </Table>
         </Grid>
       </Box>
+      <div style={{
+        marginBottom: '10rem'
+      }}>
       <Link to={"/"} style={{ textDecoration: "none" }}>
         <Button
           sx={buttonStyle}
@@ -86,9 +87,10 @@ function Confirmation() {
           Keep browsing
         </Button>
       </Link>
+      </div>
       <Typography>{total}kr</Typography>
+      
     </Card>
-    )}
     </div>
     </ThemeProvider>
   );
@@ -104,7 +106,9 @@ const boxStyle: SxProps = {
   paddingBottom: "1rem",
 };
 const buttonStyle: SxProps = {
-  marginLeft: "15rem",
+  marginLeft: '25rem',
+  marginTop: '1rem',
+  paddingBottom: '1rem',
   backgroundColor: "black",
   color: "#fff",
   "&:hover": {
@@ -115,7 +119,6 @@ const buttonStyle: SxProps = {
 const cardStyle: SxProps = {
   maxWidth: "60rem",
   paddingTop: "10rem",
-  paddingBottom: "2rem",
   backgroundColor: "rgba(0,0,0,0)",
   marginLeft: "auto",
   marginRight: "auto",
