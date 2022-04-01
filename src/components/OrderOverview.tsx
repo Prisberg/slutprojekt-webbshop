@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { TableContainer, Table, TableBody, TableRow, TableCell, Button, Box, Card, Grid, SxProps, TextField, Typography, createTheme, ThemeProvider } from "@mui/material";
+import { TableCell, Button, Box, Card, Grid, SxProps, TextField, Typography, createTheme, ThemeProvider } from "@mui/material";
 import { Link } from "react-router-dom";
 import { CartContext  } from './Context';
 import { useContext } from 'react';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-import { border, padding } from '@mui/system';
 
 
 
@@ -42,9 +40,16 @@ const Overview: React.FC<Props> = () => {
           }}>
             Order overview
           </Typography>
+          <Link to={'/checkout/adress'} style={{ textDecoration: 'none' }}>
+                  <Button sx={button}
+                  >Proceed</Button>
+                </Link>
+          <TableCell
+            sx={orderview}
+            >Total: {total}kr</TableCell> 
           
           {cart.map((product) => (
-            <Box sx={test}>
+            <Card>
             <Card sx={cards}>
               <img  src={product.image}
                    height="100"
@@ -80,25 +85,10 @@ const Overview: React.FC<Props> = () => {
                 </Button>
                </Grid>
                </Card>
-               </Box>
+               </Card>
                
            ))}
           </Box>
-            <Box sx={{
-              display:'flex',
-              flexDirection: 'column',
-              backgroundColor: 'white',
-            }}>
-           <Link to={'/checkout/adress'} style={{ textDecoration: 'none' }}>
-                  <Button sx={button}
-                  >Proceed</Button>
-                </Link>
-                
-            
-            <TableCell
-            sx={orderview}
-            >{total}kr</TableCell> 
-            </Box>
       </Card>
       </ThemeProvider>
     );
@@ -107,7 +97,7 @@ const Overview: React.FC<Props> = () => {
 export default Overview;
 
   const cardStyle: SxProps = {
-    paddingTop: '10rem',
+    paddingTop: {xs: '6rem'},
     backgroundColor: 'rgba(0,0,0,0)',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -122,12 +112,10 @@ export default Overview;
     }
     
   }
-  const button: SxProps = {
-    display: 'flex',
-    alignItems: 'end',
-    justifyContent: 'center',
-    backgroundColor: 'black',
-    color: '#fff',
+const button: SxProps = {
+  marginTop: '2rem',
+  backgroundColor: 'black',
+  color: '#fff',
     '&:hover': {
         backgroundColor: '#5f5f5f',
         color: '#fff',
@@ -150,9 +138,8 @@ const test: SxProps = {
     marginRight: {xs: '25%', lg:'none'}
 }
 const buttonStyle: SxProps = {
-    fontSize: '2rem',
-    border: '1px solid black',
-    borderRadius: '50%',
+    fontSize: '3rem',
+    color: 'black',
     height: '4rem'
 }
 const quantity: SxProps = {
@@ -163,16 +150,25 @@ const quantity: SxProps = {
 }
 const cards: SxProps={
   height: '15rem',
+  width: { xs: '20rem'},
   float: 'left',
   display: 'inline',
   marginTop: '32px',
-  marginLeft: '100px',
+  marginLeft: { xs: '40px', sm: '140px', md: '180px', lg: '340px', xl: '440px'},
   marginBottom: '2rem',
  
 }
 const orderview: SxProps={
+  
+  width: '5rem',
   border: '1px solid black',
-  display: 'flex',
+  marginLeft: 'auto',
+  marginRight: 'auto',
   backgroundColor: 'white',
-
+}
+const buttonAlign: SxProps={
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: '1rem',
+    paddingBottom: '1rem'
 }

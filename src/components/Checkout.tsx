@@ -1,7 +1,7 @@
-import { Grid, Button, Card, Typography, Select, MenuItem, TextField, InputLabel, FormControl, Paper, createTheme, ThemeProvider } from "@mui/material";
-import { border, Box, color, display, margin, SxProps } from "@mui/system";
+import { Grid, Button, Card, Typography, TextField, createTheme, ThemeProvider } from "@mui/material";
+import { Box, SxProps } from "@mui/system";
 import { useState, useContext } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from "./Context";
 
 function Checkout() {
