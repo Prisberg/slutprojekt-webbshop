@@ -82,9 +82,7 @@ function ProductInfo() {
                   </Button>
                   </div>
                   <Link to={'/'} style={linkStyle}>
-                  <Button sx={buyButtonStyle}
-                    onClick={() => { addToCart(selectedProduct) }}
-                  >
+                  <Button sx={buyButtonStyle}>
                     Go back
                   </Button>
                   </Link>
