@@ -1,9 +1,9 @@
-import Submariner from "../assets/images/SubmarinerGreen.jpg";
-import SubmarinerBlue from "../assets/images/Rolex-submariner.jpeg";
-import Oyster from "../assets/images/oyster.jpg"
-import Explorer from "../assets/images/Explorer.jpg";
-import Datejust from "../assets/images/Datejust.jpg";
-import Daydate from "../assets/images/daydate.jpg";
+import Submariner from "./assets/images/SubmarinerGreen.jpg";
+import SubmarinerBlue from "./assets/images/Rolex-submariner.jpeg";
+import Oyster from "./assets/images/oyster.jpg"
+import Explorer from "./assets/images/Explorer.jpg";
+import Datejust from "./assets/images/Datejust.jpg";
+import Daydate from "./assets/images/daydate.jpg";
 
 export interface ProductInfo {
     id: number;

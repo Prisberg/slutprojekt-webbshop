@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
 import { useContext } from 'react';
 import { CartContext } from './Context';
-import { Props } from './mockedData';
+import { Props } from '../mockedData';
 import { createTheme } from '@mui/material/styles'
 import { ThemeProvider } from '@emotion/react';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';

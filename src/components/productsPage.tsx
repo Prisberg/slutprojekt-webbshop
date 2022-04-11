@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Product from "./productCard";
-import { products } from './mockedData';
+import { products } from '../mockedData';
 import { useLocation } from 'react-router-dom';
 
 

@@ -4,7 +4,7 @@ import { Box, SxProps } from "@mui/system";
 import { CSSProperties, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { CartContext } from "./Context";
-import { products } from "./mockedData";
+import { products } from "../mockedData";
 import { Link } from 'react-router-dom';
 
 

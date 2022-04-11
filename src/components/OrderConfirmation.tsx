@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CartContext, CartItem } from "./Context";
-import { shipping } from "./mockedData";
+import { shipping } from "../mockedData";
 
 
 function Confirmation() {

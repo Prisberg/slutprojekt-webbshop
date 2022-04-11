@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Card, Grid, Radio, SxProps, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Button, createTheme, ThemeProvider } from '@mui/material';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
-import { shipping } from '../components/mockedData'
+import { shipping } from '../mockedData'
 import { useContext, useState } from 'react';
 import { CartContext } from './Context';
 
