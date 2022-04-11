@@ -3,7 +3,7 @@ An e-commerce React application.
 In the course Javascript Advanced we were given the task of creating a web shop using create-react-app and Typescript.
  We have also used the design system [Material UI](https://material-ui.com/).
 
-[Demo]()
+[Demo](https://tictoc-watches.netlify.app/)
 
 ## Developer Instruction
 After a fresh `git clone`, to install, use:
