@@ -113,7 +113,7 @@ const SideCart: React.FC<Props> = () => {
                     <Table>
                         <TableBody >
                             {cart.length === 0 ?
-                                <TableRow sx={styling}>
+                                <TableRow>
                                     <TableCell>
                                         <Typography>No watch in your cart
                                             <WatchOffIcon />
@@ -238,9 +238,5 @@ const icon: SxProps= {
     '&:hover': {
         color: 'red',
     }
-}
-const styling: SxProps = {
-    display: { xs: 'flex' },
-   
 }
 
