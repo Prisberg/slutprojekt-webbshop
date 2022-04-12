@@ -111,9 +111,9 @@ const SideCart: React.FC<Props> = () => {
                     </DrawerHeader>
                     <Divider />
                     <Table>
-                        <TableBody>
+                        <TableBody >
                             {cart.length === 0 ?
-                                <TableRow>
+                                <TableRow sx={styling}>
                                     <TableCell>
                                         <Typography>No watch in your cart
                                             <WatchOffIcon />
@@ -122,7 +122,7 @@ const SideCart: React.FC<Props> = () => {
                                 </TableRow>
                                 : null}
                             {cart.map((product) => (
-                                <TableRow key={product.model}>
+                                <TableRow  key={product.model}>
                                     <TableCell>
                                         <img src={product.image}
                                             height="100" />
@@ -226,7 +226,8 @@ const button: SxProps = {
 }
 const buttonGroup: SxProps = {
     display: { xs: 'flex' },
-    flexDirection: { xs: 'column', sm: 'column', lg: 'row' },
+    textAlign: 'center',
+    
 }
 const textfield: SxProps= {
     width: "3rem"
@@ -238,5 +239,8 @@ const icon: SxProps= {
         color: 'red',
     }
 }
-
+const styling: SxProps = {
+    display: { xs: 'flex' },
+   
+}
 
