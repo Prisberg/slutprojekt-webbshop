@@ -18,6 +18,7 @@ import WatchOffIcon from '@mui/icons-material/WatchOff';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
+
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean;
 }
@@ -122,14 +123,13 @@ const SideCart: React.FC<Props> = () => {
                                 </TableRow>
                                 : null}
                             {cart.map((product) => (
-                                <TableRow  key={product.model}>
+                                <TableRow sx={cartstyling} key={product.model}>
                                     <TableCell>
                                         <img src={product.image}
                                             height="100" />
                                     </TableCell>
-                                    <TableCell>{product.model}</TableCell>
-                                    <TableCell>{product.subTotal} kr</TableCell>
-                                    <TableCell>
+                                  
+                                    <TableCell sx={padding}>
                                         <ButtonGroup sx={buttonGroup}
                                         >
                                             <Button
@@ -161,6 +161,8 @@ const SideCart: React.FC<Props> = () => {
                                             }}
                                             />
                                         </ButtonGroup>
+                                        <TableCell>{product.model}</TableCell>
+                                    <TableCell>{product.subTotal} kr</TableCell>
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -201,7 +203,9 @@ const checkoutButton: SxProps = {
 const boxStyling: SxProps = {
     display: 'flex',
     justifyContent: 'flex-end',
-    zIndex: 2
+    zIndex: 2,
+    padding:'0rem'
+
 }
 const headerSix: SxProps = {
     height: '100%',
@@ -239,4 +243,10 @@ const icon: SxProps= {
         color: 'red',
     }
 }
-
+const cartstyling: SxProps={
+    padding: '0rem',
+    marginLeft: '2rem',
+}
+const padding: SxProps={
+    padding:'0rem'
+}
