@@ -59,28 +59,28 @@ const SideCart: React.FC<Props> = () => {
         drawerWidth = '100%'
     }
 
-    let carlentg = 0;
+    let cartLength = 0;
 
     cart.forEach((CartItem) => {
-        carlentg = carlentg + CartItem.quantity;
+        cartLength = cartLength + CartItem.quantity;
     });
 
     return (
         <React.Fragment>
-            <Box
-                sx={boxStyling}>
-
+            <Box sx={boxStyling}>
                 <Toolbar>
                     <IconButton
                         size="large"
                         color="inherit"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
-                        sx={{ ...(open && { display: 'none' }) }}
+                        sx={{
+                            ...(open && { display: 'none' })
+                        }}
                     >
                         <Badge
                             color="error"
-                            badgeContent={carlentg}
+                            badgeContent={cartLength}
                             showZero
                         >
                             <ShoppingBagIcon sx={{ zIndex: 1, fontSize: '3rem', }} />
@@ -128,10 +128,12 @@ const SideCart: React.FC<Props> = () => {
                                         <img src={product.image}
                                             height="100" />
                                     </TableCell>
-                                  
+
                                     <TableCell sx={padding}>
-                                        <ButtonGroup sx={buttonGroup}
-                                        >
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-evenly', maxWidth: '15rem', margin: '1rem' }}>
+                                            <Typography>{product.model} | {product.price} kr</Typography>
+                                        </Box>
+                                        <Box sx={{ outline: 'solid', display: 'flex', width: '11rem', borderRadius: '1rem', justifyContent: 'space-evenly' }}>
                                             <Button
                                                 sx={button}
                                                 onClick={() => {
@@ -140,35 +142,38 @@ const SideCart: React.FC<Props> = () => {
                                             >
                                                 +
                                             </Button>
-                                            <TextField
-                                                variant="outlined"
-                                                id={quantity}
-                                                value={product.quantity}
-                                                sx={textfield}
-                                            />
-                                            <Button sx={button}
+                                            <Box sx={{
+                                                maxWidth: 40,
+                                                height: 36,
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                fontSize: '2rem',
+                                            }}>
+                                                {product.quantity}
+                                            </Box>
+                                            <Button
+                                                sx={button}
                                                 onClick={() => {
                                                     removeItems(product);
                                                 }}
                                             >
-                                            -
+                                                -
                                             </Button>
-                                                
-                                            <DeleteForeverIcon 
+                                        </Box>
+
+                                        <DeleteForeverIcon
                                             sx={icon}
                                             onClick={() => {
-                                            removeCart(product);
+                                                removeCart(product);
                                             }}
-                                            />
-                                        </ButtonGroup>
-                                        <TableCell>{product.model}</TableCell>
-                                    <TableCell>{product.subTotal} kr</TableCell>
+                                        />
                                     </TableCell>
                                 </TableRow>
                             ))}
                             <TableRow>
-                            {cart.length === 0 ?
-                            null :<TableCell>Total: {total}kr</TableCell>}
+                                {cart.length === 0 ?
+                                    null : <TableCell>Total: {total}kr</TableCell>}
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -177,7 +182,7 @@ const SideCart: React.FC<Props> = () => {
                             <Button
                                 sx={checkoutButton}
                                 onClick={handleDrawerClose}
-                                >
+                            >
                                 <Typography sx={checkoutStyle}>
                                     Checkout
                                 </Typography>
@@ -193,6 +198,7 @@ export default SideCart;
 
 const checkoutButton: SxProps = {
     backgroundColor: 'black',
+    margin: '1rem',
     width: 200,
     color: 'white',
     '&:hover': {
@@ -204,8 +210,7 @@ const boxStyling: SxProps = {
     display: 'flex',
     justifyContent: 'flex-end',
     zIndex: 2,
-    padding:'0rem'
-
+    padding: '0rem'
 }
 const headerSix: SxProps = {
     height: '100%',
@@ -225,28 +230,21 @@ const checkoutStyle: SxProps = {
     fontSize: '2rem'
 }
 const button: SxProps = {
-    height: '3rem',
-    width: '3rem'
+    color: 'black',
+    fontWeight: 'bold'
 }
-const buttonGroup: SxProps = {
-    display: { xs: 'flex' },
-    textAlign: 'center',
-    
-}
-const textfield: SxProps= {
-    width: "3rem"
-}
-const icon: SxProps= {
+const icon: SxProps = {
+    margin: '1rem',
     cursor: 'pointer',
     color: 'black',
     '&:hover': {
         color: 'red',
     }
 }
-const cartstyling: SxProps={
+const cartstyling: SxProps = {
     padding: '0rem',
     marginLeft: '2rem',
 }
-const padding: SxProps={
-    padding:'0rem'
+const padding: SxProps = {
+    padding: '0rem'
 }

@@ -2,10 +2,9 @@ import * as React from 'react';
 import { Card, Grid, Radio, SxProps, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Button, createTheme, ThemeProvider } from '@mui/material';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
-import { shipping } from '../mockedData'
+import { shipping, shippingInterface } from '../mockedData'
 import { useContext, useState } from 'react';
 import { CartContext } from './Context';
-
 
 
 function Delivery() {
@@ -13,12 +12,13 @@ function Delivery() {
     const { storeShippingInformation } = useContext(CartContext);
     const [selectedValue, setSelectedValue] = useState('a');
 
-    /*     const deliveryDates = (shipping: shippingInterface) => {
-            let date = new Date();
-            shipping.deliveryDate
-        }
-     */
-
+    
+    function addDays(date: number) {
+        const result = new Date();
+        result.setDate(result.getDate() + date);
+        return result
+      }
+      
     const handleChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedValue(event.target.value);
     };
@@ -26,7 +26,6 @@ function Delivery() {
     const handleProceed = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         navigate('/checkout/payment');
-
 
         const filteredShipping: any = shipping.filter((item) => {
             return item.id === selectedValue;
@@ -36,76 +35,75 @@ function Delivery() {
 
     const theme = createTheme({
         typography: {
-          fontFamily: [
-            'Cormorant SC',
-            'serif',
-          ].join(','),
-        },});
-
-
+            fontFamily: [
+                'Cormorant SC',
+                'serif',
+            ].join(','),
+        },
+    });
 
     return (
         <ThemeProvider theme={theme}>
-           
-        <Card sx={cardStyle}>
-            <form
-                onSubmit={handleProceed}
-            >
-                <Box sx={boxStyle}>
-                    <Typography
-                        variant='h3'
-                        sx={h1}>
-                        Shipping options
-                    </Typography>
-                    <Grid sx={mainStyle}>
-                        <TableContainer>
-                            <Table sx={table} aria-label="simple table">
-                                <TableBody>
-                                    {shipping.map((shipping) => (
-                                        <TableRow key={shipping.id}>
-                                            <TableCell sx={flexColumn}>
-                                                <Box sx={spaceBetween}>
-                                                    <Box sx={flexRow}>
-                                                        <Radio
-                                                            checked={selectedValue === `${shipping.id}`}
-                                                            onChange={handleChangeRadio}
-                                                            value={`${shipping.id}`}
-                                                            color="default"
-                                                            name="radio-button"
-                                                            inputProps={{ 'aria-label': `${shipping.id}` }}
-                                                            size="small"
-                                                        />
+
+            <Card sx={cardStyle}>
+                <form
+                    onSubmit={handleProceed}
+                >
+                    <Box sx={boxStyle}>
+                        <Typography
+                            variant='h3'
+                            sx={h1}>
+                            Shipping options
+                        </Typography>
+                        <Grid sx={mainStyle}>
+                            <TableContainer>
+                                <Table sx={table} aria-label="simple table">
+                                    <TableBody>
+                                        {shipping.map((shipping) => (
+                                            <TableRow key={shipping.id}>
+                                                <TableCell sx={flexColumn}>
+                                                    <Box sx={spaceBetween}>
+                                                        <Box sx={flexRow}>
+                                                            <Radio
+                                                                checked={selectedValue === `${shipping.id}`}
+                                                                onChange={handleChangeRadio}
+                                                                value={`${shipping.id}`}
+                                                                color="default"
+                                                                name="radio-button"
+                                                                inputProps={{ 'aria-label': `${shipping.id}` }}
+                                                                size="small"
+                                                            />
+                                                            <Typography>
+                                                                {shipping.shippingType}
+                                                            </Typography>
+                                                        </Box>
                                                         <Typography>
-                                                            {shipping.shippingType}
+                                                            {shipping.shippingCost} kr
                                                         </Typography>
                                                     </Box>
-                                                    <Typography>
-                                                        {shipping.shippingCost} kr
+                                                    <Typography sx={leftMargin}>
+                                                        {shipping.shippingDescription}
                                                     </Typography>
-                                                </Box>
-                                                <Typography sx={leftMargin}>
-                                                    {shipping.shippingDescription}
-                                                </Typography>
-                                                <Typography sx={leftMargin}>
-                                                    {shipping.deliveryDate}
-                                                </Typography>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Grid>
-                    <Grid sx={buttonAlign}>
-                        <Button
-                            type='submit'
-                            sx={button}>
-                            Proceed
-                        </Button>
-                    </Grid>
-                </Box>
-            </form>
-        </Card >
+                                                    <Typography sx={leftMargin}>
+                                                        {addDays(shipping.deliveryDate).toDateString()}
+                                                    </Typography>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Grid>
+                        <Grid sx={buttonAlign}>
+                            <Button
+                                type='submit'
+                                sx={button}>
+                                Proceed
+                            </Button>
+                        </Grid>
+                    </Box>
+                </form>
+            </Card >
         </ThemeProvider>
     );
 };
@@ -120,6 +118,7 @@ const table: SxProps = {
     alignItems: 'center'
 }
 const leftMargin: SxProps = {
+    marginBottom: '1rem',
     marginLeft: '2.18rem',
     minWidth: '15rem',
 }

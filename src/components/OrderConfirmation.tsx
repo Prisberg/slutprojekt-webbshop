@@ -25,11 +25,12 @@ function Confirmation() {
           <Typography>Your order number: {ordernumber}</Typography>
         </div>
         <Grid container spacing={4} sx={{ display: "flex" }}>
-          <Table sx={{
-            margin: '3rem'
-          }}>
+          <Table >
             <TableBody sx={{
-              padding: '1rem'
+              padding: '3rem',
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column'
             }} >
               {cart.map((product) => (
                 <TableRow key={product.id}>
@@ -44,7 +45,7 @@ function Confirmation() {
               <TableRow>
                 <TableCell>Ordered by: {addressInfoLatest.name} {addressInfoLatest.LName}</TableCell>
                 <TableCell>Deliver to: {addressInfoLatest.address} | {addressInfoLatest.city}</TableCell>
-                
+
               </TableRow>
               <TableRow>
                 <TableCell>{shippingInfoLatest[0].shippingType}</TableCell>
@@ -52,18 +53,19 @@ function Confirmation() {
                 <TableCell>{shippingInfoLatest[0].shippingCost} kr</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Total sum: {shippingInfoLatest[0].shippingCost+total} kr</TableCell>
+                <TableCell>Total sum: {shippingInfoLatest[0].shippingCost + total} kr</TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </Grid>
+        <Link to={"/"} style={{ textDecoration: "none" }}>
+          <Button
+            sx={buttonStyle}
+            onClick={removeallpructs}>
+            Keep browsing
+          </Button>
+        </Link>
       </Box>
-      <Link to={"/"} style={{ textDecoration: "none" }}>
-        <Button
-          sx={buttonStyle} onClick={removeallpructs}>
-          Keep browsing
-        </Button>
-      </Link>
     </Card>
   );
 }

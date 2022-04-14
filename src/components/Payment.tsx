@@ -1,7 +1,7 @@
 
-import { Grid, Button, Typography, TextField, Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel, createTheme, ThemeProvider, CircularProgress, Radio } from "@mui/material";
+import { Grid, Button, Typography, TextField, Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel, createTheme, ThemeProvider, CircularProgress, Radio, Card } from "@mui/material";
 import { Box, SxProps } from "@mui/system";
-import { useContext, useState } from "react";
+import { CSSProperties, useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { fakeFetch } from "./ConfirmationFetch";
 import { CartContext } from "./Context";
@@ -54,120 +54,14 @@ function Payment(props: Props) {
 
   function handleChangeRadio(event: React.ChangeEvent<HTMLInputElement>) {
     setSelectedValue(event.target.value);
-    console.log(selectedValue);
-  }
-
-  function RenderPayment() {
-    if (selectedValue === 'a') {
-      return (
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <TextField
-              required
-              name="name"
-              label="First- and lastname"
-              fullWidth
-              autoComplete="cc-name"
-              value={paymentInfo.name}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              required
-              name="cardNumber"
-              label="Card number"
-              fullWidth
-              autoComplete="cc-number"
-              value={paymentInfo.cardNumber}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              required
-              name="expires"
-              label="Expiration date"
-              fullWidth
-              autoComplete="cc-exp"
-              value={paymentInfo.expires}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              required
-              name="CVV"
-              label="CVV"
-              helperText="Last three digits on the back of your card"
-              fullWidth
-              autoComplete="cc-csc"
-              value={paymentInfo.CVV}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  name="saveCard"
-                  value="yes"
-                />
-              }
-              label="Remember my information for next time"
-            />
-          </Grid>
-        </Grid>
-      )
-    } else if (selectedValue === 'b') {
-      return (
-        <Grid container spacing={6}>
-          <Grid
-            item
-            xs={12}
-            md={6}
-          >
-            <TextField
-              type="text"
-              required
-              name="tel"
-              label="Telephone number for Swish-payment method"
-              fullWidth
-              value={paymentInfo.tel}
-              onChange={handleChange}
-              autoComplete="tel"
-            />
-          </Grid>
-        </Grid>)
-    } else {
-      return (
-        <Grid container spacing={3}>
-          <Grid
-            item
-            xs={12}
-            md={6}
-          >
-            <TextField
-              required
-              name="ssn"
-              label="Social security number"
-              fullWidth
-              autoComplete="personnummer"
-              value={paymentInfo.ssn}
-              onChange={handleChange}
-            />
-          </Grid>
-        </Grid>
-      )
-    }
   }
 
   return (
-    <form onSubmit={handleProceed}>
-      <ThemeProvider theme={theme}>
-        <Box sx={primaryBox}>
-          <Box sx={secondaryBox}>
+    <ThemeProvider theme={theme}>
+      <Box sx={primaryBox}>
+        <Card sx={secondaryBox}>
+          <form style={formStyle}
+            onSubmit={handleProceed}>
             <Typography variant="h5" gutterBottom>
               Payment methods
             </Typography>
@@ -183,7 +77,69 @@ function Payment(props: Props) {
                 checked={selectedValue === 'a'}
               />
             </Typography>
-            {selectedValue === 'a' ? <RenderPayment /> : null }
+
+            {selectedValue === 'a' ?
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    required
+                    name="name"
+                    label="First- and lastname"
+                    fullWidth
+                    autoComplete="cc-name"
+                    value={paymentInfo.name}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    required
+                    name="cardNumber"
+                    label="Card number"
+                    fullWidth
+                    autoComplete="cc-number"
+                    value={paymentInfo.cardNumber}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    required
+                    name="expires"
+                    label="Expiration date"
+                    fullWidth
+                    autoComplete="cc-exp"
+                    value={paymentInfo.expires}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    required
+                    name="CVV"
+                    label="CVV"
+                    helperText="Last three digits on the back of your card"
+                    fullWidth
+                    autoComplete="cc-csc"
+                    value={paymentInfo.CVV}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        color="primary"
+                        name="saveCard"
+                        value="yes"
+                      />
+                    }
+                    label="Remember my information for next time"
+                  />
+                </Grid>
+              </Grid>
+              : null}
+
             <Typography>
               Swish
               <Radio
@@ -196,7 +152,29 @@ function Payment(props: Props) {
                 checked={selectedValue === 'b'}
               />
             </Typography>
-            {selectedValue === 'b' ? <RenderPayment /> : null }
+
+            {selectedValue === 'b' ?
+              <Grid container spacing={6}>
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                >
+                  <TextField
+                    sx={textFieldStyle}
+                    type="text"
+                    required
+                    name="tel"
+                    label="Telephone number for Swish-payment method"
+                    fullWidth
+                    value={paymentInfo.tel}
+                    onChange={handleChange}
+                    autoComplete="tel"
+                  />
+                </Grid>
+              </Grid>
+              : null}
+
             <Typography>
               Invoice
               <Radio
@@ -209,7 +187,28 @@ function Payment(props: Props) {
                 checked={selectedValue === 'c'}
               />
             </Typography>
-            {selectedValue === 'c' ? <RenderPayment /> : null }
+
+            {selectedValue === 'c' ?
+              <Grid container spacing={3}>
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                >
+                  <TextField
+                    sx={textFieldStyle}
+                    required
+                    name="ssn"
+                    label="Social security number"
+                    fullWidth
+                    autoComplete="personnummer"
+                    value={paymentInfo.ssn}
+                    onChange={handleChange}
+                  />
+                </Grid>
+              </Grid>
+              : null}
+
             <Button type="submit" sx={button}
             >
               {isLoading ? (
@@ -219,22 +218,28 @@ function Payment(props: Props) {
               ) : 'purchase'}
 
             </Button>
-          </Box>
-        </Box>
-      </ThemeProvider>
-    </form>
+          </form >
+        </Card>
+      </Box>
+    </ThemeProvider >
   );
 }
 
 export default Payment;
 
+const formStyle: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center'
+}
+const textFieldStyle: SxProps = {
+  width: '12rem'
+}
 const secondaryBox: SxProps = {
   backgroundColor: 'white',
   padding: '1rem',
   maxWidth: '60rem',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center'
+  width: '100%',
 }
 const primaryBox: SxProps = {
   paddingTop: '6rem',
@@ -243,9 +248,7 @@ const primaryBox: SxProps = {
   justifyContent: 'center'
 }
 const button: SxProps = {
-  width: '5rem',
-  marginLeft: 'auto',
-  marginRight: 'auto',
+  alignSelf: 'flex-end',
   backgroundColor: 'black',
   color: '#fff',
   '&:hover': {

@@ -9,8 +9,6 @@ function Navbar() {
    const location = useLocation();
    let locationString = location.pathname.toString()
 
-   console.log(locationString.includes('/checkout'))
-
    const theme = createTheme({
       typography: {
          fontFamily: [

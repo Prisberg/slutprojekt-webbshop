@@ -1,19 +1,16 @@
 import * as React from 'react';
 import { TableCell, Button, Box, Card, Grid, SxProps, TextField, Typography, createTheme, ThemeProvider, TableRow } from "@mui/material";
-import { Link } from "react-router-dom";
-import { CartContext  } from './Context';
+import { Link, useNavigate } from "react-router-dom";
+import { CartContext } from './Context';
 import { useContext } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
-interface Props {
-  
-}
+function Overview() {
 
-const Overview: React.FC<Props> = () => {
-
-  const { cart, addToCart, removeCart, removeItems, total} = useContext(CartContext);
+  const { cart, addToCart, removeCart, removeItems, total } = useContext(CartContext);
   const [quantity] = React.useState('');
+  const navigate = useNavigate();
 
   const theme = createTheme({
     typography: {
@@ -21,175 +18,151 @@ const Overview: React.FC<Props> = () => {
         'Cormorant SC',
         'serif',
       ].join(','),
-    },});
+    },
+  });
 
-    return (
-      <ThemeProvider theme={theme}>
+  return (
+    <ThemeProvider theme={theme}>
+      <Box sx={{ paddingTop: '7rem' }}>
         <Card sx={cardStyle}>
-          <Box sx={{
-            backgroundColor: 'white',
-          }}>
           <Typography variant="h3" sx={{
             textAlign: 'center'
           }}>
             Order overview
           </Typography>
 
-          {cart.length === 0 ?
-          null :
-          <Link to={'/checkout/adress'} style={{ textDecoration: 'none' }}>
-            <Button sx={button}
-            >Proceed</Button>
-          </Link>}
-          <br />
-          <Link to={'/'} style={{ textDecoration: 'none' }}>
-            <Button sx={button}
-            >Go back</Button>
-          </Link>
-          
-          <TableRow>
-          <TableCell
-            sx={orderview}
-            >Total: {total}kr
-          </TableCell> 
-          </TableRow>
-          
-          {cart.map((product) => (
-            <Card>
-            <Card sx={cards}>
-              <img  src={product.image}
-                   height="100"
-                   />
-           <TableRow>
-          <TableCell>{product.model}</TableCell>
-          <TableCell>{product.price} kr</TableCell>
-          </TableRow>
-            <Grid item xs={12} sm={6} sx={removeButton}>   
-              
-                <Button sx={buttonStyle}
-                onClick={() => {
-                addToCart(product);
-                }}>
-                +
-                </Button>
-
-                <TextField
-                sx={{
-                  width: '3rem'
-                }}
-                variant="outlined"
-                id={quantity}
-                value={product.quantity}
-                >
-                </TextField>
-                <Button sx={buttonStyle}
-                onClick={() => {
-                removeItems(product);
-               }}
-                > 
-                -
-                </Button>
-
-                <DeleteForeverIcon 
-                sx={iconDelete}
-                onClick={() => {
-                removeCart(product);
-                }}
+          <Card>
+            {cart.map((product) => (
+              <Card
+                key={product.id}
+                sx={cards}>
+                <img src={product.image}
+                  height="100"
                 />
-
-               </Grid>
-               </Card>
-               </Card>
-               
-           ))}
-          </Box>
-      </Card>
-      </ThemeProvider>
-    );
+                <Typography variant='h6'>{product.model} | {product.price} kr</Typography>
+                <Grid item xs={12} sm={6} sx={removeButton}>
+                  <Box sx={{ outline: 'solid', display: 'flex', width: '11rem', borderRadius: '1rem', justifyContent: 'space-evenly' }}>
+                    <Button
+                      sx={mathButton}
+                      onClick={() => {
+                        addToCart(product);
+                      }}
+                    >
+                      +
+                    </Button>
+                    <Box sx={{
+                      maxWidth: 40,
+                      height: 36,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      fontSize: '2rem',
+                    }}>
+                      {product.quantity}
+                    </Box>
+                    <Button
+                      sx={mathButton}
+                      onClick={() => {
+                        removeItems(product);
+                      }}
+                    >
+                      -
+                    </Button>
+                  </Box>
+                  <DeleteForeverIcon
+                    sx={iconDelete}
+                    onClick={() => {
+                      removeCart(product);
+                    }}
+                  />
+                </Grid>
+              </Card>
+            ))}
+          </Card>
+          <Typography sx={orderview}>
+            Total: {total}kr
+          </Typography>
+          <Button
+            sx={button}
+            onClick={() => {
+              navigate('/')
+            }}
+          >
+            Go back
+          </Button>
+          {cart.length === 0 ? null :
+            <Button
+              sx={button}
+              onClick={() => {
+                navigate('/checkout/adress')
+              }}
+            >
+              Proceed
+            </Button>
+          }
+        </Card>
+      </Box>
+    </ThemeProvider >
+  );
 };
 
 export default Overview;
 
-  const cardStyle: SxProps = {
-    paddingTop: {xs: '6rem'},
-    backgroundColor: 'rgba(0,0,0,0)',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    textAlign: 'center',
-    width:{
-      xs: 400, // theme.breakpoints.up('xs')
-      sm: 600, // theme.breakpoints.up('sm')
-      md: 700, // theme.breakpoints.up('md')
-      lg: 1000, // theme.breakpoints.up('lg')
-      xl: 1200, // theme.breakpoints.up('xl')
-      
-    }
-    
-  }
-const button: SxProps = {
-  marginTop: '2rem',
-  backgroundColor: 'black',
-  color: '#fff',
-    '&:hover': {
-        backgroundColor: '#5f5f5f',
-        color: '#fff',
-    },
-}
-const removeButton: SxProps = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignContent: 'center', 
-}
-const icon: SxProps = {
-    color: 'black',
-    fontSize: '2rem',
-    
-}
-const test: SxProps = {
-    display: {xs: 'flex', lg:'unset'},
-    justifyContent: {xs: 'center', lg:'unset'},
 
-    marginRight: {xs: '25%', lg:'none'}
+const mathButton: SxProps = {
+  color: 'black',
+  fontWeight: 'bold'
 }
-const buttonStyle: SxProps = {
-    fontSize: '3rem',
-    color: 'black',
-    height: '4rem'
-}
-const quantity: SxProps = {
-    width: '2rem', 
-
-    marginRight: {xs: '25%', lg:'none'},
-    
-}
-const cards: SxProps={
-  height: '15rem',
-  width: { xs: '20rem'},
-  float: 'left',
-  display: 'inline',
-  marginTop: '32px',
-  marginLeft: { xs: '40px', sm: '140px', md: '180px', lg: '340px', xl: '440px'},
-  marginBottom: '2rem',
- 
-}
-const orderview: SxProps={
-  
-  width: '5rem',
-  border: '1px solid black',
+const cardStyle: SxProps = {
+  backgroundColor: 'white',
   marginLeft: 'auto',
   marginRight: 'auto',
+  textAlign: 'center',
+  maxWidth: {
+    xs: 350,
+    sm: 600,
+    md: 700,
+    lg: 1000,
+    xl: 1200,
+  }
+}
+const button: SxProps = {
+  margin: '1.5rem',
+  backgroundColor: 'black',
+  color: '#fff',
+  '&:hover': {
+    backgroundColor: '#5f5f5f',
+    color: '#fff',
+  },
+}
+const removeButton: SxProps = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignContent: 'center',
+}
+const buttonStyle: SxProps = {
+  fontSize: '3rem',
+  color: 'black',
+  height: '4rem'
+}
+const cards: SxProps = {
+  display: 'flex',
+  flexDirection: { xs: 'column', md: 'row' },
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  height: '15rem',
+  minWidth: '15rem',
+}
+const orderview: SxProps = {
+  width: '12rem',
+  border: '1px solid black',
+  margin: '0 auto',
   backgroundColor: 'white',
 }
-const buttonAlign: SxProps={
-    display: 'flex',
-    justifyContent: 'center',
-    paddingTop: '1rem',
-    paddingBottom: '1rem'
-}
-const iconDelete: SxProps= {
+const iconDelete: SxProps = {
   cursor: 'pointer',
   color: 'black',
   '&:hover': {
-      color: 'red',
+    color: 'red',
   }
 }

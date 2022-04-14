@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from "react";
+import BadGate from "./BadGate";
 
 interface Props {
   children: ReactNode;
@@ -25,7 +26,7 @@ class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       //return vad som helst
-      return <h1>404: An error has ocurred</h1>;
+      return <BadGate/>;
     }
 
     return this.props.children;
